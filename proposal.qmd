@@ -31,7 +31,7 @@ Provide some code to read in the data (either stored in the repository or read i
 
 ### Description
 
-This dataset contains information about ...
+The dataset contains information about various movies, including movie name, release year, director, age difference between lead actors, the number of couples in the movie, actor names, their respective genders, birthdates, and ages. It was collected from \[mention data source and any specific details about the dataset\].
 
 It was collected from ...
 
@@ -39,22 +39,22 @@ Here is a data dictionary showing each variable, the type of variable, units, an
 
 Note: this is an example table, please modify to actually match your data. Ensure that all of the same information is represented.
 
-+-------------+---------------------------------------------------------+-------------+-------+---------------------------------------------------------------+
-| Name        | Description                                             | Type        | Units | Range/Values                                                  |
-+=============+=========================================================+=============+=======+===============================================================+
-| day_of_week | The day of the week on which the observation took place | categorical | NA    | 0 = Sunday\                                                   |
-|             |                                                         |             |       | 1 = Monday\                                                   |
-|             |                                                         |             |       | ...\                                                          |
-|             |                                                         |             |       | 6 = Saturday\                                                 |
-|             |                                                         |             |       | 7 = Unknown                                                   |
-+-------------+---------------------------------------------------------+-------------+-------+---------------------------------------------------------------+
-| weight      | The weight of the individual                            | numeric     | lbs   | 0 - 300 (max weight measurable on the scale used)\            |
-|             |                                                         |             |       | NA indicates missing data                                     |
-+-------------+---------------------------------------------------------+-------------+-------+---------------------------------------------------------------+
-| time        | The time of the observation                             | numeric     | HHMM  | 0000 corresponds to midnight,                                 |
-|             |                                                         |             |       |                                                               |
-|             |                                                         |             |       | 2359 corresponds to 1 minute before midnight on the same day. |
-+-------------+---------------------------------------------------------+-------------+-------+---------------------------------------------------------------+
++-------------+---------------------------------------------------------+-------------+---------+---------------------------------------------------------------+
+| Name        | Description                                             | Type        | Units   | Range/Values                                                  |
++=============+=========================================================+=============+=========+===============================================================+
+| day_of_week | The day of the week on which the observation took place | categorical | NA      | 0 = Sunday\                                                   |
+|             |                                                         |             |         | 1 = Monday\                                                   |
+|             |                                                         |             |         | ...\                                                          |
+|             |                                                         |             |         | 6 = Saturday\                                                 |
+|             |                                                         |             |         | 7 = Unknown                                                   |
++-------------+---------------------------------------------------------+-------------+---------+---------------------------------------------------------------+
+| weight      | The weight of the individual                            | numeric     | lbs     | 0 - 300 (max weight measurable on the scale used)\            |
+|             |                                                         |             |         | NA indicates missing data                                     |
++-------------+---------------------------------------------------------+-------------+---------+---------------------------------------------------------------+
+| time        | The time of the observation                             | numeric     | HHMM    | 0000 corresponds to midnight,                                 |
+|             |                                                         |             |         |                                                               |
+|             |                                                         |             |         | 2359 corresponds to 1 minute before midnight on the same day. |
++-------------+---------------------------------------------------------+-------------+---------+---------------------------------------------------------------+
 
 ## Project Goals
 
