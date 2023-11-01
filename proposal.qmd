@@ -65,9 +65,9 @@ We will use \[dataset\](<https://github.com/rfordatascience/tidytuesday/blob/mas
 
 We expect to create
 
--   description of some of the graphs you might create
--   a shiny application
--   a statistical model
+-   Several summary tables
+-   Data visualization (age difference distribution, time series, director influence...)
+-   Some interesting findings (race, number of artists, states, ...)
 -   ...
 
 ## Division of Labor
