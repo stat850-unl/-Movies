@@ -2,6 +2,7 @@
 title: "Stat 850 Project Proposal"
 format: html
 editor: visual
+Authors: Mahyar Madarshahain, Jing Wang
 ---
 
 ## Instructions
