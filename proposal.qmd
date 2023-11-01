@@ -40,15 +40,17 @@ Here is a data dictionary showing each variable, the type of variable, units, an
 
 Note: this is an example table, please modify to actually match your data. Ensure that all of the same information is represented.
 
-| variable          | class     | description                                                                                                                                                                                                                                                                                                                                                                                                                      |
-|-------------------|-----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| state             | character | state/territory                                                                                                                                                                                                                                                                                                                                                                                                                  |
-| race              | character | race                                                                                                                                                                                                                                                                                                                                                                                                                             |
-| type              | character | type of artists                                                                                                                                                                                                                                                                                                                                                                                                                  |
-| all_workers_n     | double    | all worker count                                                                                                                                                                                                                                                                                                                                                                                                                 |
-| artists_n         | double    | artist count                                                                                                                                                                                                                                                                                                                                                                                                                     |
-| artists_share     | double    | artist share                                                                                                                                                                                                                                                                                                                                                                                                                     |
-| location_quotient | double    | Location quotients (LQ) measure an artist occupation's concentration in the labor force, relative to the U.S. labor force share. For example, an LQ of 1.2 indicates that the state's labor force in an occupation is 20 percent greater than the occupation's national labor force share. An LQ of 0.8 indicates that the state's labor force in an occupation is 20 percent below the occupation's national labor force share. |
+| variable \| class \| description \|
+| state \| character \| This variable represents the U.S. state where the data was collected\|
+| race \| character \| This variable specifies the racial or ethnic category of the workforce being analyzed\|
+| type \| character \| This variable indicates the type of profession or occupation for which the data is recorded \|
+| all_workers_n \| double \| This numeric variable represents the total number of workers in the specified state and occupation \|
+| artists_n \| double \| This numeric variable signifies the number of artists within the same state and occupation\|
+| artists_share \| double \| This numeric variable expresses the share or proportion of artists among all workers in the occupation within the particular state\|
+| location_quotient \| double \| Location quotient is a numerical measure used to assess the concentration of a particular occupation in a specific geographical area\|
+
+| 
+| labor force share. For example, an LQ of 1.2 indicates that the state's labor force in an occupation is 20 percent greater than the occupation's national labor force share. An LQ of 0.8 indicates that the state's labor force in an occupation is 20 percent below the occupation's national labor force share. \|
 
 ## Project Goals
 
@@ -72,7 +74,13 @@ We expect to create
 
 ## Division of Labor
 
-Describe how you plan to work together as a team. Set intermediate deadlines - what do you plan to have done by the project check-in? The more you have done (report/slides/code), the better feedback I can give you.
+We will work together to cleaning and preprocessing the dataset.
+
+We will work together to focus on exploring the data, identifying trends, and creating visualizations
+
+We will work together to creat interactive graphics to enhance data exploration.
+
+We will work together for creating the project report and presentation
 
 ## Additional Comments
 
