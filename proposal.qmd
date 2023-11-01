@@ -26,7 +26,7 @@ The data we are using in this project comes from \[<https://www.arts.gov/impact/
 
 If you cannot link directly to the data file, then you need to additionally describe how someone could acquire the same data:
 
-> You can download the data directly using \[process\]
+> You can download the data directly using \[<https://github.com/rfordatascience/tidytuesday/blob/master/data/2022/2022-09-27/artists.csv>\]
 
 Provide some code to read in the data (either stored in the repository or read in directly from the source).
 
@@ -40,22 +40,15 @@ Here is a data dictionary showing each variable, the type of variable, units, an
 
 Note: this is an example table, please modify to actually match your data. Ensure that all of the same information is represented.
 
-+-------------+---------------------------------------------------------+-------------+---------+---------------------------------------------------------------+
-| Name        | Description                                             | Type        | Units   | Range/Values                                                  |
-+=============+=========================================================+=============+=========+===============================================================+
-| day_of_week | The day of the week on which the observation took place | categorical | NA      | 0 = Sunday\                                                   |
-|             |                                                         |             |         | 1 = Monday\                                                   |
-|             |                                                         |             |         | ...\                                                          |
-|             |                                                         |             |         | 6 = Saturday\                                                 |
-|             |                                                         |             |         | 7 = Unknown                                                   |
-+-------------+---------------------------------------------------------+-------------+---------+---------------------------------------------------------------+
-| weight      | The weight of the individual                            | numeric     | lbs     | 0 - 300 (max weight measurable on the scale used)\            |
-|             |                                                         |             |         | NA indicates missing data                                     |
-+-------------+---------------------------------------------------------+-------------+---------+---------------------------------------------------------------+
-| time        | The time of the observation                             | numeric     | HHMM    | 0000 corresponds to midnight,                                 |
-|             |                                                         |             |         |                                                               |
-|             |                                                         |             |         | 2359 corresponds to 1 minute before midnight on the same day. |
-+-------------+---------------------------------------------------------+-------------+---------+---------------------------------------------------------------+
+| variable          | class     | description                                                                                                                                                                                                                                                                                                                                                                                                                      |
+|-------------------|-----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| state             | character | state/territory                                                                                                                                                                                                                                                                                                                                                                                                                  |
+| race              | character | race                                                                                                                                                                                                                                                                                                                                                                                                                             |
+| type              | character | type of artists                                                                                                                                                                                                                                                                                                                                                                                                                  |
+| all_workers_n     | double    | all worker count                                                                                                                                                                                                                                                                                                                                                                                                                 |
+| artists_n         | double    | artist count                                                                                                                                                                                                                                                                                                                                                                                                                     |
+| artists_share     | double    | artist share                                                                                                                                                                                                                                                                                                                                                                                                                     |
+| location_quotient | double    | Location quotients (LQ) measure an artist occupation's concentration in the labor force, relative to the U.S. labor force share. For example, an LQ of 1.2 indicates that the state's labor force in an occupation is 20 percent greater than the occupation's national labor force share. An LQ of 0.8 indicates that the state's labor force in an occupation is 20 percent below the occupation's national labor force share. |
 
 ## Project Goals
 
