@@ -22,7 +22,7 @@ In the proposal as in the final report, all of your code chunks should be set so
 
 ### Source
 
-The data we are using in this project comes from \[link to web site\].
+The data we are using in this project comes from \[<https://www.arts.gov/impact/research/arts-data-profile-series/adp-31/data-tables>\].
 
 If you cannot link directly to the data file, then you need to additionally describe how someone could acquire the same data:
 
