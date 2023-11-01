@@ -1,6 +1,6 @@
 ---
 title: "Stat 850 Project"
-author: "Firstname Lastname, Firstname Lastname, ..."
+author: "Mahyar Madarshahian, Jing Wang"
 format: md
 ---
 
