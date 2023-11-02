@@ -40,6 +40,7 @@ Here is a data dictionary showing each variable, the type of variable, units, an
 
 Note: this is an example table, please modify to actually match your data. Ensure that all of the same information is represented.
 
+<<<<<<< HEAD
 | variable \| class \| description \|
 | state \| character \| This variable represents the U.S. state where the data was collected\|
 | race \| character \| This variable specifies the racial or ethnic category of the workforce being analyzed\|
@@ -51,6 +52,16 @@ Note: this is an example table, please modify to actually match your data. Ensur
 
 | 
 | labor force share. For example, an LQ of 1.2 indicates that the state's labor force in an occupation is 20 percent greater than the occupation's national labor force share. An LQ of 0.8 indicates that the state's labor force in an occupation is 20 percent below the occupation's national labor force share. \|
+=======
+| variable          | class     | description                             |
+| state             | character | This variable represents the U.S. state where the data was collected|
+| race              | character | This variable specifies the racial or ethnic category of the workforce being analyzed|
+| type              | character | This variable indicates the type of profession or occupation for which the data is recorded                                                                                                                                                                                                                                                                                                                                                                                              |
+| all_workers_n     | double    | This numeric variable represents the total number of workers in the specified state and occupation                                                                                                                                                                                                                                                                                                                                                                                                                 |
+| artists_n         | double    | This numeric variable signifies the number of artists within the same state and occupation                                                                                                                                                                                                                                                                                                                                                                                                                     |
+| artists_share     | double    | artist share                                                                                                                                                                                                                                                                                                                                                                                                                     |
+| location_quotient | double    | Location quotients (LQ) measure an artist occupation's concentration in the labor force, relative to the U.S. labor force share. For example, an LQ of 1.2 indicates that the state's labor force in an occupation is 20 percent greater than the occupation's national labor force share. An LQ of 0.8 indicates that the state's labor force in an occupation is 20 percent below the occupation's national labor force share. |
+>>>>>>> 5160a82ddff9d56589b842bef079e108f76909c7
 
 ## Project Goals
 
