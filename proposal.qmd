@@ -44,7 +44,6 @@ The dataset provides insights into the presence and concentration of Hispanic ar
 
 It was collected from \[mention data source and any specific details about the dataset\].
 
-
 Here is a data dictionary showing each variable, the type of variable, units, and range of values that are possible:
 
 Note: this is an example table, please modify to actually match your data. Ensure that all of the same information is represented.
@@ -82,12 +81,11 @@ We expect to create
 -   ...
 
 ## Division of Labor
+
 During the whole project, Mahyar and Jing will collaborate closely and help each other using R and Python.
 
-- Task 1: Clean and preprocess dataset
-  ** Mahyar will set up the the environment, prepare the basic visualization, clean and preprocess the dataset using python
-  ** Jing Wang will set up the the environment, prepare the basic visualization, clean and preprocess the dataset using R
-  
+-   Task 1: Clean and preprocess dataset \*\* Mahyar will set up the the environment, prepare the basic visualization, clean and preprocess the dataset using python \*\* Jing Wang will set up the the environment, prepare the basic visualization, clean and preprocess the dataset using R
+
 -Task 2: exploring the data, identifying trends, and creating visualizations
 
 We will work together to cleaning and preprocessing the dataset.
