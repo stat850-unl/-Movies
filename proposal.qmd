@@ -76,6 +76,7 @@ We expect to create
 -   Several summary tables
 -   Data visualization (age difference distribution, time series, director influence...)
 -   Some interesting findings (race, number of artists, states, ...)
+-    ...
 
 ## Division of Labor
 
