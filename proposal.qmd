@@ -97,6 +97,14 @@ We expect to create
 -   ...
 
 ## Division of Labor
+During the whole project, Mahyar and Jing will collaborate closely and help each other using R and Python.
+
+- Task 1: Clean and preprocess dataset
+  ** Mahyar will set up the the environment, prepare the basic visualization, clean and preprocess the dataset using python
+  ** Jing Wang will set up the the environment, prepare the basic visualization, clean and preprocess the dataset using R
+  
+-Task 2: exploring the data, identifying trends, and creating visualizations
+
 
 We will work together to cleaning and preprocessing the dataset.
 
