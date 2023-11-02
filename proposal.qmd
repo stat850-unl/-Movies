@@ -49,7 +49,7 @@ Here is a data dictionary showing each variable, the type of variable, units, an
 Note: this is an example table, please modify to actually match your data. Ensure that all of the same information is represented.
 
 | variable          | class     | description                                                                                                                          |
-|-------------------|-----------|--------------------------------------------------------------------------------------------------------------------------------------|
+|-----------|-----------|--------------------------------------------------|
 | state             | character | This variable represents the U.S. state where the data was collected                                                                 |
 | race              | character | This variable specifies the racial or ethnic category of the workforce being analyzed                                                |
 | type              | character | This variable indicates the type of profession or occupation for which the data is recorded                                          |
@@ -81,20 +81,20 @@ We expect to create
 
 During the whole project, Mahyar and Jing will collaborate closely and help each other using R and Python.
 
--   Task 1: Clean and preprocess dataset
-    -    Mahyar will set up the the environment, prepare the basic visualization, clean and preprocess the dataset using python
-    -   Jing Wang will set up the the environment, prepare the basic visualization, clean and preprocess the dataset using R
-    -   Work together to compare the clean dataset
--   Task 2: exploring the data, identifying trends, and creating visualizations
-    -   
+Task 1: Clean and preprocess dataset
 
-We will work together to cleaning and preprocessing the dataset.
+-   Mahyar will set up the the environment, prepare the basic visualization, clean and preprocess the dataset using python
+-   Jing Wang will set up the the environment, prepare the basic visualization, clean and preprocess the dataset using R
+-   Work together to compare the clean dataset
 
-We will work together to focus on exploring the data, identifying trends, and creating visualizations
+Task 2: exploring the data, identifying trends, and creating visualizations
 
-We will work together to creat interactive graphics to enhance data exploration.
+-   Mahyar and Jing will explore the data, identify the trends and create the visualizations using Python and R, independently
+-   Work together to check the results and findings
 
-We will work together for creating the project report and presentation
+Task 3: Creat interactive graphics to enhance data exploration
+
+Task 4: Creat the project report and presentation
 
 ## Additional Comments
 
