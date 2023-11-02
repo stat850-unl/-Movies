@@ -32,9 +32,10 @@ Provide some code to read in the data (either stored in the repository or read i
 
 ### Description
 
-The dataset contains information about various movies, including movie name, release year, director, age difference between lead actors, the number of couples in the movie, actor names, their respective genders, birthdates, and ages. It was collected from \[mention data source and any specific details about the dataset\].
+The dataset provides insights into the presence and concentration of Hispanic architects in different states, highlighting variations in workforce demographics and professional diversity across the United States.
 
-It was collected from ...
+It was collected from \[mention data source and any specific details about the dataset\].
+
 
 Here is a data dictionary showing each variable, the type of variable, units, and range of values that are possible:
 
@@ -95,4 +96,4 @@ We will work together for creating the project report and presentation
 
 ## Additional Comments
 
-What concerns do you have about this project? This is your place to provide feedback about the project guidelines and ask clarifying questions for me to address either individually or in class, if the question is relevant to everyone.
+Up to now there is no concern about the project.
