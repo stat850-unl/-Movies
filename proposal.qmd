@@ -42,7 +42,7 @@ Provide some code to read in the data (either stored in the repository or read i
 
 The dataset provides insights into the presence and concentration of Hispanic architects in different states, highlighting variations in workforce demographics and professional diversity across the United States.
 
-It was collected from \[mention data source and any specific details about the dataset\].
+It was collected from \[Artists in the U.S.\] (https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2022/2022-09-27/artists.csv).
 
 Here is a data dictionary showing each variable, the type of variable, units, and range of values that are possible:
 
