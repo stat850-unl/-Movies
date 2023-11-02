@@ -49,7 +49,7 @@ Here is a data dictionary showing each variable, the type of variable, units, an
 Note: this is an example table, please modify to actually match your data. Ensure that all of the same information is represented.
 
 | variable          | class     | description                                                                                                                          |
-|-----------|-----------|--------------------------------------------------|
+|--------------|--------------|--------------------------------------------|
 | state             | character | This variable represents the U.S. state where the data was collected                                                                 |
 | race              | character | This variable specifies the racial or ethnic category of the workforce being analyzed                                                |
 | type              | character | This variable indicates the type of profession or occupation for which the data is recorded                                          |
@@ -94,7 +94,15 @@ Task 2: exploring the data, identifying trends, and creating visualizations
 
 Task 3: Creat interactive graphics to enhance data exploration
 
+-   Mahyar will create the necessary table(s) and graphic (s) to enhance data exploration for question 1,3, 5 using python
+
+-   Jing will create the necessary table(s) and graphic (s) to enhance data exploration for question 2, 4, 6 using R
+
+-   Work together to check the tables and graphics.
+
 Task 4: Creat the project report and presentation
+
+-   Mahyar and Jing will work together to finisht he report and presentation and other related tasks.
 
 ## Additional Comments
 
