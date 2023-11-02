@@ -22,11 +22,11 @@ In the proposal as in the final report, all of your code chunks should be set so
 
 ### Source
 
-The data we are using in this project comes from \[<https://www.arts.gov/impact/research/arts-data-profile-series/adp-31/data-tables>\].
+The data we are using in this project comes from [Artists in the U.S.](https://www.arts.gov/impact/research/arts-data-profile-series/adp-31/data-tables)
 
 If you cannot link directly to the data file, then you need to additionally describe how someone could acquire the same data:
 
-> You can download the data directly using \[<https://github.com/rfordatascience/tidytuesday/blob/master/data/2022/2022-09-27/artists.csv>\]
+> You can download the data directly using [this link](https://github.com/rfordatascience/tidytuesday/blob/master/data/2022/2022-09-27/artists.csv)
 
 ```{r}
 url <- "https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2022/2022-09-27/artists.csv"
@@ -42,14 +42,14 @@ Provide some code to read in the data (either stored in the repository or read i
 
 The dataset provides insights into the presence and concentration of Hispanic architects in different states, highlighting variations in workforce demographics and professional diversity across the United States.
 
-It was collected from \[mention data source and any specific details about the dataset\].
+It was collected from [Artists in the U.S.](https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2022/2022-09-27/artists.csv)
 
 Here is a data dictionary showing each variable, the type of variable, units, and range of values that are possible:
 
 Note: this is an example table, please modify to actually match your data. Ensure that all of the same information is represented.
 
 | variable          | class     | description                                                                                                                          |
-|----------------|----------------|-----------------------------------------|
+|-----------------|-----------------|--------------------------------------|
 | state             | character | This variable represents the U.S. state where the data was collected                                                                 |
 | race              | character | This variable specifies the racial or ethnic category of the workforce being analyzed                                                |
 | type              | character | This variable indicates the type of profession or occupation for which the data is recorded                                          |
@@ -62,7 +62,7 @@ Note: this is an example table, please modify to actually match your data. Ensur
 
 Describe why this data is interesting and what you hope to do with it
 
-We will use \[dataset\](<https://github.com/rfordatascience/tidytuesday/blob/master/data/2022/2022-09-27/artists.csv>) to explore the following topics:
+We will use the dataset from [Artists in the U.S.](https://github.com/rfordatascience/tidytuesday/blob/master/data/2022/2022-09-27/artists.csv) to explore the following topics:
 
 -   The top 10 state /territory has the highest number of artists, as indicated by the location quotient.
 -   Are there any states with a location quotient significantly below 1.0 for artists?
