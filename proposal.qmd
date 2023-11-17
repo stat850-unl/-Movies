@@ -5,55 +5,51 @@ editor: visual
 Authors: Mahyar Madarshahain, Jing Wang
 ---
 
-## Instructions
-
-Each member of your team should modify this document in some way and push their modifications to the repository in a separate commit. This will ensure that you have set your repository up in a way that ensures all group members are working with the same repository.
-
-Please ensure that you have set your git name and email address on your computer by **modifying** the following commands and running them in the terminal:
-
-```         
-git config --global user.name "Mona Lisa"
-git config --global user.email "mona@lisa.com"
-```
-
-In the proposal as in the final report, all of your code chunks should be set so that `echo = F`, which prevents the code from being printed in the report. You should also set `message = F, warning = F`, which will reduce the amount of additional output which is present in the report. You can customize the execution of code in quarto by using additional options, some of which are detailed [here](https://quarto.org/docs/computations/execution-options.html).
-
 ## Data
 
 ### Source
 
-The data we are using in this project comes from \[<https://www.arts.gov/impact/research/arts-data-profile-series/adp-31/data-tables>\].
+The data we are using in this project comes from [Artists in the U.S.](https://www.arts.gov/impact/research/arts-data-profile-series/adp-31/data-tables)
 
 If you cannot link directly to the data file, then you need to additionally describe how someone could acquire the same data:
 
-> You can download the data directly using \[<https://github.com/rfordatascience/tidytuesday/blob/master/data/2022/2022-09-27/artists.csv>\]
+> You can download the data directly using [this link](https://github.com/rfordatascience/tidytuesday/blob/master/data/2022/2022-09-27/artists.csv)
+
+```{r}
+url <- "https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2022/2022-09-27/artists.csv"
+
+# Read the data from the URL into a data frame
+artists_data <- read.csv(url)
+head(artists_data)
+```
 
 Provide some code to read in the data (either stored in the repository or read in directly from the source).
 
 ### Description
 
-The dataset contains information about various movies, including movie name, release year, director, age difference between lead actors, the number of couples in the movie, actor names, their respective genders, birthdates, and ages. It was collected from \[mention data source and any specific details about the dataset\].
+The dataset provides insights into the presence and concentration of Hispanic architects in different states, highlighting variations in workforce demographics and professional diversity across the United States.
 
-It was collected from ...
+It was collected from [Artists in the U.S.](https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2022/2022-09-27/artists.csv)
 
 Here is a data dictionary showing each variable, the type of variable, units, and range of values that are possible:
 
 Note: this is an example table, please modify to actually match your data. Ensure that all of the same information is represented.
 
-| variable          | class     | description                             |
-| state             | character | This variable represents the U.S. state where the data was collected|
-| race              | character | This variable specifies the racial or ethnic category of the workforce being analyzed|
-| type              | character | This variable indicates the type of profession or occupation for which the data is recorded                                                                                                                                                                                                                                                                                                                                                                                                                  |
-| all_workers_n     | double    | This numeric variable represents the total number of workers in the specified state and occupation                                                                                                                                                                                                                                                                                                                                                                                                                 |
-| artists_n         | double    | This numeric variable signifies the number of artists within the same state and occupation                                                                                                                                                                                                                                                                                                                                                                                                                     |
-| artists_share     | double    | artist share                                                                                                                                                                                                                                                                                                                                                                                                                     |
-| location_quotient | double    | Location quotients (LQ) measure an artist occupation's concentration in the labor force, relative to the U.S. labor force share. For example, an LQ of 1.2 indicates that the state's labor force in an occupation is 20 percent greater than the occupation's national labor force share. An LQ of 0.8 indicates that the state's labor force in an occupation is 20 percent below the occupation's national labor force share. |
+| variable          | class     | description                                                                                                                          |
+|-----------|-----------|--------------------------------------------------|
+| state             | character | This variable represents the U.S. state where the data was collected                                                                 |
+| race              | character | This variable specifies the racial or ethnic category of the workforce being analyzed                                                |
+| type              | character | This variable indicates the type of profession or occupation for which the data is recorded                                          |
+| all_workers_n     | double    | This numeric variable represents the total number of workers in the specified state and occupation                                   |
+| artists_n         | double    | This numeric variable signifies the number of artists within the same state and occupation                                           |
+| artists_share     | double    | This numeric variable expresses the share or proportion of artists among all workers in the occupation within the particular state   |
+| location_quotient | double    | Location quotient is a numerical measure used to assess the concentration of a particular occupation in a specific geographical area |
 
 ## Project Goals
 
-Describe why this data is interesting and what you hope to do with it.
+Describe why this data is interesting and what you hope to do with it
 
-We will use \[dataset\](<https://github.com/rfordatascience/tidytuesday/blob/master/data/2022/2022-09-27/artists.csv>) to explore the following topics:
+We will use the dataset from [Artists in the U.S.](https://github.com/rfordatascience/tidytuesday/blob/master/data/2022/2022-09-27/artists.csv) to explore the following topics:
 
 
 -   Are there any states with a location quotient significantly below 1.0 for artists?
@@ -72,8 +68,49 @@ We expect to create
 
 ## Division of Labor
 
-Describe how you plan to work together as a team. Set intermediate deadlines - what do you plan to have done by the project check-in? The more you have done (report/slides/code), the better feedback I can give you.
+During the whole project, Mahyar and Jing will collaborate closely and help each other using R and Python.
+
+Task 1: Clean and preprocess dataset
+
+-   Mahyar will set up the the environment, prepare the basic visualization, clean and preprocess the dataset using python
+-   Jing Wang will set up the the environment, prepare the basic visualization, clean and preprocess the dataset using R
+-   Work together to compare the clean dataset
+
+Task 2: exploring the data, identifying trends, and creating visualizations
+
+-   Mahyar and Jing will explore the data, identify the trends and create the visualizations using Python and R, independently
+-   Work together to check the results and findings
+
+Task 3: Creat interactive graphics to enhance data exploration
+
+-   Mahyar will create the necessary table(s) and graphic (s) to enhance data exploration for question 1,3, 5 using python
+
+-   Jing will create the necessary table(s) and graphic (s) to enhance data exploration for question 2, 4, 6 using R
+
+-   Work together to check the tables and graphics.
+
+Task 4: Creat the project report and presentation
+
+-   Mahyar and Jing will work together to finisht he report and presentation and other related tasks.
 
 ## Additional Comments
 
-What concerns do you have about this project? This is your place to provide feedback about the project guidelines and ask clarifying questions for me to address either individually or in class, if the question is relevant to everyone.
+Up to now there is no concern about the project.
+
+---
+
+Git fame output:
+```
+(base) susan@silicon:~/Projects/Class/unl-stat850-computing-tools-stat/2023-student-assignments/project-submissions/Artist_In_The_US$ git fame .--incl=".(q|Q|r|R)md"
+Processing: 100%|██████████████████████████████████████████████████████████████████████████████████████████████| 4/4 [00:00<00:00, 286.33file/s]
+Total commits: 35
+Total ctimes: 41
+Total files: 7
+Total loc: 346
+| Author                |   loc |   coms |   fils |  distribution   |
+|:----------------------|------:|-------:|-------:|:----------------|
+| github-classroom[bot] |   284 |      1 |      4 | 82.1/ 2.9/57.1  |
+| Jing Wang             |    33 |     14 |      1 | 9.5/40.0/14.3   |
+| mahyar-madarshahian   |    26 |     13 |      1 | 7.5/37.1/14.3   |
+| Mahyar Madarshahian   |     3 |      7 |      1 | 0.9/20.0/14.3   |
+```
