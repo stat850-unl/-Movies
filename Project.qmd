@@ -2,7 +2,7 @@
 title: "Artists"
 format: html
 editor: visual
-Names: Mahyar Madarshahain, Jing Wang
+Names: Mahyar Madarshahain, Jing Wang.
 ---
 
 ## Quarto
