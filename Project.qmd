@@ -48,5 +48,6 @@ plt.show()
 alpha = 0.05
 population_mean = 1.0  # The hypothesized mean (1.0)
 
-
+# Perform a one-sample t-test
+t_stat, p_value = stats.ttest_1samp(subset['location_quotient'], population_mean)
 ```
