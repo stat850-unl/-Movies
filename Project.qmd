@@ -32,4 +32,13 @@ plt.title('Histogram of Location Quotients for Artists')
 plt.xlabel('Location Quotient')
 plt.ylabel('Frequency')
 plt.show()
+
+
+# Visual analysis using a box plot
+plt.figure(figsize=(10, 6))
+plt.boxplot(subset['location_quotient'])
+plt.title('Location Quotient Distribution for Artists')
+plt.xlabel('Artists')
+plt.ylabel('Location Quotient')
+plt.show()
 ```
