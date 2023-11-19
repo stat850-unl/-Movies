@@ -25,5 +25,11 @@ artist = artist.dropna()
 # Filter the data to include only the relevant columns
 subset = artist[['state', 'location_quotient']]
 
-
+# Visual analysis using a histogram
+plt.figure(figsize=(10, 6))
+plt.hist(subset['location_quotient'], bins=20, edgecolor='black')
+plt.title('Histogram of Location Quotients for Artists')
+plt.xlabel('Location Quotient')
+plt.ylabel('Frequency')
+plt.show()
 ```
