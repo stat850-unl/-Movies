@@ -13,8 +13,13 @@ Quarto enables you to weave together content and executable code into a finished
 
 When you click the **Render** button a document will be generated that includes both content and the output of embedded code. You can embed code like this:
 
-```{r}
-1 + 1
+```{python}
+# Explicitly import pandas
+import pandas
+
+# Import the dataset
+artist = pandas.read_csv("artists.csv")
+
 ```
 
 You can add options to executable code like this
