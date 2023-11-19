@@ -50,4 +50,8 @@ population_mean = 1.0  # The hypothesized mean (1.0)
 
 # Perform a one-sample t-test
 t_stat, p_value = stats.ttest_1samp(subset['location_quotient'], population_mean)
+# Check if the p-value is less than the significance level
+
+# Filter states with location quotient less than 1.0
+states_below_1 = subset[subset['location_quotient'] < 1.0]
 ```
