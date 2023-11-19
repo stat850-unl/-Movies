@@ -41,4 +41,11 @@ plt.title('Location Quotient Distribution for Artists')
 plt.xlabel('Artists')
 plt.ylabel('Location Quotient')
 plt.show()
+
+
+# Set the significance level for the hypothesis test
+alpha = 0.05
+
+
+
 ```
