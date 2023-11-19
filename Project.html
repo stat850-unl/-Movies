@@ -139,15 +139,56 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a><span class="co"># Perform a one-sample t-test</span></span>
 <span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a>t_stat, p_value <span class="op">=</span> stats.ttest_1samp(subset[<span class="st">'location_quotient'</span>], population_mean)</span>
-<span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a><span class="co"># Check if the p-value is less than the significance level</span></span>
-<span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a><span class="co"># Filter states with location quotient less than 1.0</span></span>
-<span id="cb1-46"><a href="#cb1-46" aria-hidden="true" tabindex="-1"></a>states_below_1 <span class="op">=</span> subset[subset[<span class="st">'location_quotient'</span>] <span class="op">&lt;</span> <span class="fl">1.0</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a><span class="co"># Filter states with location quotient less than 1.0</span></span>
+<span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a>states_below_1 <span class="op">=</span> subset[subset[<span class="st">'location_quotient'</span>] <span class="op">&lt;</span> <span class="fl">1.0</span>]</span>
+<span id="cb1-46"><a href="#cb1-46" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-47"><a href="#cb1-47" aria-hidden="true" tabindex="-1"></a><span class="co"># Check if the p-value is less than the significance level</span></span>
+<span id="cb1-48"><a href="#cb1-48" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> p_value <span class="op">&lt;</span> alpha:</span>
+<span id="cb1-49"><a href="#cb1-49" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"States with a location quotient significantly below 1.0 (p-value: </span><span class="sc">{</span>p_value<span class="sc">:.4f}</span><span class="ss">): </span><span class="sc">{</span><span class="bu">len</span>(states_below_1)<span class="sc">}</span><span class="ss"> states"</span>)</span>
+<span id="cb1-50"><a href="#cb1-50" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb1-51"><a href="#cb1-51" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Filter the original dataset based on the states with a significantly lower location quotient than 1.0</span></span>
+<span id="cb1-52"><a href="#cb1-52" aria-hidden="true" tabindex="-1"></a>    filtered_dataset <span class="op">=</span> artist[artist[<span class="st">'state'</span>].isin(states_below_1[<span class="st">'state'</span>])]</span>
+<span id="cb1-53"><a href="#cb1-53" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"Filtered Dataset:"</span>)</span>
+<span id="cb1-54"><a href="#cb1-54" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(filtered_dataset)</span>
+<span id="cb1-55"><a href="#cb1-55" aria-hidden="true" tabindex="-1"></a><span class="cf">else</span>:</span>
+<span id="cb1-56"><a href="#cb1-56" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"No significant evidence of location quotients below 1.0. Number of states below 1.0: </span><span class="sc">{</span><span class="bu">len</span>(states_below_1)<span class="sc">}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <p><img src="Project_files/figure-html/cell-2-output-1.png" width="816" height="523"></p>
 </div>
 <div class="cell-output cell-output-display">
 <p><img src="Project_files/figure-html/cell-2-output-2.png" width="808" height="523"></p>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>States with a location quotient significantly below 1.0 (p-value: 0.0007): 1186 states
+Filtered Dataset:
+           state      race           type  all_workers_n  artists_n  \
+0        Alabama  Hispanic     Architects          88165       45.0   
+1         Alaska  Hispanic     Architects          26875       15.0   
+2        Arizona  Hispanic     Architects        1033370      270.0   
+4     California  Hispanic     Architects        7470730     3870.0   
+5       Colorado  Hispanic     Architects         594525      200.0   
+...          ...       ...            ...            ...        ...   
+3372        Utah     Other  Photographers          57995       35.0   
+3373     Vermont     Other  Photographers           5900       20.0   
+3374    Virginia     Other  Photographers         128845      130.0   
+3375  Washington     Other  Photographers         214925      245.0   
+3377   Wisconsin     Other  Photographers          66920       60.0   
+
+      artists_share  location_quotient  
+0          0.000510           0.875352  
+1          0.000558           0.957214  
+2          0.000261           0.448099  
+4          0.000518           0.888412  
+5          0.000336           0.576934  
+...             ...                ...  
+3372       0.000604           0.492364  
+3373       0.003390           2.765584  
+3374       0.001009           0.823161  
+3375       0.001140           0.930011  
+3377       0.000897           0.731483  
+
+[1909 rows x 7 columns]</code></pre>
 </div>
 </div>
 </section>

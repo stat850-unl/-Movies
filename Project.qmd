@@ -50,8 +50,18 @@ population_mean = 1.0  # The hypothesized mean (1.0)
 
 # Perform a one-sample t-test
 t_stat, p_value = stats.ttest_1samp(subset['location_quotient'], population_mean)
-# Check if the p-value is less than the significance level
 
 # Filter states with location quotient less than 1.0
 states_below_1 = subset[subset['location_quotient'] < 1.0]
+
+# Check if the p-value is less than the significance level
+if p_value < alpha:
+    print(f"States with a location quotient significantly below 1.0 (p-value: {p_value:.4f}): {len(states_below_1)} states")
+    
+    # Filter the original dataset based on the states with a significantly lower location quotient than 1.0
+    filtered_dataset = artist[artist['state'].isin(states_below_1['state'])]
+    print("Filtered Dataset:")
+    print(filtered_dataset)
+else:
+    print(f"No significant evidence of location quotients below 1.0. Number of states below 1.0: {len(states_below_1)}")
 ```
