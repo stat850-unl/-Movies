@@ -43,9 +43,10 @@ plt.ylabel('Location Quotient')
 plt.show()
 
 
+# Statistical analysis using a one-sample t-test
 # Set the significance level for the hypothesis test
 alpha = 0.05
-
+population_mean = 1.0  # The hypothesized mean (1.0)
 
 
 ```
