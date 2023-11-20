@@ -202,7 +202,24 @@ Filtered Dataset:
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>sorted_dataset <span class="op">=</span> artist.sort_values(by<span class="op">=</span><span class="st">'location_quotient'</span>, ascending<span class="op">=</span><span class="va">False</span>)</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Get the top 10 states with the highest location quotient</span></span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>top_10_states <span class="op">=</span> sorted_dataset.head(<span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>top_10_states <span class="op">=</span> sorted_dataset.head(<span class="dv">10</span>)</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Display the top 10 states</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Top 10 States with the Highest Location Quotient:"</span>)</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(top_10_states[[<span class="st">'state'</span>, <span class="st">'location_quotient'</span>]])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Top 10 States with the Highest Location Quotient:
+                     state  location_quotient
+1752              Oklahoma          15.634618
+2505               Florida           8.433593
+3076  District of Columbia           8.247381
+2920  District of Columbia           7.746697
+2420                Nevada           7.310929
+2122             Tennessee           7.104216
+1148            California           7.090421
+8     District of Columbia           7.068656
+1796                Nevada           6.843550
+1623                Hawaii           6.427619</code></pre>
+</div>
 </div>
 </section>
 
