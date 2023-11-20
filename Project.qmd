@@ -74,5 +74,6 @@ else:
 # Sort the dataset by location quotient in descending order
 sorted_dataset = artist.sort_values(by='location_quotient', ascending=False)
 
-
+# Get the top 10 states with the highest location quotient
+top_10_states = sorted_dataset.head(10)
 ```
