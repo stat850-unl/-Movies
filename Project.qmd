@@ -7,6 +7,8 @@ Names: Mahyar Madarshahain, Jing Wang.
 
 ## Python Code
 
+-   Are there any states with a location quotient significantly below 1.0 for artists?
+
 ```{python table-setup-py}
 # Explicitly import pandas
 import pandas as pd
@@ -64,4 +66,13 @@ if p_value < alpha:
     print(filtered_dataset)
 else:
     print(f"No significant evidence of location quotients below 1.0. Number of states below 1.0: {len(states_below_1)}")
+```
+
+-   The top 10 state /territory has the highest number of artists, as indicated by the location quotient.
+
+```{python table-setup-py}
+# Sort the dataset by location quotient in descending order
+sorted_dataset = artist.sort_values(by='location_quotient', ascending=False)
+
+
 ```
