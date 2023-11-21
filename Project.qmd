@@ -80,3 +80,110 @@ top_10_states = sorted_dataset.head(10)
 print("Top 10 States with the Highest Location Quotient:")
 print(top_10_states[['state', 'location_quotient']])
 ```
+
+## R Code
+
+-   What is the overall distribution of artist types across different states or territories?
+
+```{r}
+# Load required libraries
+library(readr)
+library(stats)
+library(dplyr)
+
+# Import the dataset
+artist <- read_csv("artists.csv")
+
+# Display the first few rows of the dataset
+head(artist)
+
+# Delete missing values
+artist <- na.omit(artist)
+
+# Question 2 : What is the overall distribution of artist types across different states or territories?
+
+# Filter the data to include only the relevant columns
+subset <- artist %>% select(state, type)
+# Calculate the overall distribution
+distribution <- subset %>% group_by(state, type) %>% summarise(count = n())
+
+# Display the overall distribution
+print(distribution)
+
+library(ggplot2)
+
+library(tidyr)
+
+# Pivot the data for heatmap
+heatmap_data <- distribution %>%
+  pivot_wider(names_from = "type", values_from = "count", values_fill = 0)
+
+# Create a heatmap
+ggplot(heatmap_data, aes(x = state, y = `Actors`, fill = `Actors`)) +
+  geom_tile() +
+  scale_fill_gradient(low = "red", high = "blue") +
+  labs(title = "Distribution of Artist Types Across States",
+       x = "State",
+       y = "Artist Type") +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+```
+
+```{r}
+library(shiny)
+library(ggplot2)
+library(readr)
+library(stats)
+library(dplyr)
+
+ui <- fluidPage(
+  titlePanel("Artist Type Distribution"),
+  sidebarLayout(
+    sidebarPanel(
+      selectInput("stateInput", "Select a state:", unique(distribution$state)),
+      actionButton("plotButton", "Plot")
+    ),
+    mainPanel(
+      tableOutput("resultTable"),
+      plotOutput("barPlot"),
+      plotOutput("pieChart")
+    )
+  )
+)
+
+server <- function(input, output) {
+  state_data <- reactive({
+    selected_state <- input$stateInput
+    subset_for_state <- distribution[distribution$state == selected_state, ]
+    subset_for_state
+  })
+
+  output$resultTable <- renderTable({
+    state_data()
+  })
+
+  observeEvent(input$plotButton, {
+    output$barPlot <- renderPlot({
+      ggplot(state_data(), aes(x = type, y = count, fill = type)) +
+        geom_bar(stat = "identity") +
+        labs(title = paste("Distribution of Artist Types in", input$stateInput),
+             x = "Artist Type",
+             y = "Count") +
+        theme_minimal() +
+        theme(axis.text.x = element_text(angle = 45, hjust = 1))
+    })
+
+    output$pieChart <- renderPlot({
+      ggplot(state_data(), aes(x = "", y = count, fill = type)) +
+        geom_bar(stat = "pie") +
+        labs(title = paste("Pie Chart of Artist Types in", input$stateInput),
+             x = NULL,
+             y = NULL) +
+        theme_void() +
+        coord_polar(theta = "y")
+    })
+  })
+}
+
+shinyApp(ui, server)
+```
