@@ -87,6 +87,8 @@ print(top_10_states[['state', 'location_quotient']])
 
 ```{r}
 # Load required libraries
+library(shiny)
+library(ggplot2)
 library(readr)
 library(stats)
 library(dplyr)
@@ -130,11 +132,6 @@ ggplot(heatmap_data, aes(x = state, y = `Actors`, fill = `Actors`)) +
 ```
 
 ```{r}
-library(shiny)
-library(ggplot2)
-library(readr)
-library(stats)
-library(dplyr)
 
 ui <- fluidPage(
   titlePanel("Artist Type Distribution"),
@@ -187,3 +184,71 @@ server <- function(input, output) {
 
 shinyApp(ui, server)
 ```
+
+-   Is there a correlation between the percentage of artists in a state (artists_share) and the state's number of workers?
+
+```{r}
+# Assuming your dataframe is named "artist"
+# Replace "your_data.csv" with the actual file path if you are reading from a CSV file
+
+# Check the structure of your dataframe
+str(artist)
+
+# Calculate the correlation
+correlation <- cor(artist$artists_share, artist$all_workers_n)
+
+# Print the correlation
+cat("Correlation between artists_share and all_workers_n:", correlation, "\n")
+
+```
+
+The correlation coefficient of approximately -0.0315 suggests a very weak negative correlation between the percentage of artists in a state (**`artists_share`**) and the state's number of workers (**`all_workers_n`**). Here are some interpretations:
+
+1.  **Weak Negative Correlation:** The negative sign indicates that, on average, as the percentage of artists in a state increases, the state's number of workers tends to decrease slightly. However, the strength of this relationship is very weak.
+
+2.  **Limited Predictive Power:** The correlation is close to zero, indicating that there is little linear association between the two variables. This means that the percentage of artists in a state is not a strong predictor or indicator of the total number of workers in that state.
+
+3.  **Other Factors at Play:** The weak correlation suggests that factors other than the percentage of artists likely influence the total number of workers in a state. There may be various economic, demographic, or industry-specific factors that contribute to the overall workforce size.
+
+4.  **Cautious Interpretation:** Correlation does not imply causation. Even though there is a weak correlation, it does not necessarily mean that the presence of artists directly causes a decrease in the number of workers or vice versa. Other confounding factors may be influencing the observed relationship.
+
+In summary, while there is a statistical correlation, the practical significance of this correlation is very limited. It's essential to interpret correlation in the context of the specific data and consider other relevant factors when drawing conclusions about the relationship between variables.
+
+```{r}
+# Fisher's Exact Test:
+
+#If the expected frequencies are too small, you might want to consider using Fisher's Exact Test, which is more appropriate for small sample sizes. In R, you can use fisher.test() for this purpose.
+
+fisher_test <- fisher.test(table(artist$race, artist$state), simulate.p.value = TRUE)
+print(fisher_test)
+
+chisq_test <- chisq.test(table(artist$race, artist$state), correct = FALSE)
+print(chisq_test)
+# Print the test results
+print(chisq_test)
+
+```
+
+The Fisher's Exact Test with simulated p-value and the Pearson's Chi-squared test both indicate a highly significant association between the race of artists and the state. Let's interpret each result:
+
+1.  **Fisher's Exact Test:**
+
+    -   The p-value obtained from the Fisher's Exact Test with simulated p-value is 0.0004998, which is less than the typical significance level of 0.05. This suggests strong evidence to reject the null hypothesis that there is no association between the race of artists and the state.
+
+2.  **Pearson's Chi-squared Test:**
+
+    -   The Pearson's Chi-squared test also provides a very low p-value of 2.6e-09, which is practically zero. Like the Fisher's Exact Test, this indicates strong evidence against the null hypothesis.
+
+Both tests suggest that there is a significant association between the race of artists and the state. In practical terms, this means that the racial composition of artists varies significantly across different states. The next steps would involve investigating the nature of this association and understanding which specific races contribute more or less than expected in certain states.
+
+Here are some possible next steps:
+
+-   **Post-hoc Analysis:** If you find a significant association, you might want to perform post-hoc analysis or pairwise comparisons to identify which specific races and states contribute to the observed association.
+
+-   **Interpretation:** Consider the practical significance of the association. Are there specific states where certain racial groups of artists are overrepresented or underrepresented compared to the overall population?
+
+-   **Covariates:** If available, consider including covariates (additional variables) in the analysis to account for potential confounding factors that could influence the relationship.
+
+-   **Explore Contributing Factors:** Investigate other factors (economic, cultural, etc.) that might explain the observed association.
+
+Remember that statistical significance does not imply causation, and further investigation and domain knowledge are often necessary to understand the underlying reasons for the observed associations.
