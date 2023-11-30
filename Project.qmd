@@ -252,3 +252,47 @@ Here are some possible next steps:
 -   **Explore Contributing Factors:** Investigate other factors (economic, cultural, etc.) that might explain the observed association.
 
 Remember that statistical significance does not imply causation, and further investigation and domain knowledge are often necessary to understand the underlying reasons for the observed associations.
+
+```{r}
+# Create a contingency table
+contingency_table <- table(artist$race, artist$state)
+
+print(contingency_table)
+
+
+# Convert the contingency table to a data frame
+contingency_df <- as.data.frame(as.table(contingency_table))
+
+print(contingency_df)
+
+# Create an empty dataframe to store results
+result_df <- data.frame()
+
+# Loop through each combination of race and state
+for (i in unique(contingency_df$Var1)) {
+  for (j in unique(contingency_df$Var2)) {
+    
+    # Subset the data for the specific combination of race and state
+    subset_data <- contingency_df[contingency_df$Var1 == i & contingency_df$Var2 == j, ]
+    
+    # Check if the subset_data has at least 2 rows
+    if (nrow(subset_data) >= 2) {
+      # Perform Fisher's Exact Test
+      fisher_test <- fisher.test(subset_data$Freq)
+      
+      # Extract relevant information and store in result_df
+      result_df <- rbind(result_df, data.frame(
+        Var1 = i,
+        Var2 = j,
+        p.value = fisher_test$p.value
+      ))
+    }
+  }
+}
+
+# Adjust p-values for multiple comparisons
+result_df$p.adjusted <- p.adjust(result_df$p.value, method = "holm")
+
+# Print the results
+print(result_df)
+```
