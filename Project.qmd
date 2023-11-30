@@ -138,6 +138,8 @@ As shown in the above figure, while the heatmap is a very useful visualization, 
 3.  Depending on the range of counts in my data, the color scale might not effectively represent the variations.
 4.  we have many states or artist types as shown in the table, the labels on the axes (states and artist types) has become crowded and difficult to read. This is especially true whenI have a large dataset (51 states and lots of types of artists), and it is challenging to display all labels clearly.
 
+Consider the specific goals of our analysis and the characteristics of our dataset when choosing a visualization method. Based on waht we learnt in the class, we want to create one shiny graph to answer this question. The R code is shown below:
+
 ```{r}
 
 ui <- fluidPage(
