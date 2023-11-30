@@ -134,6 +134,7 @@ ggplot(heatmap_data, aes(x = state, y = `Actors`, fill = `Actors`)) +
 As shown in the above figure, while the heatmap is a very useful visualization, it also has its own disadvantages which are reflected from the above figure.
 
 1.  Heatmaps rely on color to convey information, and misinterpretation of colors is a common issue. As shown in above, it is hard for the reviewers (even Mahyar and Jing) to interpret differences in shades. We also have difficulty distinguishing between similar colors. This is one reason that I decided to use another format to answer this question.
+2.  Heatmaps are effective for showing overall patterns but may not provide detailed information on individual data points. if we want to analyze the specific values in one specific state, it is hard to read it directly from this heat table.
 
 ```{r}
 
