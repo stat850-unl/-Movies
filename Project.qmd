@@ -70,15 +70,16 @@ else:
 
 -   The top 10 state /territory has the highest number of artists, as indicated by the location quotient.
 
-```{python table-setup-py}
-# Sort the dataset by location quotient in descending order
-sorted_dataset = artist.sort_values(by='location_quotient', ascending=False)
+```{python table-setup-py2}
+# Calculate the average location_quotient for each state
+average_location_quotient = artist.groupby('state')['location_quotient'].mean()
 
-# Get the top 10 states with the highest location quotient
-top_10_states = sorted_dataset.head(10)
+# Sort states based on average location_quotient and get the top 10
+top_10_states = average_location_quotient.sort_values(ascending=False).head(10)
+
 # Display the top 10 states
-print("Top 10 States with the Highest Location Quotient:")
-print(top_10_states[['state', 'location_quotient']])
+print("Top 10 States with Highest Location Quotient:")
+print(top_10_states)
 ```
 
 ## R Code

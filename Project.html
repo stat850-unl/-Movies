@@ -99,7 +99,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <ul>
 <li>Are there any states with a location quotient significantly below 1.0 for artists?</li>
 </ul>
-<div class="cell" data-execution_count="1">
+<div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Explicitly import pandas</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy <span class="im">import</span> stats</span>
@@ -109,87 +109,98 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>artist <span class="op">=</span> pd.read_csv(<span class="st">"artists.csv"</span>)</span>
 <span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>artist.head()</span>
 <span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Delete missing values</span></span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>artist <span class="op">=</span> artist.dropna()</span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="co">""" Question1: Are there any states with a location quotient significantly below 1.0 for artists?"""</span></span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Filter the data to include only the relevant columns</span></span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>subset <span class="op">=</span> artist[[<span class="st">'state'</span>, <span class="st">'location_quotient'</span>]]</span>
-<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a><span class="co"># Visual analysis using a histogram</span></span>
-<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">6</span>))</span>
-<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>plt.hist(subset[<span class="st">'location_quotient'</span>], bins<span class="op">=</span><span class="dv">20</span>, edgecolor<span class="op">=</span><span class="st">'black'</span>)</span>
-<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Histogram of Location Quotients for Artists'</span>)</span>
-<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'Location Quotient'</span>)</span>
-<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'Frequency'</span>)</span>
-<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>plt.show()</span>
-<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a><span class="co"># Visual analysis using a box plot</span></span>
-<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">6</span>))</span>
-<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>plt.boxplot(subset[<span class="st">'location_quotient'</span>])</span>
-<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Location Quotient Distribution for Artists'</span>)</span>
-<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'Artists'</span>)</span>
-<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'Location Quotient'</span>)</span>
-<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a>plt.show()</span>
-<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a><span class="co"># Statistical analysis using a one-sample t-test</span></span>
-<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a><span class="co"># Set the significance level for the hypothesis test</span></span>
-<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a>alpha <span class="op">=</span> <span class="fl">0.05</span></span>
-<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a>population_mean <span class="op">=</span> <span class="fl">1.0</span>  <span class="co"># The hypothesized mean (1.0)</span></span>
-<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a><span class="co"># Perform a one-sample t-test</span></span>
-<span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a>t_stat, p_value <span class="op">=</span> stats.ttest_1samp(subset[<span class="st">'location_quotient'</span>], population_mean)</span>
-<span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a><span class="co"># Filter states with location quotient less than 1.0</span></span>
-<span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a>states_below_1 <span class="op">=</span> subset[subset[<span class="st">'location_quotient'</span>] <span class="op">&lt;</span> <span class="fl">1.0</span>]</span>
-<span id="cb1-46"><a href="#cb1-46" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-47"><a href="#cb1-47" aria-hidden="true" tabindex="-1"></a><span class="co"># Check if the p-value is less than the significance level</span></span>
-<span id="cb1-48"><a href="#cb1-48" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> p_value <span class="op">&lt;</span> alpha:</span>
-<span id="cb1-49"><a href="#cb1-49" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"States with a location quotient significantly below 1.0 (p-value: </span><span class="sc">{</span>p_value<span class="sc">:.4f}</span><span class="ss">): </span><span class="sc">{</span><span class="bu">len</span>(states_below_1)<span class="sc">}</span><span class="ss"> states"</span>)</span>
-<span id="cb1-50"><a href="#cb1-50" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb1-51"><a href="#cb1-51" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Filter the original dataset based on the states with a significantly lower location quotient than 1.0</span></span>
-<span id="cb1-52"><a href="#cb1-52" aria-hidden="true" tabindex="-1"></a>    filtered_dataset <span class="op">=</span> artist[artist[<span class="st">'state'</span>].isin(states_below_1[<span class="st">'state'</span>])]</span>
-<span id="cb1-53"><a href="#cb1-53" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"Filtered Dataset:"</span>)</span>
-<span id="cb1-54"><a href="#cb1-54" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(filtered_dataset)</span>
-<span id="cb1-55"><a href="#cb1-55" aria-hidden="true" tabindex="-1"></a><span class="cf">else</span>:</span>
-<span id="cb1-56"><a href="#cb1-56" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"No significant evidence of location quotients below 1.0. Number of states below 1.0: </span><span class="sc">{</span><span class="bu">len</span>(states_below_1)<span class="sc">}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display">
-<p><img src="Project_files/figure-html/cell-2-output-1.png" width="816" height="523"></p>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Delete missing values</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>        state      race  ... artists_share  location_quotient
+0     Alabama  Hispanic  ...      0.000510           0.875352
+1      Alaska  Hispanic  ...      0.000558           0.957214
+2     Arizona  Hispanic  ...      0.000261           0.448099
+3    Arkansas  Hispanic  ...           NaN                NaN
+4  California  Hispanic  ...      0.000518           0.888412
+
+[5 rows x 7 columns]</code></pre>
 </div>
-<div class="cell-output cell-output-display">
-<p><img src="Project_files/figure-html/cell-2-output-2.png" width="808" height="523"></p>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>artist <span class="op">=</span> artist.dropna()</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="co">""" Question1: Are there any states with a location quotient significantly below 1.0 for artists?"""</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Filter the data to include only the relevant columns</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>' Question1: Are there any states with a location quotient significantly below 1.0 for artists?'</code></pre>
 </div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>subset <span class="op">=</span> artist[[<span class="st">'state'</span>, <span class="st">'location_quotient'</span>]]</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Visual analysis using a histogram</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">6</span>))</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>plt.hist(subset[<span class="st">'location_quotient'</span>], bins<span class="op">=</span><span class="dv">20</span>, edgecolor<span class="op">=</span><span class="st">'black'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>(array([814., 823., 166.,  42.,  25.,  11.,  10.,   8.,   2.,   5.,   2.,
+         0.,   0.,   0.,   0.,   0.,   0.,   0.,   0.,   1.]), array([ 0.        ,  0.78173091,  1.56346182,  2.34519273,  3.12692364,
+        3.90865455,  4.69038547,  5.47211638,  6.25384729,  7.0355782 ,
+        7.81730911,  8.59904002,  9.38077093, 10.16250184, 10.94423275,
+       11.72596366, 12.50769457, 13.28942548, 14.0711564 , 14.85288731,
+       15.63461822]), &lt;BarContainer object of 20 artists&gt;)</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Histogram of Location Quotients for Artists'</span>)</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'Location Quotient'</span>)</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'Frequency'</span>)</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>plt.show()</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Visual analysis using a box plot</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="Project_files/figure-html/table-setup-py-1.png" class="img-fluid" width="960"></p>
+</div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">6</span>))</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>plt.boxplot(subset[<span class="st">'location_quotient'</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>{'whiskers': [&lt;matplotlib.lines.Line2D object at 0x0000000064B04710&gt;, &lt;matplotlib.lines.Line2D object at 0x0000000064AF8D90&gt;], 'caps': [&lt;matplotlib.lines.Line2D object at 0x0000000064AF87D0&gt;, &lt;matplotlib.lines.Line2D object at 0x0000000064AFAF90&gt;], 'boxes': [&lt;matplotlib.lines.Line2D object at 0x0000000064B05B90&gt;], 'medians': [&lt;matplotlib.lines.Line2D object at 0x0000000064AFBF50&gt;], 'fliers': [&lt;matplotlib.lines.Line2D object at 0x0000000064AEE210&gt;], 'means': []}</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Location Quotient Distribution for Artists'</span>)</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'Artists'</span>)</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'Location Quotient'</span>)</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>plt.show()</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Statistical analysis using a one-sample t-test</span></span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Set the significance level for the hypothesis test</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="Project_files/figure-html/table-setup-py-2.png" class="img-fluid" width="960"></p>
+</div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>alpha <span class="op">=</span> <span class="fl">0.05</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>population_mean <span class="op">=</span> <span class="fl">1.0</span>  <span class="co"># The hypothesized mean (1.0)</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Perform a one-sample t-test</span></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>t_stat, p_value <span class="op">=</span> stats.ttest_1samp(subset[<span class="st">'location_quotient'</span>], population_mean)</span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Filter states with location quotient less than 1.0</span></span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>states_below_1 <span class="op">=</span> subset[subset[<span class="st">'location_quotient'</span>] <span class="op">&lt;</span> <span class="fl">1.0</span>]</span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Check if the p-value is less than the significance level</span></span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> p_value <span class="op">&lt;</span> alpha:</span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"States with a location quotient significantly below 1.0 (p-value: </span><span class="sc">{</span>p_value<span class="sc">:.4f}</span><span class="ss">): </span><span class="sc">{</span><span class="bu">len</span>(states_below_1)<span class="sc">}</span><span class="ss"> states"</span>)</span>
+<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Filter the original dataset based on the states with a significantly lower location quotient than 1.0</span></span>
+<span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a>    filtered_dataset <span class="op">=</span> artist[artist[<span class="st">'state'</span>].isin(states_below_1[<span class="st">'state'</span>])]</span>
+<span id="cb11-16"><a href="#cb11-16" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"Filtered Dataset:"</span>)</span>
+<span id="cb11-17"><a href="#cb11-17" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(filtered_dataset)</span>
+<span id="cb11-18"><a href="#cb11-18" aria-hidden="true" tabindex="-1"></a><span class="cf">else</span>:</span>
+<span id="cb11-19"><a href="#cb11-19" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"No significant evidence of location quotients below 1.0. Number of states below 1.0: </span><span class="sc">{</span><span class="bu">len</span>(states_below_1)<span class="sc">}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>States with a location quotient significantly below 1.0 (p-value: 0.0007): 1186 states
 Filtered Dataset:
-           state      race           type  all_workers_n  artists_n  \
-0        Alabama  Hispanic     Architects          88165       45.0   
-1         Alaska  Hispanic     Architects          26875       15.0   
-2        Arizona  Hispanic     Architects        1033370      270.0   
-4     California  Hispanic     Architects        7470730     3870.0   
-5       Colorado  Hispanic     Architects         594525      200.0   
-...          ...       ...            ...            ...        ...   
-3372        Utah     Other  Photographers          57995       35.0   
-3373     Vermont     Other  Photographers           5900       20.0   
-3374    Virginia     Other  Photographers         128845      130.0   
-3375  Washington     Other  Photographers         214925      245.0   
-3377   Wisconsin     Other  Photographers          66920       60.0   
-
-      artists_share  location_quotient  
-0          0.000510           0.875352  
-1          0.000558           0.957214  
-2          0.000261           0.448099  
-4          0.000518           0.888412  
-5          0.000336           0.576934  
-...             ...                ...  
-3372       0.000604           0.492364  
-3373       0.003390           2.765584  
-3374       0.001009           0.823161  
-3375       0.001140           0.930011  
-3377       0.000897           0.731483  
+           state      race  ... artists_share  location_quotient
+0        Alabama  Hispanic  ...      0.000510           0.875352
+1         Alaska  Hispanic  ...      0.000558           0.957214
+2        Arizona  Hispanic  ...      0.000261           0.448099
+4     California  Hispanic  ...      0.000518           0.888412
+5       Colorado  Hispanic  ...      0.000336           0.576934
+...          ...       ...  ...           ...                ...
+3372        Utah     Other  ...      0.000604           0.492364
+3373     Vermont     Other  ...      0.003390           2.765584
+3374    Virginia     Other  ...      0.001009           0.823161
+3375  Washington     Other  ...      0.001140           0.930011
+3377   Wisconsin     Other  ...      0.000897           0.731483
 
 [1909 rows x 7 columns]</code></pre>
 </div>
@@ -197,28 +208,677 @@ Filtered Dataset:
 <ul>
 <li>The top 10 state /territory has the highest number of artists, as indicated by the location quotient.</li>
 </ul>
-<div class="cell" data-execution_count="2">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Sort the dataset by location quotient in descending order</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>sorted_dataset <span class="op">=</span> artist.sort_values(by<span class="op">=</span><span class="st">'location_quotient'</span>, ascending<span class="op">=</span><span class="va">False</span>)</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Get the top 10 states with the highest location quotient</span></span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>top_10_states <span class="op">=</span> sorted_dataset.head(<span class="dv">10</span>)</span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Display the top 10 states</span></span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Top 10 States with the Highest Location Quotient:"</span>)</span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(top_10_states[[<span class="st">'state'</span>, <span class="st">'location_quotient'</span>]])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate the average location_quotient for each state</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>average_location_quotient <span class="op">=</span> artist.groupby(<span class="st">'state'</span>)[<span class="st">'location_quotient'</span>].mean()</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Sort states based on average location_quotient and get the top 10</span></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>top_10_states <span class="op">=</span> average_location_quotient.sort_values(ascending<span class="op">=</span><span class="va">False</span>).head(<span class="dv">10</span>)</span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Display the top 10 states</span></span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Top 10 States with Highest Location Quotient:"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Top 10 States with the Highest Location Quotient:
-                     state  location_quotient
-1752              Oklahoma          15.634618
-2505               Florida           8.433593
-3076  District of Columbia           8.247381
-2920  District of Columbia           7.746697
-2420                Nevada           7.310929
-2122             Tennessee           7.104216
-1148            California           7.090421
-8     District of Columbia           7.068656
-1796                Nevada           6.843550
-1623                Hawaii           6.427619</code></pre>
+<pre><code>Top 10 States with Highest Location Quotient:</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(top_10_states)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>state
+District of Columbia    3.021805
+Nevada                  1.928534
+California              1.833589
+New York                1.719143
+Hawaii                  1.583119
+Vermont                 1.416223
+Maine                   1.368509
+Oregon                  1.290829
+Rhode Island            1.277834
+Georgia                 1.227988
+Name: location_quotient, dtype: float64</code></pre>
+</div>
+</div>
+</section>
+<section id="r-code" class="level2">
+<h2 class="anchored" data-anchor-id="r-code">R Code</h2>
+<ul>
+<li>What is the overall distribution of artist types across different states or territories?</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load required libraries</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(shiny)</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readr)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: package 'readr' was built under R version 4.1.3</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(stats)</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: package 'dplyr' was built under R version 4.1.3</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Attaching package: 'dplyr'</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>The following objects are masked from 'package:stats':
+
+    filter, lag</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>The following objects are masked from 'package:base':
+
+    intersect, setdiff, setequal, union</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Import the dataset</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>artist <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"artists.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Rows: 3380 Columns: 7</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>-- Column specification --------------------------------------------------------
+Delimiter: ","
+chr (3): state, race, type
+dbl (4): all_workers_n, artists_n, artists_share, location_quotient
+
+i Use `spec()` to retrieve the full column specification for this data.
+i Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Display the first few rows of the dataset</span></span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(artist)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 x 7
+  state      race  type  all_workers_n artists_n artists_share location_quotient
+  &lt;chr&gt;      &lt;chr&gt; &lt;chr&gt;         &lt;dbl&gt;     &lt;dbl&gt;         &lt;dbl&gt;             &lt;dbl&gt;
+1 Alabama    Hisp~ Arch~         88165        45      0.000510             0.875
+2 Alaska     Hisp~ Arch~         26875        15      0.000558             0.957
+3 Arizona    Hisp~ Arch~       1033370       270      0.000261             0.448
+4 Arkansas   Hisp~ Arch~        101405        NA     NA                   NA    
+5 California Hisp~ Arch~       7470730      3870      0.000518             0.888
+6 Colorado   Hisp~ Arch~        594525       200      0.000336             0.577</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Delete missing values</span></span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>artist <span class="ot">&lt;-</span> <span class="fu">na.omit</span>(artist)</span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Question 2 : What is the overall distribution of artist types across different states or territories?</span></span>
+<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Filter the data to include only the relevant columns</span></span>
+<span id="cb29-7"><a href="#cb29-7" aria-hidden="true" tabindex="-1"></a>subset <span class="ot">&lt;-</span> artist <span class="sc">%&gt;%</span> <span class="fu">select</span>(state, type)</span>
+<span id="cb29-8"><a href="#cb29-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate the overall distribution</span></span>
+<span id="cb29-9"><a href="#cb29-9" aria-hidden="true" tabindex="-1"></a>distribution <span class="ot">&lt;-</span> subset <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(state, type) <span class="sc">%&gt;%</span> <span class="fu">summarise</span>(<span class="at">count =</span> <span class="fu">n</span>())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>`summarise()` has grouped output by 'state'. You can override using the
+`.groups` argument.</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Display the overall distribution</span></span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(distribution)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 647 x 3
+# Groups:   state [51]
+   state   type                                       count
+   &lt;chr&gt;   &lt;chr&gt;                                      &lt;int&gt;
+ 1 Alabama Actors                                         2
+ 2 Alabama Announcers                                     2
+ 3 Alabama Architects                                     2
+ 4 Alabama Dancers And Choreographers                     1
+ 5 Alabama Designers                                      5
+ 6 Alabama Entertainers                                   2
+ 7 Alabama Fine Artists, Art Directors, And Animators     3
+ 8 Alabama Landscape Architects                           1
+ 9 Alabama Music Directors And Composers                  2
+10 Alabama Musicians                                      2
+# i 637 more rows</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyr)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: package 'tidyr' was built under R version 4.1.3</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Pivot the data for heatmap</span></span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>heatmap_data <span class="ot">&lt;-</span> distribution <span class="sc">%&gt;%</span></span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> <span class="st">"type"</span>, <span class="at">values_from =</span> <span class="st">"count"</span>, <span class="at">values_fill =</span> <span class="dv">0</span>)</span>
+<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a heatmap</span></span>
+<span id="cb35-6"><a href="#cb35-6" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(heatmap_data, <span class="fu">aes</span>(<span class="at">x =</span> state, <span class="at">y =</span> <span class="st">`</span><span class="at">Actors</span><span class="st">`</span>, <span class="at">fill =</span> <span class="st">`</span><span class="at">Actors</span><span class="st">`</span>)) <span class="sc">+</span></span>
+<span id="cb35-7"><a href="#cb35-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_tile</span>() <span class="sc">+</span></span>
+<span id="cb35-8"><a href="#cb35-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_gradient</span>(<span class="at">low =</span> <span class="st">"red"</span>, <span class="at">high =</span> <span class="st">"blue"</span>) <span class="sc">+</span></span>
+<span id="cb35-9"><a href="#cb35-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Distribution of Artist Types Across States"</span>,</span>
+<span id="cb35-10"><a href="#cb35-10" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"State"</span>,</span>
+<span id="cb35-11"><a href="#cb35-11" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Artist Type"</span>) <span class="sc">+</span></span>
+<span id="cb35-12"><a href="#cb35-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb35-13"><a href="#cb35-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">45</span>, <span class="at">hjust =</span> <span class="dv">1</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="Project_files/figure-html/unnamed-chunk-1-5.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>As shown in the above figure, while the heatmap is a very useful visualization, it also has its own disadvantages which are reflected from the above figure.</p>
+<ol type="1">
+<li>Heatmaps rely on color to convey information, and misinterpretation of colors is a common issue. As shown in above, it is hard for the reviewers (even Mahyar and Jing) to interpret differences in shades. We also have difficulty distinguishing between similar colors. This is one reason that I decided to use another format to answer this question.</li>
+<li>Heatmaps are effective for showing overall patterns but may not provide detailed information on individual data points. if we want to analyze the specific values in one specific state, it is hard to read it directly from this heat table. This is the second reason that I need to use other format table to answer this question.</li>
+<li>Depending on the range of counts in my data, the color scale might not effectively represent the variations.</li>
+<li>we have many states or artist types as shown in the table, the labels on the axes (states and artist types) has become crowded and difficult to read. This is especially true whenI have a large dataset (51 states and lots of types of artists), and it is challenging to display all labels clearly.</li>
+</ol>
+<p>Consider the specific goals of our analysis and the characteristics of our dataset when choosing a visualization method. Based on waht we learnt in the class, we want to create one shiny graph to answer this question. The R code is shown below:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>ui <span class="ot">&lt;-</span> <span class="fu">fluidPage</span>(</span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">titlePanel</span>(<span class="st">"Artist Type Distribution"</span>),</span>
+<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sidebarLayout</span>(</span>
+<span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">sidebarPanel</span>(</span>
+<span id="cb36-5"><a href="#cb36-5" aria-hidden="true" tabindex="-1"></a>      <span class="fu">selectInput</span>(<span class="st">"stateInput"</span>, <span class="st">"Select a state:"</span>, <span class="fu">unique</span>(distribution<span class="sc">$</span>state)),</span>
+<span id="cb36-6"><a href="#cb36-6" aria-hidden="true" tabindex="-1"></a>      <span class="fu">actionButton</span>(<span class="st">"plotButton"</span>, <span class="st">"Plot"</span>)</span>
+<span id="cb36-7"><a href="#cb36-7" aria-hidden="true" tabindex="-1"></a>    ),</span>
+<span id="cb36-8"><a href="#cb36-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mainPanel</span>(</span>
+<span id="cb36-9"><a href="#cb36-9" aria-hidden="true" tabindex="-1"></a>      <span class="fu">tableOutput</span>(<span class="st">"resultTable"</span>),</span>
+<span id="cb36-10"><a href="#cb36-10" aria-hidden="true" tabindex="-1"></a>      <span class="fu">plotOutput</span>(<span class="st">"barPlot"</span>),</span>
+<span id="cb36-11"><a href="#cb36-11" aria-hidden="true" tabindex="-1"></a>      <span class="fu">plotOutput</span>(<span class="st">"pieChart"</span>)</span>
+<span id="cb36-12"><a href="#cb36-12" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb36-13"><a href="#cb36-13" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb36-14"><a href="#cb36-14" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb36-15"><a href="#cb36-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-16"><a href="#cb36-16" aria-hidden="true" tabindex="-1"></a>server <span class="ot">&lt;-</span> <span class="cf">function</span>(input, output) {</span>
+<span id="cb36-17"><a href="#cb36-17" aria-hidden="true" tabindex="-1"></a>  state_data <span class="ot">&lt;-</span> <span class="fu">reactive</span>({</span>
+<span id="cb36-18"><a href="#cb36-18" aria-hidden="true" tabindex="-1"></a>    selected_state <span class="ot">&lt;-</span> input<span class="sc">$</span>stateInput</span>
+<span id="cb36-19"><a href="#cb36-19" aria-hidden="true" tabindex="-1"></a>    subset_for_state <span class="ot">&lt;-</span> distribution[distribution<span class="sc">$</span>state <span class="sc">==</span> selected_state, ]</span>
+<span id="cb36-20"><a href="#cb36-20" aria-hidden="true" tabindex="-1"></a>    subset_for_state</span>
+<span id="cb36-21"><a href="#cb36-21" aria-hidden="true" tabindex="-1"></a>  })</span>
+<span id="cb36-22"><a href="#cb36-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-23"><a href="#cb36-23" aria-hidden="true" tabindex="-1"></a>  output<span class="sc">$</span>resultTable <span class="ot">&lt;-</span> <span class="fu">renderTable</span>({</span>
+<span id="cb36-24"><a href="#cb36-24" aria-hidden="true" tabindex="-1"></a>    <span class="fu">state_data</span>()</span>
+<span id="cb36-25"><a href="#cb36-25" aria-hidden="true" tabindex="-1"></a>  })</span>
+<span id="cb36-26"><a href="#cb36-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-27"><a href="#cb36-27" aria-hidden="true" tabindex="-1"></a>  <span class="fu">observeEvent</span>(input<span class="sc">$</span>plotButton, {</span>
+<span id="cb36-28"><a href="#cb36-28" aria-hidden="true" tabindex="-1"></a>    output<span class="sc">$</span>barPlot <span class="ot">&lt;-</span> <span class="fu">renderPlot</span>({</span>
+<span id="cb36-29"><a href="#cb36-29" aria-hidden="true" tabindex="-1"></a>      <span class="fu">ggplot</span>(<span class="fu">state_data</span>(), <span class="fu">aes</span>(<span class="at">x =</span> type, <span class="at">y =</span> count, <span class="at">fill =</span> type)) <span class="sc">+</span></span>
+<span id="cb36-30"><a href="#cb36-30" aria-hidden="true" tabindex="-1"></a>        <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">"identity"</span>) <span class="sc">+</span></span>
+<span id="cb36-31"><a href="#cb36-31" aria-hidden="true" tabindex="-1"></a>        <span class="fu">labs</span>(<span class="at">title =</span> <span class="fu">paste</span>(<span class="st">"Distribution of Artist Types in"</span>, input<span class="sc">$</span>stateInput),</span>
+<span id="cb36-32"><a href="#cb36-32" aria-hidden="true" tabindex="-1"></a>             <span class="at">x =</span> <span class="st">"Artist Type"</span>,</span>
+<span id="cb36-33"><a href="#cb36-33" aria-hidden="true" tabindex="-1"></a>             <span class="at">y =</span> <span class="st">"Count"</span>) <span class="sc">+</span></span>
+<span id="cb36-34"><a href="#cb36-34" aria-hidden="true" tabindex="-1"></a>        <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb36-35"><a href="#cb36-35" aria-hidden="true" tabindex="-1"></a>        <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">45</span>, <span class="at">hjust =</span> <span class="dv">1</span>))</span>
+<span id="cb36-36"><a href="#cb36-36" aria-hidden="true" tabindex="-1"></a>    })</span>
+<span id="cb36-37"><a href="#cb36-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-38"><a href="#cb36-38" aria-hidden="true" tabindex="-1"></a>    output<span class="sc">$</span>pieChart <span class="ot">&lt;-</span> <span class="fu">renderPlot</span>({</span>
+<span id="cb36-39"><a href="#cb36-39" aria-hidden="true" tabindex="-1"></a>      <span class="fu">ggplot</span>(<span class="fu">state_data</span>(), <span class="fu">aes</span>(<span class="at">x =</span> <span class="st">""</span>, <span class="at">y =</span> count, <span class="at">fill =</span> type)) <span class="sc">+</span></span>
+<span id="cb36-40"><a href="#cb36-40" aria-hidden="true" tabindex="-1"></a>        <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">"pie"</span>) <span class="sc">+</span></span>
+<span id="cb36-41"><a href="#cb36-41" aria-hidden="true" tabindex="-1"></a>        <span class="fu">labs</span>(<span class="at">title =</span> <span class="fu">paste</span>(<span class="st">"Pie Chart of Artist Types in"</span>, input<span class="sc">$</span>stateInput),</span>
+<span id="cb36-42"><a href="#cb36-42" aria-hidden="true" tabindex="-1"></a>             <span class="at">x =</span> <span class="cn">NULL</span>,</span>
+<span id="cb36-43"><a href="#cb36-43" aria-hidden="true" tabindex="-1"></a>             <span class="at">y =</span> <span class="cn">NULL</span>) <span class="sc">+</span></span>
+<span id="cb36-44"><a href="#cb36-44" aria-hidden="true" tabindex="-1"></a>        <span class="fu">theme_void</span>() <span class="sc">+</span></span>
+<span id="cb36-45"><a href="#cb36-45" aria-hidden="true" tabindex="-1"></a>        <span class="fu">coord_polar</span>(<span class="at">theta =</span> <span class="st">"y"</span>)</span>
+<span id="cb36-46"><a href="#cb36-46" aria-hidden="true" tabindex="-1"></a>    })</span>
+<span id="cb36-47"><a href="#cb36-47" aria-hidden="true" tabindex="-1"></a>  })</span>
+<span id="cb36-48"><a href="#cb36-48" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb36-49"><a href="#cb36-49" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-50"><a href="#cb36-50" aria-hidden="true" tabindex="-1"></a><span class="fu">shinyApp</span>(ui, server)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>PhantomJS not found. You can install it with webshot::install_phantomjs(). If it is installed, please make sure the phantomjs executable can be found via the PATH variable.</code></pre>
+</div>
+<div class="cell-output-display">
+<p></p><div style="width: 100% ; height: 400px ; text-align: center; box-sizing: border-box; -moz-box-sizing: border-box; -webkit-box-sizing: border-box;" class="muted well">Shiny applications not supported in static R Markdown documents</div><p></p>
+</div>
+</div>
+<ul>
+<li>Is there a correlation between the percentage of artists in a state (artists_share) and the state’s number of workers?</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Assuming your dataframe is named "artist"</span></span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Replace "your_data.csv" with the actual file path if you are reading from a CSV file</span></span>
+<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Check the structure of your dataframe</span></span>
+<span id="cb38-5"><a href="#cb38-5" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(artist)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>tibble [1,909 x 7] (S3: tbl_df/tbl/data.frame)
+ $ state            : chr [1:1909] "Alabama" "Alaska" "Arizona" "California" ...
+ $ race             : chr [1:1909] "Hispanic" "Hispanic" "Hispanic" "Hispanic" ...
+ $ type             : chr [1:1909] "Architects" "Architects" "Architects" "Architects" ...
+ $ all_workers_n    : num [1:1909] 88165 26875 1033370 7470730 594525 ...
+ $ artists_n        : num [1:1909] 45 15 270 3870 200 150 185 2900 370 40 ...
+ $ artists_share    : num [1:1909] 0.00051 0.000558 0.000261 0.000518 0.000336 ...
+ $ location_quotient: num [1:1909] 0.875 0.957 0.448 0.888 0.577 ...
+ - attr(*, "na.action")= 'omit' Named int [1:1471] 4 8 13 16 18 20 25 27 28 29 ...
+  ..- attr(*, "names")= chr [1:1471] "4" "8" "13" "16" ...</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate the correlation</span></span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a>correlation <span class="ot">&lt;-</span> <span class="fu">cor</span>(artist<span class="sc">$</span>artists_share, artist<span class="sc">$</span>all_workers_n)</span>
+<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-4"><a href="#cb40-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Print the correlation</span></span>
+<span id="cb40-5"><a href="#cb40-5" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"Correlation between artists_share and all_workers_n:"</span>, correlation, <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Correlation between artists_share and all_workers_n: -0.0315063 </code></pre>
+</div>
+</div>
+<p>The correlation coefficient of approximately -0.0315 suggests a very weak negative correlation between the percentage of artists in a state (<strong><code>artists_share</code></strong>) and the state’s number of workers (<strong><code>all_workers_n</code></strong>). Here are some interpretations:</p>
+<ol type="1">
+<li><p><strong>Weak Negative Correlation:</strong> The negative sign indicates that, on average, as the percentage of artists in a state increases, the state’s number of workers tends to decrease slightly. However, the strength of this relationship is very weak.</p></li>
+<li><p><strong>Limited Predictive Power:</strong> The correlation is close to zero, indicating that there is little linear association between the two variables. This means that the percentage of artists in a state is not a strong predictor or indicator of the total number of workers in that state.</p></li>
+<li><p><strong>Other Factors at Play:</strong> The weak correlation suggests that factors other than the percentage of artists likely influence the total number of workers in a state. There may be various economic, demographic, or industry-specific factors that contribute to the overall workforce size.</p></li>
+<li><p><strong>Cautious Interpretation:</strong> Correlation does not imply causation. Even though there is a weak correlation, it does not necessarily mean that the presence of artists directly causes a decrease in the number of workers or vice versa. Other confounding factors may be influencing the observed relationship.</p></li>
+</ol>
+<p>In summary, while there is a statistical correlation, the practical significance of this correlation is very limited. It’s essential to interpret correlation in the context of the specific data and consider other relevant factors when drawing conclusions about the relationship between variables.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Fisher's Exact Test:</span></span>
+<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a><span class="co">#If the expected frequencies are too small, you might want to consider using Fisher's Exact Test, which is more appropriate for small sample sizes. In R, you can use fisher.test() for this purpose.</span></span>
+<span id="cb42-4"><a href="#cb42-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-5"><a href="#cb42-5" aria-hidden="true" tabindex="-1"></a>fisher_test <span class="ot">&lt;-</span> <span class="fu">fisher.test</span>(<span class="fu">table</span>(artist<span class="sc">$</span>race, artist<span class="sc">$</span>state), <span class="at">simulate.p.value =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb42-6"><a href="#cb42-6" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(fisher_test)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Fisher's Exact Test for Count Data with simulated p-value (based on
+    2000 replicates)
+
+data:  table(artist$race, artist$state)
+p-value = 0.0004998
+alternative hypothesis: two.sided</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a>chisq_test <span class="ot">&lt;-</span> <span class="fu">chisq.test</span>(<span class="fu">table</span>(artist<span class="sc">$</span>race, artist<span class="sc">$</span>state), <span class="at">correct =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning in chisq.test(table(artist$race, artist$state), correct = FALSE):
+Chi-squared approximation may be incorrect</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(chisq_test)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Pearson's Chi-squared test
+
+data:  table(artist$race, artist$state)
+X-squared = 339.68, df = 200, p-value = 2.6e-09</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Print the test results</span></span>
+<span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(chisq_test)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Pearson's Chi-squared test
+
+data:  table(artist$race, artist$state)
+X-squared = 339.68, df = 200, p-value = 2.6e-09</code></pre>
+</div>
+</div>
+<p>The Fisher’s Exact Test with simulated p-value and the Pearson’s Chi-squared test both indicate a highly significant association between the race of artists and the state. Let’s interpret each result:</p>
+<ol type="1">
+<li><p><strong>Fisher’s Exact Test:</strong></p>
+<ul>
+<li>The p-value obtained from the Fisher’s Exact Test with simulated p-value is 0.0004998, which is less than the typical significance level of 0.05. This suggests strong evidence to reject the null hypothesis that there is no association between the race of artists and the state.</li>
+</ul></li>
+<li><p><strong>Pearson’s Chi-squared Test:</strong></p>
+<ul>
+<li>The Pearson’s Chi-squared test also provides a very low p-value of 2.6e-09, which is practically zero. Like the Fisher’s Exact Test, this indicates strong evidence against the null hypothesis.</li>
+</ul></li>
+</ol>
+<p>Both tests suggest that there is a significant association between the race of artists and the state. In practical terms, this means that the racial composition of artists varies significantly across different states. The next steps would involve investigating the nature of this association and understanding which specific races contribute more or less than expected in certain states.</p>
+<p>Here are some possible next steps:</p>
+<ul>
+<li><p><strong>Post-hoc Analysis:</strong> If you find a significant association, you might want to perform post-hoc analysis or pairwise comparisons to identify which specific races and states contribute to the observed association.</p></li>
+<li><p><strong>Interpretation:</strong> Consider the practical significance of the association. Are there specific states where certain racial groups of artists are overrepresented or underrepresented compared to the overall population?</p></li>
+<li><p><strong>Covariates:</strong> If available, consider including covariates (additional variables) in the analysis to account for potential confounding factors that could influence the relationship.</p></li>
+<li><p><strong>Explore Contributing Factors:</strong> Investigate other factors (economic, cultural, etc.) that might explain the observed association.</p></li>
+</ul>
+<p>Remember that statistical significance does not imply causation, and further investigation and domain knowledge are often necessary to understand the underlying reasons for the observed associations.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a contingency table</span></span>
+<span id="cb50-2"><a href="#cb50-2" aria-hidden="true" tabindex="-1"></a>contingency_table <span class="ot">&lt;-</span> <span class="fu">table</span>(artist<span class="sc">$</span>race, artist<span class="sc">$</span>state)</span>
+<span id="cb50-3"><a href="#cb50-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb50-4"><a href="#cb50-4" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(contingency_table)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                  
+                   Alabama Alaska Arizona Arkansas California Colorado
+  African-American      10      0       5        3         13        6
+  Asian                  1      1       6        1         13        8
+  Hispanic               5      1      12        2         13       11
+  Other                  3     10       8        1         13        9
+  White                 13     11      13       11         13       13
+                  
+                   Connecticut Delaware District of Columbia Florida Georgia
+  African-American           7        3                    9      12      12
+  Asian                      8        1                    6      11       8
+  Hispanic                   8        1                    4      13      12
+  Other                      7        1                    4      11       9
+  White                     12       12                   13      13      13
+                  
+                   Hawaii Idaho Illinois Indiana Iowa Kansas Kentucky Louisiana
+  African-American      2     0       12       7    4      6        6        11
+  Asian                11     1       11       5    4      4        2         4
+  Hispanic              7     2       13       8    2      6        4        10
+  Other                11     2       11       5    1      4        2         6
+  White                13    12       13      13   13     13       13        13
+                  
+                   Maine Maryland Massachusetts Michigan Minnesota Mississippi
+  African-American     0       13            11       12         7           8
+  Asian                1       11            11        6         7           0
+  Hispanic             2       10            12        9         7           1
+  Other                2       12             7        7         9           0
+  White               13       13            13       13        13          12
+                  
+                   Missouri Montana Nebraska Nevada New Hampshire New Jersey
+  African-American        9       0        0     10             0         12
+  Asian                   6       0        1      7             2         10
+  Hispanic                6       0        4     11             1         12
+  Other                   6       3        5      8             2         10
+  White                  13      13       13     13            12         13
+                  
+                   New Mexico New York North Carolina North Dakota Ohio
+  African-American          2       13             12            0   11
+  Asian                     1       13              8            0    6
+  Hispanic                 10       13              8            0    9
+  Other                     9       13              8            4    8
+  White                    12       13             13           10   13
+                  
+                   Oklahoma Oregon Pennsylvania Rhode Island South Carolina
+  African-American        4      4           11            1             10
+  Asian                   5     10            8            3              2
+  Hispanic                9      8           11            2              6
+  Other                  11      8            9            2              4
+  White                  13     13           13           13             13
+                  
+                   South Dakota Tennessee Texas Utah Vermont Virginia
+  African-American            0        10    13    0       0       12
+  Asian                       0         4    13    5       1        9
+  Hispanic                    1         9    13    8       0        9
+  Other                       5         6    11    5       3        9
+  White                      12        13    13   13      12       13
+                  
+                   Washington West Virginia Wisconsin Wyoming
+  African-American          5             0         6       0
+  Asian                    11             0         5       0
+  Hispanic                 10             1        11       1
+  Other                     9             1         5       1
+  White                    13            13        13      10</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb52"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert the contingency table to a data frame</span></span>
+<span id="cb52-2"><a href="#cb52-2" aria-hidden="true" tabindex="-1"></a>contingency_df <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(<span class="fu">as.table</span>(contingency_table))</span>
+<span id="cb52-3"><a href="#cb52-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-4"><a href="#cb52-4" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(contingency_df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                Var1                 Var2 Freq
+1   African-American              Alabama   10
+2              Asian              Alabama    1
+3           Hispanic              Alabama    5
+4              Other              Alabama    3
+5              White              Alabama   13
+6   African-American               Alaska    0
+7              Asian               Alaska    1
+8           Hispanic               Alaska    1
+9              Other               Alaska   10
+10             White               Alaska   11
+11  African-American              Arizona    5
+12             Asian              Arizona    6
+13          Hispanic              Arizona   12
+14             Other              Arizona    8
+15             White              Arizona   13
+16  African-American             Arkansas    3
+17             Asian             Arkansas    1
+18          Hispanic             Arkansas    2
+19             Other             Arkansas    1
+20             White             Arkansas   11
+21  African-American           California   13
+22             Asian           California   13
+23          Hispanic           California   13
+24             Other           California   13
+25             White           California   13
+26  African-American             Colorado    6
+27             Asian             Colorado    8
+28          Hispanic             Colorado   11
+29             Other             Colorado    9
+30             White             Colorado   13
+31  African-American          Connecticut    7
+32             Asian          Connecticut    8
+33          Hispanic          Connecticut    8
+34             Other          Connecticut    7
+35             White          Connecticut   12
+36  African-American             Delaware    3
+37             Asian             Delaware    1
+38          Hispanic             Delaware    1
+39             Other             Delaware    1
+40             White             Delaware   12
+41  African-American District of Columbia    9
+42             Asian District of Columbia    6
+43          Hispanic District of Columbia    4
+44             Other District of Columbia    4
+45             White District of Columbia   13
+46  African-American              Florida   12
+47             Asian              Florida   11
+48          Hispanic              Florida   13
+49             Other              Florida   11
+50             White              Florida   13
+51  African-American              Georgia   12
+52             Asian              Georgia    8
+53          Hispanic              Georgia   12
+54             Other              Georgia    9
+55             White              Georgia   13
+56  African-American               Hawaii    2
+57             Asian               Hawaii   11
+58          Hispanic               Hawaii    7
+59             Other               Hawaii   11
+60             White               Hawaii   13
+61  African-American                Idaho    0
+62             Asian                Idaho    1
+63          Hispanic                Idaho    2
+64             Other                Idaho    2
+65             White                Idaho   12
+66  African-American             Illinois   12
+67             Asian             Illinois   11
+68          Hispanic             Illinois   13
+69             Other             Illinois   11
+70             White             Illinois   13
+71  African-American              Indiana    7
+72             Asian              Indiana    5
+73          Hispanic              Indiana    8
+74             Other              Indiana    5
+75             White              Indiana   13
+76  African-American                 Iowa    4
+77             Asian                 Iowa    4
+78          Hispanic                 Iowa    2
+79             Other                 Iowa    1
+80             White                 Iowa   13
+81  African-American               Kansas    6
+82             Asian               Kansas    4
+83          Hispanic               Kansas    6
+84             Other               Kansas    4
+85             White               Kansas   13
+86  African-American             Kentucky    6
+87             Asian             Kentucky    2
+88          Hispanic             Kentucky    4
+89             Other             Kentucky    2
+90             White             Kentucky   13
+91  African-American            Louisiana   11
+92             Asian            Louisiana    4
+93          Hispanic            Louisiana   10
+94             Other            Louisiana    6
+95             White            Louisiana   13
+96  African-American                Maine    0
+97             Asian                Maine    1
+98          Hispanic                Maine    2
+99             Other                Maine    2
+100            White                Maine   13
+101 African-American             Maryland   13
+102            Asian             Maryland   11
+103         Hispanic             Maryland   10
+104            Other             Maryland   12
+105            White             Maryland   13
+106 African-American        Massachusetts   11
+107            Asian        Massachusetts   11
+108         Hispanic        Massachusetts   12
+109            Other        Massachusetts    7
+110            White        Massachusetts   13
+111 African-American             Michigan   12
+112            Asian             Michigan    6
+113         Hispanic             Michigan    9
+114            Other             Michigan    7
+115            White             Michigan   13
+116 African-American            Minnesota    7
+117            Asian            Minnesota    7
+118         Hispanic            Minnesota    7
+119            Other            Minnesota    9
+120            White            Minnesota   13
+121 African-American          Mississippi    8
+122            Asian          Mississippi    0
+123         Hispanic          Mississippi    1
+124            Other          Mississippi    0
+125            White          Mississippi   12
+126 African-American             Missouri    9
+127            Asian             Missouri    6
+128         Hispanic             Missouri    6
+129            Other             Missouri    6
+130            White             Missouri   13
+131 African-American              Montana    0
+132            Asian              Montana    0
+133         Hispanic              Montana    0
+134            Other              Montana    3
+135            White              Montana   13
+136 African-American             Nebraska    0
+137            Asian             Nebraska    1
+138         Hispanic             Nebraska    4
+139            Other             Nebraska    5
+140            White             Nebraska   13
+141 African-American               Nevada   10
+142            Asian               Nevada    7
+143         Hispanic               Nevada   11
+144            Other               Nevada    8
+145            White               Nevada   13
+146 African-American        New Hampshire    0
+147            Asian        New Hampshire    2
+148         Hispanic        New Hampshire    1
+149            Other        New Hampshire    2
+150            White        New Hampshire   12
+151 African-American           New Jersey   12
+152            Asian           New Jersey   10
+153         Hispanic           New Jersey   12
+154            Other           New Jersey   10
+155            White           New Jersey   13
+156 African-American           New Mexico    2
+157            Asian           New Mexico    1
+158         Hispanic           New Mexico   10
+159            Other           New Mexico    9
+160            White           New Mexico   12
+161 African-American             New York   13
+162            Asian             New York   13
+163         Hispanic             New York   13
+164            Other             New York   13
+165            White             New York   13
+166 African-American       North Carolina   12
+167            Asian       North Carolina    8
+168         Hispanic       North Carolina    8
+169            Other       North Carolina    8
+170            White       North Carolina   13
+171 African-American         North Dakota    0
+172            Asian         North Dakota    0
+173         Hispanic         North Dakota    0
+174            Other         North Dakota    4
+175            White         North Dakota   10
+176 African-American                 Ohio   11
+177            Asian                 Ohio    6
+178         Hispanic                 Ohio    9
+179            Other                 Ohio    8
+180            White                 Ohio   13
+181 African-American             Oklahoma    4
+182            Asian             Oklahoma    5
+183         Hispanic             Oklahoma    9
+184            Other             Oklahoma   11
+185            White             Oklahoma   13
+186 African-American               Oregon    4
+187            Asian               Oregon   10
+188         Hispanic               Oregon    8
+189            Other               Oregon    8
+190            White               Oregon   13
+191 African-American         Pennsylvania   11
+192            Asian         Pennsylvania    8
+193         Hispanic         Pennsylvania   11
+194            Other         Pennsylvania    9
+195            White         Pennsylvania   13
+196 African-American         Rhode Island    1
+197            Asian         Rhode Island    3
+198         Hispanic         Rhode Island    2
+199            Other         Rhode Island    2
+200            White         Rhode Island   13
+201 African-American       South Carolina   10
+202            Asian       South Carolina    2
+203         Hispanic       South Carolina    6
+204            Other       South Carolina    4
+205            White       South Carolina   13
+206 African-American         South Dakota    0
+207            Asian         South Dakota    0
+208         Hispanic         South Dakota    1
+209            Other         South Dakota    5
+210            White         South Dakota   12
+211 African-American            Tennessee   10
+212            Asian            Tennessee    4
+213         Hispanic            Tennessee    9
+214            Other            Tennessee    6
+215            White            Tennessee   13
+216 African-American                Texas   13
+217            Asian                Texas   13
+218         Hispanic                Texas   13
+219            Other                Texas   11
+220            White                Texas   13
+221 African-American                 Utah    0
+222            Asian                 Utah    5
+223         Hispanic                 Utah    8
+224            Other                 Utah    5
+225            White                 Utah   13
+226 African-American              Vermont    0
+227            Asian              Vermont    1
+228         Hispanic              Vermont    0
+229            Other              Vermont    3
+230            White              Vermont   12
+231 African-American             Virginia   12
+232            Asian             Virginia    9
+233         Hispanic             Virginia    9
+234            Other             Virginia    9
+235            White             Virginia   13
+236 African-American           Washington    5
+237            Asian           Washington   11
+238         Hispanic           Washington   10
+239            Other           Washington    9
+240            White           Washington   13
+241 African-American        West Virginia    0
+242            Asian        West Virginia    0
+243         Hispanic        West Virginia    1
+244            Other        West Virginia    1
+245            White        West Virginia   13
+246 African-American            Wisconsin    6
+247            Asian            Wisconsin    5
+248         Hispanic            Wisconsin   11
+249            Other            Wisconsin    5
+250            White            Wisconsin   13
+251 African-American              Wyoming    0
+252            Asian              Wyoming    0
+253         Hispanic              Wyoming    1
+254            Other              Wyoming    1
+255            White              Wyoming   10</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb54"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create an empty dataframe to store results</span></span>
+<span id="cb54-2"><a href="#cb54-2" aria-hidden="true" tabindex="-1"></a>result_df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>()</span>
+<span id="cb54-3"><a href="#cb54-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb54-4"><a href="#cb54-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Loop through each combination of race and state</span></span>
+<span id="cb54-5"><a href="#cb54-5" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="fu">unique</span>(contingency_df<span class="sc">$</span>Var1)) {</span>
+<span id="cb54-6"><a href="#cb54-6" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> (j <span class="cf">in</span> <span class="fu">unique</span>(contingency_df<span class="sc">$</span>Var2)) {</span>
+<span id="cb54-7"><a href="#cb54-7" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb54-8"><a href="#cb54-8" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Subset the data for the specific combination of race and state</span></span>
+<span id="cb54-9"><a href="#cb54-9" aria-hidden="true" tabindex="-1"></a>    subset_data <span class="ot">&lt;-</span> contingency_df[contingency_df<span class="sc">$</span>Var1 <span class="sc">==</span> i <span class="sc">&amp;</span> contingency_df<span class="sc">$</span>Var2 <span class="sc">==</span> j, ]</span>
+<span id="cb54-10"><a href="#cb54-10" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb54-11"><a href="#cb54-11" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Check if the subset_data has at least 2 rows</span></span>
+<span id="cb54-12"><a href="#cb54-12" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (<span class="fu">nrow</span>(subset_data) <span class="sc">&gt;=</span> <span class="dv">2</span>) {</span>
+<span id="cb54-13"><a href="#cb54-13" aria-hidden="true" tabindex="-1"></a>      <span class="co"># Perform Fisher's Exact Test</span></span>
+<span id="cb54-14"><a href="#cb54-14" aria-hidden="true" tabindex="-1"></a>      fisher_test <span class="ot">&lt;-</span> <span class="fu">fisher.test</span>(subset_data<span class="sc">$</span>Freq)</span>
+<span id="cb54-15"><a href="#cb54-15" aria-hidden="true" tabindex="-1"></a>      </span>
+<span id="cb54-16"><a href="#cb54-16" aria-hidden="true" tabindex="-1"></a>      <span class="co"># Extract relevant information and store in result_df</span></span>
+<span id="cb54-17"><a href="#cb54-17" aria-hidden="true" tabindex="-1"></a>      result_df <span class="ot">&lt;-</span> <span class="fu">rbind</span>(result_df, <span class="fu">data.frame</span>(</span>
+<span id="cb54-18"><a href="#cb54-18" aria-hidden="true" tabindex="-1"></a>        <span class="at">Var1 =</span> i,</span>
+<span id="cb54-19"><a href="#cb54-19" aria-hidden="true" tabindex="-1"></a>        <span class="at">Var2 =</span> j,</span>
+<span id="cb54-20"><a href="#cb54-20" aria-hidden="true" tabindex="-1"></a>        <span class="at">p.value =</span> fisher_test<span class="sc">$</span>p.value</span>
+<span id="cb54-21"><a href="#cb54-21" aria-hidden="true" tabindex="-1"></a>      ))</span>
+<span id="cb54-22"><a href="#cb54-22" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb54-23"><a href="#cb54-23" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb54-24"><a href="#cb54-24" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb54-25"><a href="#cb54-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb54-26"><a href="#cb54-26" aria-hidden="true" tabindex="-1"></a><span class="co"># Adjust p-values for multiple comparisons</span></span>
+<span id="cb54-27"><a href="#cb54-27" aria-hidden="true" tabindex="-1"></a>result_df<span class="sc">$</span>p.adjusted <span class="ot">&lt;-</span> <span class="fu">p.adjust</span>(result_df<span class="sc">$</span>p.value, <span class="at">method =</span> <span class="st">"holm"</span>)</span>
+<span id="cb54-28"><a href="#cb54-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb54-29"><a href="#cb54-29" aria-hidden="true" tabindex="-1"></a><span class="co"># Print the results</span></span>
+<span id="cb54-30"><a href="#cb54-30" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(result_df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] p.adjusted
+&lt;0 rows&gt; (or 0-length row.names)</code></pre>
 </div>
 </div>
 </section>
