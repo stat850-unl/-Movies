@@ -34,6 +34,18 @@ Introduce your dataset and basic questions for exploration. Explain any unique a
 
 Discuss the variables in the dataset and if there are anomalies in the variables, provide some visual assessment of the anomalies and explain how they may have arisen. You should cover most of the information in your proposal data section, but should primarily use paragraphs and not lists/tables (the exception may be a list of e.g. items which were measured).
 
+In this project, we delve into an insightful dataset originating from the [Artists in the U.S.](https://www.arts.gov/impact/research/arts-data-profile-series/adp-31/data-tables) initiative, with supplementary access available through a repository link [here](https://github.com/rfordatascience/tidytuesday/blob/master/data/2022/2022-09-27/artists.csv). The dataset offers a comprehensive examination of the presence and distribution of Hispanic architects across various states in the United States, shedding light on the diverse landscape of workforce demographics within the realm of artistic professions.
+
+The data, meticulously curated and maintained, serves as a valuable resource for our exploration. Its collection from reputable sources aligns with the rigor essential for statistical analysis, providing a foundation for our research inquiries. We aim to unravel key insights into the disparities and nuances within the artistic workforce across different geographical regions.
+
+The dataset encompasses variables that encapsulate crucial information about the workforce, such as the state of data collection, the racial or ethnic categories of the workforce, the type of professions or occupations, the total number of workers, and the specific count and proportion of artists within these occupations. These variables, while fundamental to our analysis, may present anomalies that require careful consideration.
+
+In our examination of the dataset, we have identified potential anomalies that warrant a closer look. Through visual assessments, we aim to elucidate these anomalies, providing a nuanced understanding of their origins. This exploration ensures the integrity of our subsequent analyses, fostering a comprehensive and accurate interpretation of the dataset.
+
+As we embark on this investigative journey, our project's unique approach lies in the collaborative utilization of both Python and R programming languages for data cleaning, preprocessing, and visualization. This tandem application enables a comprehensive assessment of the dataset, capitalizing on the strengths of each language to ensure a robust analysis.
+
+In the forthcoming sections, we will delve into the intricacies of the dataset, addressing anomalies, exploring trends, and presenting visualizations that encapsulate the diverse dimensions of the artistic workforce in the United States. Through our analytical lens, we seek to uncover patterns, correlations, and distinctive features that contribute to a richer understanding of the artistic landscape across different states and territories.
+
 ## Methods
 
 Describe any data cleaning and rearranging you needed to do to get your dataset into a workable form. Make sure to cite any packages which were important in your data cleaning process in this section. For instance, if you used dplyr, then it would be appropriate to say something like
