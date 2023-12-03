@@ -117,7 +117,7 @@ server <- function(input, output) {
   # Sort states based on average location quotient and get the top 10
   top_10_states <- average_location_quotient %>%
     arrange(desc(average_location_quotient)) %>%
-    head(5)
+    head(10)
   
   # Display the top 10 states
   output$averageTable <- renderTable({
@@ -132,7 +132,7 @@ server <- function(input, output) {
            x = "State",
            y = "Average Location Quotient") +
       theme_minimal() +
-      theme(axis.text.x = element_text(angle = 45, hjust = 1))
+      theme(axis.text.x = element_text(angle = 90, hjust = 1))
   })
 }
 

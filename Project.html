@@ -154,7 +154,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">6</span>))</span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>plt.boxplot(subset[<span class="st">'location_quotient'</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>{'whiskers': [&lt;matplotlib.lines.Line2D object at 0x0000000064AEE690&gt;, &lt;matplotlib.lines.Line2D object at 0x0000000064AEFAD0&gt;], 'caps': [&lt;matplotlib.lines.Line2D object at 0x0000000064AEE510&gt;, &lt;matplotlib.lines.Line2D object at 0x0000000064AED810&gt;], 'boxes': [&lt;matplotlib.lines.Line2D object at 0x0000000064ABF690&gt;], 'medians': [&lt;matplotlib.lines.Line2D object at 0x0000000064517FD0&gt;], 'fliers': [&lt;matplotlib.lines.Line2D object at 0x0000000064515650&gt;], 'means': []}</code></pre>
+<pre><code>{'whiskers': [&lt;matplotlib.lines.Line2D object at 0x0000000064903350&gt;, &lt;matplotlib.lines.Line2D object at 0x00000000648DFC90&gt;], 'caps': [&lt;matplotlib.lines.Line2D object at 0x00000000648FD090&gt;, &lt;matplotlib.lines.Line2D object at 0x00000000648FE290&gt;], 'boxes': [&lt;matplotlib.lines.Line2D object at 0x0000000064903490&gt;], 'medians': [&lt;matplotlib.lines.Line2D object at 0x00000000648FC710&gt;], 'fliers': [&lt;matplotlib.lines.Line2D object at 0x00000000648FE010&gt;], 'means': []}</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Location Quotient Distribution for Artists'</span>)</span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'Artists'</span>)</span>
@@ -287,7 +287,7 @@ Attaching package: 'dplyr'</code></pre>
 <span id="cb22-24"><a href="#cb22-24" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Sort states based on average location quotient and get the top 10</span></span>
 <span id="cb22-25"><a href="#cb22-25" aria-hidden="true" tabindex="-1"></a>  top_10_states <span class="ot">&lt;-</span> average_location_quotient <span class="sc">%&gt;%</span></span>
 <span id="cb22-26"><a href="#cb22-26" aria-hidden="true" tabindex="-1"></a>    <span class="fu">arrange</span>(<span class="fu">desc</span>(average_location_quotient)) <span class="sc">%&gt;%</span></span>
-<span id="cb22-27"><a href="#cb22-27" aria-hidden="true" tabindex="-1"></a>    <span class="fu">head</span>(<span class="dv">5</span>)</span>
+<span id="cb22-27"><a href="#cb22-27" aria-hidden="true" tabindex="-1"></a>    <span class="fu">head</span>(<span class="dv">10</span>)</span>
 <span id="cb22-28"><a href="#cb22-28" aria-hidden="true" tabindex="-1"></a>  </span>
 <span id="cb22-29"><a href="#cb22-29" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Display the top 10 states</span></span>
 <span id="cb22-30"><a href="#cb22-30" aria-hidden="true" tabindex="-1"></a>  output<span class="sc">$</span>averageTable <span class="ot">&lt;-</span> <span class="fu">renderTable</span>({</span>
@@ -302,7 +302,7 @@ Attaching package: 'dplyr'</code></pre>
 <span id="cb22-39"><a href="#cb22-39" aria-hidden="true" tabindex="-1"></a>           <span class="at">x =</span> <span class="st">"State"</span>,</span>
 <span id="cb22-40"><a href="#cb22-40" aria-hidden="true" tabindex="-1"></a>           <span class="at">y =</span> <span class="st">"Average Location Quotient"</span>) <span class="sc">+</span></span>
 <span id="cb22-41"><a href="#cb22-41" aria-hidden="true" tabindex="-1"></a>      <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
-<span id="cb22-42"><a href="#cb22-42" aria-hidden="true" tabindex="-1"></a>      <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">45</span>, <span class="at">hjust =</span> <span class="dv">1</span>))</span>
+<span id="cb22-42"><a href="#cb22-42" aria-hidden="true" tabindex="-1"></a>      <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">90</span>, <span class="at">hjust =</span> <span class="dv">1</span>))</span>
 <span id="cb22-43"><a href="#cb22-43" aria-hidden="true" tabindex="-1"></a>  })</span>
 <span id="cb22-44"><a href="#cb22-44" aria-hidden="true" tabindex="-1"></a>}</span>
 <span id="cb22-45"><a href="#cb22-45" aria-hidden="true" tabindex="-1"></a></span>
