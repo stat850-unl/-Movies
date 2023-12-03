@@ -82,6 +82,66 @@ print("Top 10 States with Highest Location Quotient:")
 print(top_10_states)
 ```
 
+```{r}
+# Assuming you have loaded your dataset into a data frame named 'artist'
+# Replace 'your_data.csv' with the actual file path if you are reading from a CSV file
+
+
+# Load required libraries
+library(shiny)
+library(dplyr)
+
+# Import the dataset
+artist <- read.csv("artists.csv")  # Replace with the actual file path
+artist <- na.omit(artist)
+# UI definition
+ui <- fluidPage(
+  titlePanel("Average Location Quotient for Each State and Top 10 States"),
+  sidebarLayout(
+    sidebarPanel(),
+    mainPanel(
+      tableOutput("averageTable"),
+      plotOutput("barPlot")
+    )
+  )
+)
+
+# Server definition
+server <- function(input, output) {
+  
+  # Calculate average location quotient for each state
+  average_location_quotient <- artist %>%
+    group_by(state) %>%
+    summarize(average_location_quotient = mean(location_quotient))
+  
+  # Sort states based on average location quotient and get the top 10
+  top_10_states <- average_location_quotient %>%
+    arrange(desc(average_location_quotient)) %>%
+    head(5)
+  
+  # Display the top 10 states
+  output$averageTable <- renderTable({
+    top_10_states
+  })
+  
+  # Bar plot of average location quotient for each state
+  output$barPlot <- renderPlot({
+    ggplot(average_location_quotient, aes(x = state, y = average_location_quotient)) +
+      geom_bar(stat = "identity", fill = "skyblue") +
+      labs(title = "Average Location Quotient for Each State",
+           x = "State",
+           y = "Average Location Quotient") +
+      theme_minimal() +
+      theme(axis.text.x = element_text(angle = 45, hjust = 1))
+  })
+}
+
+# Run the Shiny app
+shinyApp(ui, server)
+
+
+```
+
 ## R Code
 
 -   What is the overall distribution of artist types across different states or territories?
