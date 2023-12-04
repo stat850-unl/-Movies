@@ -58,6 +58,10 @@ Furthermore, anomalies within categorical variables were systematically identifi
 
 A pivotal aspect of the data cleaning process involved the transformation of variables to harmonize units or scales where necessary. This meticulous adjustment, performed using dplyr's mutate function, ensured a standardized and coherent dataset, facilitating meaningful inter-variable comparisons.
 
+**Collaborative Utilization of Python and R**
+
+In addition to the aforementioned data cleaning endeavors in R, a parallel process was executed in Python to capitalize on the strengths of both programming languages. Python's pandas library played a crucial role in complementing the data cleaning efforts. The collaborative utilization of Python and R aimed to exploit the distinctive features and capabilities of each language, enhancing the overall robustness of the dataset.
+
 Describe any data cleaning and rearranging you needed to do to get your dataset into a workable form. Make sure to cite any packages which were important in your data cleaning process in this section. For instance, if you used dplyr, then it would be appropriate to say something like
 
 > we used the group-apply-combine paradigm with the `dplyr` functions `group_by` and `summarize` [@dplyr-package] to generate a dataset for each day of the observation period from the 15-minute interval observations in the raw data set.
