@@ -48,6 +48,16 @@ In the forthcoming sections, we will delve into the intricacies of the dataset, 
 
 ## Methods
 
+**Data Cleaning and Preparation**
+
+The initial dataset underwent a systematic process of cleaning and restructuring to ensure its suitability for rigorous analysis. Notably, the cleaning procedures were predominantly executed using the versatile programming language R, with key reliance on the dplyr package \[\@dplyr-package\].
+
+To commence the cleaning process, the raw data was scrutinized for any missing values or inconsistencies in the variable entries. Instances of missing data were addressed through appropriate imputation techniques, leveraging functionalities from the dplyr package to ensure data integrity throughout the dataset.
+
+Furthermore, anomalies within categorical variables were systematically identified and rectified. This involved scrutinizing the dataset for outliers or erroneous entries that could potentially compromise the accuracy of subsequent analyses. The dplyr package's filter and mutate functions were instrumental in isolating and addressing these anomalies effectively.
+
+A pivotal aspect of the data cleaning process involved the transformation of variables to harmonize units or scales where necessary. This meticulous adjustment, performed using dplyr's mutate function, ensured a standardized and coherent dataset, facilitating meaningful inter-variable comparisons.
+
 Describe any data cleaning and rearranging you needed to do to get your dataset into a workable form. Make sure to cite any packages which were important in your data cleaning process in this section. For instance, if you used dplyr, then it would be appropriate to say something like
 
 > we used the group-apply-combine paradigm with the `dplyr` functions `group_by` and `summarize` [@dplyr-package] to generate a dataset for each day of the observation period from the 15-minute interval observations in the raw data set.
