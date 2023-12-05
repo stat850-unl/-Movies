@@ -142,6 +142,65 @@ shinyApp(ui, server)
 
 ```
 
+-   How does the racial diversity of artists vary across different states or territories? Are there states with a more diverse artist population than others?
+
+```{r}
+library(shiny)
+library(tidyverse)
+library(viridis)
+
+
+# Define UI
+ui <- fluidPage(
+  titlePanel("Racial Diversity of Artists Across States"),
+  
+  sidebarLayout(
+    sidebarPanel(
+      selectInput("selected_state", "Select State", choices = unique(artist$state), selected = "Alabama"),
+      # You can add more inputs here if needed
+    ),
+    
+    mainPanel(
+      plotOutput("barPlot")
+    )
+  )
+)
+
+# Define server
+server <- function(input, output) {
+  
+  # Filter data based on selected state
+  data_selected_state <- reactive({
+    filter(artist, state == input$selected_state)
+  })
+  
+  # Process data and create plot
+  output$barPlot <- renderPlot({
+    data_processed <- data_selected_state() %>%
+      group_by(state, race) %>%
+      summarise(artists_n = sum(artists_n)) %>%
+      group_by(state) %>%
+      mutate(percentage_of_artists = (artists_n / sum(artists_n)) * 100)
+    
+    # Create a bar plot using ggplot2
+    ggplot(data_processed, aes(x = state, y = percentage_of_artists, fill = race)) +
+      geom_bar(stat = "identity", position = "dodge") +
+      labs(title = "Racial Diversity of Artists Across States",
+           x = "State",
+           y = "Percentage of Artists",
+           fill = "Race") +
+      theme_minimal() +
+      theme(axis.text.x = element_text(angle = 0, hjust = 1)) +
+      scale_fill_viridis(discrete = TRUE)
+  })
+}
+
+# Run the Shiny app
+shinyApp(ui, server)
+
+
+```
+
 ## R Code
 
 -   What is the overall distribution of artist types across different states or territories?
