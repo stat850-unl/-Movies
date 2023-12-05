@@ -62,6 +62,12 @@ A pivotal aspect of the data cleaning process involved the transformation of var
 
 In addition to the aforementioned data cleaning endeavors in R, a parallel process was executed in Python to capitalize on the strengths of both programming languages. Python's pandas library played a crucial role in complementing the data cleaning efforts. The collaborative utilization of Python and R aimed to exploit the distinctive features and capabilities of each language, enhancing the overall robustness of the dataset.
 
+**Integration and Verification**
+
+Following the individual cleaning processes in R and Python, the datasets were integrated, and a meticulous verification was undertaken to confirm their consistency and alignment. Discrepancies, if any, were resolved through a collaborative review process, ensuring a cohesive and accurate dataset for subsequent analyses.
+
+In summary, the data cleaning procedures encompassed imputation of missing values, identification and rectification of anomalies, and standardization of variables. The integration of Python and R facilitated a comprehensive and meticulous approach to ensure the dataset's readiness for advanced statistical analyses.
+
 Describe any data cleaning and rearranging you needed to do to get your dataset into a workable form. Make sure to cite any packages which were important in your data cleaning process in this section. For instance, if you used dplyr, then it would be appropriate to say something like
 
 > we used the group-apply-combine paradigm with the `dplyr` functions `group_by` and `summarize` [@dplyr-package] to generate a dataset for each day of the observation period from the 15-minute interval observations in the raw data set.
