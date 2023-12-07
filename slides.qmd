@@ -135,10 +135,16 @@ X: the percentage of artists in a state (artists_share)
 Y: the state's number of workers (all_workers_n)
 The correlation coefficient (r) ranges from -1 to 1:
 ![](explain.png)
+
+
+
 ## Result for question 5
-<<<<<<< HEAD
-![Racial Diversity](https://github.com/stat850-unl/Artist_In_The_US/blob/main/Racial%20Diversity.jpg)
+![Racial Diversity](Racial Diversity.jpg)
+
+
+
 ## Question 6: The top 10 states which has the most number of Asian artists, and the related population percentage
+
 | state          | artist_count | population_percentage |
 |----------------|--------------|------------------------|
 | California     | 61210        | 0.386956806            |
