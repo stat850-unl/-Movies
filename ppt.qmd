@@ -33,7 +33,6 @@ Delving into dataset intricacies, addressing anomalies, exploring trends, and pr
 
 # Dataset Description
 
-![Table](https://github.com/stat850-unl/Artist_In_The_US/Table%20of%20Data.png)
-
+![Table](Table of Data.png)
 
 # Introduction
