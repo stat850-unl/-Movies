@@ -13,10 +13,13 @@ Quarto enables you to weave together content and executable code into a finished
 
 ## Objective
 
-When you click the **Render** button a document will be generated that includes:
+-   Are there any states with a location quotient significantly below 1.0 for artists?
+-   What is the overall distribution of artist types across different states or territories?
+-   The top 10 state /territory has the highest number of artists, as indicated by the location quotient.
+-   Is there a correlation between the percentage of artists in a state (artists_share) and the state's number of workers?
+-   How does the racial diversity of artists vary across different states or territories? Are there states with a more diverse artist population than others?
+-   Are there any states where the racial composition of artists is significantly different from the overall racial composition of the state's population, and what might explain this difference?
 
--   Content authored with markdown
--   Output from executable code
 
 ##  Dataset Description
 
