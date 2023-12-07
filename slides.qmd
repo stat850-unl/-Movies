@@ -4,7 +4,7 @@ author: "Mahyar Madarshahain & Jing Wang"
 date: "2023-12-07"
 output:
   revealjs::revealjs_presentation:
-    theme: "white" # You can choose a different theme
+    theme: "white" 
     slideNumber: true
     center: true
     controls: true
@@ -13,8 +13,16 @@ output:
 
 ##Introduction
 
-Quarto enables you to weave together content and executable code into a finished presentation. To learn more about Quarto presentations see <https://quarto.org/docs/presentations/>.
+The Arts Data Profile provides national and state-level estimates of artists in the workforce, sourced from 2015-2019 American Community Survey (ACS) data conducted by the U.S. Census Bureau. State-level estimates cover the total number of artists and individual counts for 13 specific artist occupations. An interactive map displays counts and location quotients for total artists and selected occupations, including architects, arts directors, fine artists, animators, designers, dancers, musicians, actors, entertainers, writers, authors, and photographers for each U.S. state.
 
+### Artists: 
+
+Architects (except landscape and naval); landscape architects; art directors, fine artists, and animators; designers; actors; producers and directors; dancers and choreographers; music directors and composers; musicians; disk jockeys, except radio; entertainers; broadcast announcers and radio disk jockeys; other media and communication workers; writers and authors; and photographers.
+
+
+### Location Quotients
+
+The location quotient (LQ) measures the concentration of a particular occupation within a state’s labor force, relative to that occupation’s concentration in the U.S. labor force. For example, an LQ of 1.2 indicates that the occupation clusters in a state at a level 20 percent greater than within the nation’s workforce at large. An LQ of 0.8 indicates that the occupation clusters in a state at a level 20 percent below the occupation’s concentration in the U.S. labor force.
 ------------------------------------------------------------------------
 
 ## Objective
