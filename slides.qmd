@@ -87,7 +87,7 @@ Are there any states with a location quotient significantly below 1.0 for artist
 
 ### The histogram of location quotient for all states
 
-![Histogram](https://github.com/stat850-unl/Artist_In_The_US/blob/main/Histogram%20of%20average%20location%20qutient.png)
+![Histogram](Histogram of average location qutient.png)
 
 <<<<<<< HEAD
 
@@ -113,13 +113,13 @@ Are there any states with a location quotient significantly below 1.0 for artist
 ## Result for question 3
 The top 10 state /territory has the highest number of artists, as indicated by the location quotient.
 
-![Top 10 states](https://github.com/stat850-unl/Artist_In_The_US/blob/main/Top%2010%20states%20having%20high%20quotient.png)
+![The top 10 ](Top 10 states having high quotient.png)
 
 ## Result for question 4
 
 
 ## Result for question 5
-![Racial Diversity](https://github.com/stat850-unl/Artist_In_The_US/blob/main/Racial%20Diversity.jpg)
+![Racial Diversity](Racial Diversity.jpg)
 ## Result for question 6
 
 ## Conclusion
