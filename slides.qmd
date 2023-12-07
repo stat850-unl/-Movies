@@ -32,7 +32,7 @@ The location quotient (LQ) measures the concentration of a particular occupation
 -   The top 10 state /territory has the highest number of artists, as indicated by the location quotient.
 -   Is there a correlation between the percentage of artists in a state (artists_share) and the state's number of workers?
 -   How does the racial diversity of artists vary across different states or territories? Are there states with a more diverse artist population than others?
--   Are there any states where the racial composition of artists is significantly different from the overall racial composition of the state's population, and what might explain this difference?
+-   The top 10 states which has the most number of Asian artists, and the related population percentage.
 
 
 Delving into dataset intricacies, addressing anomalies, exploring trends, and presenting visualizations
@@ -128,13 +128,36 @@ The top 10 state /territory has the highest number of artists, as indicated by t
 
 ![The top 10 ](Top 10 states having high quotient.png)
 
-## Result for question 4
-
-
+## Question 4: Is there a correlation between the percentage of artists in a state (artists_share) and the state's number of workers?
+The correlation between two variables, x and Y, is calculated using the Pearson correlation coefficient (r), which is defined by the following formula: 
+![](correction.png)
+X: the percentage of artists in a state (artists_share)
+Y: the state's number of workers (all_workers_n)
+The correlation coefficient (r) ranges from -1 to 1:
+![](explain.png)
 ## Result for question 5
+<<<<<<< HEAD
+![Racial Diversity](https://github.com/stat850-unl/Artist_In_The_US/blob/main/Racial%20Diversity.jpg)
+## Question 6: The top 10 states which has the most number of Asian artists, and the related population percentage
+| state          | artist_count | population_percentage |
+|----------------|--------------|------------------------|
+| California     | 61210        | 0.386956806            |
+| New York       | 22820        | 0.111216828            |
+| Texas          | 8830         | 0.091643248            |
+| New Jersey     | 7420         | 0.044556437            |
+| Washington     | 5305         | 0.038646725            |
+| Illinois       | 5165         | 0.04114094             |
+| Massachusetts  | 3645         | 0.02719804             |
+| Florida        | 3615         | 0.031865987            |
+| Virginia       | 3445         | 0.027151296            |
+| Hawaii         | 3305         | 0.031579239            |
+=======
 ![Racial Diversity](Racial Diversity.jpg)
 ## Result for question 6
+>>>>>>> d999a3f1f5c86bdff5616c66617bdd03c6c60d4a
 
+## Shiny app fpr question 6
+![](race.png)
 ## Conclusion
 
 ## Thank you

@@ -227,7 +227,6 @@ server <- function(input, output) {
 shinyApp(ui, server)
 ```
 
-
 ## R Code
 
 -   What is the overall distribution of artist types across different states or territories?
@@ -480,8 +479,83 @@ top_10_asian_states <- head(top_asian_states, 10)
 # Print the top 10 states with artist count and population percentage
 print(top_10_asian_states[, c("state", "artist_count", "population_percentage")])
 
+# Save the top 10 Asian states table to a CSV file
+write.table(top_10_asian_states[, c("state", "artist_count", "population_percentage")],
+            file = "top_10_asian_states_table.csv",
+            sep = ",",
+            row.names = FALSE)
+
+# Print the table
+print(top_10_asian_states[, c("state", "artist_count", "population_percentage")])
 
 
 ```
 
-vdbf
+```{r}
+# Load necessary libraries
+library(shiny)
+library(dplyr)
+
+# Assuming you have already loaded the 'artist' dataset and executed previous code
+
+# Define UI
+ui <- fluidPage(
+  titlePanel("Top States by Artist Count and Population Percentage"),
+  sidebarLayout(
+    sidebarPanel(
+      # Select race
+      selectInput("race", "Select Race:", choices = unique(artist$race)),
+      
+      # Select number of top states
+      numericInput("top_n", "Select Top N States:", value = 10, min = 1, max = 50),
+      
+      # Action button to trigger the update
+      actionButton("update_button", "Update")
+    ),
+    mainPanel(
+      # Table to display top states
+      tableOutput("top_states_table")
+    )
+  )
+)
+
+# Define server
+server <- function(input, output, session) {
+  # Reactive function to update the top states based on user input
+  top_states <- reactive({
+    # Filter the dataset based on selected race
+    filtered_data <- artist %>% filter(race == input$race)
+    
+    # Calculate the racial composition for selected artists
+    artist_composition <- filtered_data %>%
+      group_by(state, race) %>%
+      summarise(artist_count = sum(artists_n, na.rm = TRUE), .groups = 'drop') %>%
+      mutate(artist_percentage = artist_count / sum(artist_count, na.rm = TRUE))
+    
+    # Calculate the overall racial composition of the selected population in each state
+    population_composition <- filtered_data %>%
+      group_by(state, race) %>%
+      summarise(population_count = sum(all_workers_n, na.rm = TRUE), .groups = 'drop') %>%
+      mutate(population_percentage = population_count / sum(population_count, na.rm = TRUE))
+    
+    # Merge the two datasets
+    merged_data <- merge(artist_composition, population_composition, by = c("state", "race"), all = TRUE)
+    
+    # Sort merged data by artist_count in descending order
+    sorted_data <- merged_data[order(-merged_data$artist_count), ]
+    
+    # Select the top N states
+    top_states <- head(sorted_data, input$top_n)
+    
+    return(top_states)
+  })
+
+  # Reactive function to update the table output
+  output$top_states_table <- renderTable({
+    top_states()
+  })
+}
+
+# Run the application
+shinyApp(ui, server)
+```

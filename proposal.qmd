@@ -36,7 +36,7 @@ Here is a data dictionary showing each variable, the type of variable, units, an
 Note: this is an example table, please modify to actually match your data. Ensure that all of the same information is represented.
 
 | variable          | class     | description                                                                                                                          |
-|-------------------|-----------|--------------------------------------------------------------------------------------------------------------------------------------|
+|-----------|-----------|--------------------------------------------------|
 | state             | character | This variable represents the U.S. state where the data was collected                                                                 |
 | race              | character | This variable specifies the racial or ethnic category of the workforce being analyzed                                                |
 | type              | character | This variable indicates the type of profession or occupation for which the data is recorded                                          |
@@ -56,7 +56,7 @@ We will use the dataset from [Artists in the U.S.](https://github.com/rfordatasc
 -   The top 10 state /territory has the highest number of artists, as indicated by the location quotient.
 -   Is there a correlation between the percentage of artists in a state (artists_share) and the state's number of workers?
 -   How does the racial diversity of artists vary across different states or territories? Are there states with a more diverse artist population than others?
--   Are there any states where the racial composition of artists is significantly different from the overall racial composition of the state's population, and what might explain this difference?
+-   The top 10 states which has the most number of Asian artists, and the related population percentage
 
 We expect to create
 
