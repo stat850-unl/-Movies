@@ -424,3 +424,9 @@ result_df$p.adjusted <- p.adjust(result_df$p.value, method = "holm")
 # Print the results
 print(result_df)
 ```
+
+-   Are there any states where the racial composition of artists is significantly different from the overall racial composition of the state's population, and what might explain this difference?
+
+```{r}
+
+```
