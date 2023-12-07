@@ -59,7 +59,7 @@ An analytical journey unfolding across different states and territories
 
 ## Result for question 1
 
-Are there any states with a location quotient significantly below 1.0 for artists?\
+Are there any states with a location quotient below 1.0 for artists?\
 
 ### The states having average location quotient less than one
 
