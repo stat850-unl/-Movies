@@ -1,22 +1,24 @@
 ---
-title: "Artists In The U.S."
+title: "Artists in the US"
 author: "Mahyar Madarshahain & Jing Wang"
-date: "2023-12-07"
-format: pptx
+format: revealjs
 editor: visual
 ---
 
-##Introduction
+# Introduction
 
-The Arts Data Profile provides national and state-level estimates of artists in the workforce, sourced from 2015-2019 American Community Survey (ACS) data conducted by the U.S. Census Bureau. State-level estimates cover the total number of artists and individual counts for 13 specific artist occupations. An interactive map displays counts and location quotients for total artists and selected occupations, including architects, arts directors, fine artists, animators, designers, dancers, musicians, actors, entertainers, writers, authors, and photographers for each U.S. state.
+-   The Arts Data Profile offers national and state-level estimates of artists in the workforce.
+-   Data is sourced from the 2015-2019 American Community Survey (ACS) conducted by the U.S. Census Bureau.
+-   State-level estimates include the total number of artists and counts for 13 specific artist occupations.
+-   The goal is to provide a comprehensive overview of the artistic workforce across different U.S. states.
 
-### Artists:
+**Artists**
 
-Architects (except landscape and naval); landscape architects; art directors, fine artists, and animators; designers; actors; producers and directors; dancers and choreographers; music directors and composers; musicians; disk jockeys, except radio; entertainers; broadcast announcers and radio disk jockeys; other media and communication workers; writers and authors; and photographers.
+-   Architects (except landscape and naval); landscape architects; art directors, fine artists, and animators; designers; actors; producers and directors; dancers and choreographers; music directors and composers; musicians; disk jockeys, except radio; entertainers; broadcast announcers and radio disk jockeys; other media and communication workers; writers and authors; and photographers.
 
-### Location Quotients
+**Location Quotients**
 
-## The location quotient (LQ) measures the concentration of a particular occupation within a state's labor force, relative to that occupation's concentration in the U.S. labor force. For example, an LQ of 1.2 indicates that the occupation clusters in a state at a level 20 percent greater than within the nation's workforce at large. An LQ of 0.8 indicates that the occupation clusters in a state at a level 20 percent below the occupation's concentration in the U.S. labor force.
+The location quotient (LQ) measures the concentration of a particular occupation within a state's labor force, relative to that occupation's concentration in the U.S. labor force. For example, an LQ of 1.2 indicates that the occupation clusters in a state at a level 20 percent greater than within the nation's workforce at large. An LQ of 0.8 indicates that the occupation clusters in a state at a level 20 percent below the occupation's concentration.
 
 ## Objective
 
@@ -29,108 +31,9 @@ Architects (except landscape and naval); landscape architects; art directors, fi
 
 Delving into dataset intricacies, addressing anomalies, exploring trends, and presenting visualizations Seeking patterns, correlations, and distinctive features to enhance understanding of the artistic workforce in the U.S. An analytical journey unfolding across different states and territories
 
-## Dataset Description
+# Dataset Description
 
-| Number of Obseravations | Number of Variables | Number of Rows having missing values | Number of rows after data cleaning |
-|------------------|------------------|-------------------|------------------|
-| 3381                    | 6                   | 1472                                 | 1909                               |
+![Table](https://github.com/stat850-unl/Artist_In_The_US/Table%20of%20Data.png)
 
-## Variables Description
 
-| variable          | class     | description                                                                                                                          |
-|-----------------|-----------------|--------------------------------------|
-| state             | character | This variable represents the U.S. state where the data was collected                                                                 |
-| race              | character | This variable specifies the racial or ethnic category of the workforce being analyzed                                                |
-| type              | character | This variable indicates the type of profession or occupation for which the data is recorded                                          |
-| all_workers_n     | double    | This numeric variable represents the total number of workers in the specified state and occupation                                   |
-| artists_n         | double    | This numeric variable signifies the number of artists within the same state and occupation                                           |
-| artists_share     | double    | This numeric variable expresses the share or proportion of artists among all workers in the occupation within the particular state   |
-| location_quotient | double    | Location quotient is a numerical measure used to assess the concentration of a particular occupation in a specific geographical area |
-
-## Result for question 1
-
-Are there any states with a location quotient significantly below 1.0 for artists?\
-
-### The states having average location quotient less than one
-
-| state          | location quotient |
-|----------------|-------------------|
-| Alabama        | 0.678499          |
-| Alaska         | 0.703285          |
-| Arizona        | 0.889886          |
-| Arkansas       | 0.624634          |
-| Delaware       | 0.718172          |
-| Idaho          | 0.756616          |
-| Illinois       | 0.937109          |
-| Indiana        | 0.718303          |
-| Iowa           | 0.670376          |
-| Kentucky       | 0.694958          |
-| Michigan       | 0.863056          |
-| Minnesota      | 0.925676          |
-| Mississippi    | 0.524682          |
-| Missouri       | 0.810909          |
-| Montana        | 0.789532          |
-| Nebraska       | 0.861959          |
-| New Hampshire  | 0.664936          |
-| New Mexico     | 0.984415          |
-| North Carolina | 0.671117          |
-| North Dakota   | 0.581610          |
-| Ohio           | 0.924914          |
-| Pennsylvania   | 0.905970          |
-| South Carolina | 0.716638          |
-| South Dakota   | 0.636614          |
-| Tennessee      | 0.994544          |
-| Texas          | 0.854910          |
-| Utah           | 0.875502          |
-| Virginia       | 0.918024          |
-| Washington     | 0.944148          |
-| West Virginia  | 0.512631          |
-| Wisconsin      | 0.707132          |
-| Wyoming        | 0.880094          |
-
-### The histogram of location quotient for all states
-
-![Histogram](Histogram%20of%20average%20location%20qutient.png)
-
-\<\<\<\<\<\<\< HEAD
-
-## Question 2: What is the overall distribution of artist types across different states or territories?
-
-![The overall distribution of all artist types across different states or territories](distribution_of_artists_in_the_US.PNG)
-
-## Visualization Considerations for Question 2
-
--   Heatmaps are powerful but come with limitations.
--   Challenges include color misinterpretation and difficulty in distinguishing similar shades.
--   Difficulty in interpreting shades.
--   Lack of granularity for specific data points, especially in individual states.
--   Concerns about color scale effectiveness based on data variations. Shiny App Solution
--   Leveraging Shiny to address heatmap limitations.
--   Interactive visualization for detailed analysis.
--   Better navigation for exploring specific states and artist types.
-
-## Shiny App for Question 2
-
-# ![The overall distribution of all artist types across different states or territories](artist_type_distribution.png)
-
-## Result for question 3
-
-The top 10 state /territory has the highest number of artists, as indicated by the location quotient.
-
-![The top 10](Top%2010%20states%20having%20high%20quotient.png)
-
-## Question 4: Is there a correlation between the percentage of artists in a state (artists_share) and the state's number of workers?
-
-The correlation between two variables, x and Y, is calculated using the Pearson correlation coefficient (r), which is defined by the following formula: ![](correction.png) X: the percentage of artists in a state (artists_share) Y: the state's number of workers (all_workers_n) The correlation coefficient (r) ranges from -1 to 1: ![](explain.png)
-
-## Question 4: Is there a correlation between the percentage of artists in a state (artists_share) and the state's number of workers?
-
-# Correlation Coefficient: -0.0315 (Very Weak Negative Correlation)
-
-Interpretations: 1. The negative sign suggests that, on average, as the percentage of artists increases, the state's number of workers tends to decrease slightly. 2. Percentage of artists is not a strong predictor of the overall workforce size. 3. Economic, demographic, or industry-specific factors may contribute to the overall workforce size. \## Result for question 5 \<\<\<\<\<\<\< HEAD ![Racial Diversity](https://github.com/stat850-unl/Artist_In_The_US/blob/main/Racial%20Diversity.jpg) \## Question 6: The top 10 states which has the most number of Asian artists, and the related population percentage \| state \| artist_count \| population_percentage \| \|----------------\|--------------\|------------------------\| \| California \| 61210 \| 0.386956806 \| \| New York \| 22820 \| 0.111216828 \| \| Texas \| 8830 \| 0.091643248 \| \| New Jersey \| 7420 \| 0.044556437 \| \| Washington \| 5305 \| 0.038646725 \| \| Illinois \| 5165 \| 0.04114094 \| \| Massachusetts \| 3645 \| 0.02719804 \| \| Florida \| 3615 \| 0.031865987 \| \| Virginia \| 3445 \| 0.027151296 \| \| Hawaii \| 3305 \| 0.031579239 \| ======= ![Racial Diversity](Racial%20Diversity.jpg)
-
-## Shiny app fpr question 6
-
-![](race.png) \## Conclusion
-
-## Thank you
+# Introduction
