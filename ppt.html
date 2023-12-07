@@ -336,7 +336,6 @@ Mahyar Madarshahain &amp; Jing Wang
 </div>
 
 </section>
-<section>
 <section id="introduction" class="title-slide slide level1 center">
 <h1>Introduction</h1>
 <ul>
@@ -345,6 +344,11 @@ Mahyar Madarshahain &amp; Jing Wang
 <li>State-level estimates include the total number of artists and counts for 13 specific artist occupations.</li>
 <li>The goal is to provide a comprehensive overview of the artistic workforce across different U.S. states.</li>
 </ul>
+</section>
+
+<section>
+<section id="definition" class="title-slide slide level1 center">
+<h1>Definition</h1>
 <p><strong>Artists</strong></p>
 <ul>
 <li>Architects (except landscape and naval); landscape architects; art directors, fine artists, and animators; designers; actors; producers and directors; dancers and choreographers; music directors and composers; musicians; disk jockeys, except radio; entertainers; broadcast announcers and radio disk jockeys; other media and communication workers; writers and authors; and photographers.</li>
@@ -367,11 +371,21 @@ Mahyar Madarshahain &amp; Jing Wang
 <section id="dataset-description" class="title-slide slide level1 center">
 <h1>Dataset Description</h1>
 
-<img data-src="Table%20of%20Data.png" class="r-stretch quarto-figure-center"><p class="caption">Table</p></section>
+<img data-src="Table%20of%20Data.png" class="r-stretch"></section>
 
 <section id="result-for-question1" class="title-slide slide level1 center">
 <h1>Result for Question1</h1>
-<p><strong><em>The states having average location quotient less than one</em></strong> <img data-src="States%20Having%20low%20quotient.png" alt="Table"></p>
+<p><strong><em>The states having average location quotient less than one</em></strong></p>
+
+<img data-src="States%20Having%20low%20quotient.png" width="279" class="r-stretch"></section>
+
+<section id="result-for-question1-1" class="title-slide slide level1 center">
+<h1>Result for Question1</h1>
+
+<img data-src="Histogram%20of%20average%20location%20qutient.png" width="432" class="r-stretch"></section>
+
+<section id="result-for-question2" class="title-slide slide level1 center">
+<h1>Result for Question2</h1>
 <div class="footer footer-default">
 
 </div>
@@ -587,6 +601,44 @@ Mahyar Madarshahain &amp; Jing Wang
         ]
       });
     </script>
+    
+    <script>
+      // htmlwidgets need to know to resize themselves when slides are shown/hidden.
+      // Fire the "slideenter" event (handled by htmlwidgets.js) when the current
+      // slide changes (different for each slide format).
+      (function () {
+        // dispatch for htmlwidgets
+        function fireSlideEnter() {
+          const event = window.document.createEvent("Event");
+          event.initEvent("slideenter", true, true);
+          window.document.dispatchEvent(event);
+        }
+
+        function fireSlideChanged(previousSlide, currentSlide) {
+          fireSlideEnter();
+
+          // dispatch for shiny
+          if (window.jQuery) {
+            if (previousSlide) {
+              window.jQuery(previousSlide).trigger("hidden");
+            }
+            if (currentSlide) {
+              window.jQuery(currentSlide).trigger("shown");
+            }
+          }
+        }
+
+        // hookup for slidy
+        if (window.w3c_slidy) {
+          window.w3c_slidy.add_observer(function (slide_num) {
+            // slide_num starts at position 1
+            fireSlideChanged(null, w3c_slidy.slides[slide_num - 1]);
+          });
+        }
+
+      })();
+    </script>
+
     <script id="quarto-html-after-body" type="application/javascript">
     window.document.addEventListener("DOMContentLoaded", function (event) {
       const toggleBodyColorMode = (bsSheetEl) => {

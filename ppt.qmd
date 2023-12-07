@@ -12,6 +12,8 @@ editor: visual
 -   State-level estimates include the total number of artists and counts for 13 specific artist occupations.
 -   The goal is to provide a comprehensive overview of the artistic workforce across different U.S. states.
 
+# Definition
+
 **Artists**
 
 -   Architects (except landscape and naval); landscape architects; art directors, fine artists, and animators; designers; actors; producers and directors; dancers and choreographers; music directors and composers; musicians; disk jockeys, except radio; entertainers; broadcast announcers and radio disk jockeys; other media and communication workers; writers and authors; and photographers.
@@ -33,9 +35,27 @@ Delving into dataset intricacies, addressing anomalies, exploring trends, and pr
 
 # Dataset Description
 
-![Table](Table of Data.png)
+![](Table of Data.png)
 
 # Result for Question1
+***The states having average location quotient less than one*** 
+```{r}
+# Load the knitr library
+library(knitr)
 
-***The states having average location quotient less than one***
-![Table](States Having low quotient.png)
+# Insert your favorite plot generated in R
+knitr::include_graphics("States Having low quotient.png")
+```
+# Result for Question1
+
+
+```{r}
+# Load the knitr library
+library(knitr)
+
+# Insert your favorite plot generated in R
+knitr::include_graphics("Histogram of average location qutient.png")
+```
+
+
+# Result for Question2
