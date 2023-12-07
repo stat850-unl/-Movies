@@ -36,7 +36,7 @@ Here is a data dictionary showing each variable, the type of variable, units, an
 Note: this is an example table, please modify to actually match your data. Ensure that all of the same information is represented.
 
 | variable          | class     | description                                                                                                                          |
-|-----------|-----------|--------------------------------------------------|
+|-------------------|-----------|--------------------------------------------------------------------------------------------------------------------------------------|
 | state             | character | This variable represents the U.S. state where the data was collected                                                                 |
 | race              | character | This variable specifies the racial or ethnic category of the workforce being analyzed                                                |
 | type              | character | This variable indicates the type of profession or occupation for which the data is recorded                                          |
@@ -50,7 +50,6 @@ Note: this is an example table, please modify to actually match your data. Ensur
 Describe why this data is interesting and what you hope to do with it
 
 We will use the dataset from [Artists in the U.S.](https://github.com/rfordatascience/tidytuesday/blob/master/data/2022/2022-09-27/artists.csv) to explore the following topics:
-
 
 -   Are there any states with a location quotient significantly below 1.0 for artists?
 -   What is the overall distribution of artist types across different states or territories?
@@ -97,10 +96,11 @@ Task 4: Creat the project report and presentation
 
 Up to now there is no concern about the project.
 
----
+------------------------------------------------------------------------
 
 Git fame output:
-```
+
+```         
 (base) susan@silicon:~/Projects/Class/unl-stat850-computing-tools-stat/2023-student-assignments/project-submissions/Artist_In_The_US$ git fame .--incl=".(q|Q|r|R)md"
 Processing: 100%|██████████████████████████████████████████████████████████████████████████████████████████████| 4/4 [00:00<00:00, 286.33file/s]
 Total commits: 35
