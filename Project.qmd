@@ -425,8 +425,38 @@ result_df$p.adjusted <- p.adjust(result_df$p.value, method = "holm")
 print(result_df)
 ```
 
--   Are there any states where the racial composition of artists is significantly different from the overall racial composition of the state's population, and what might explain this difference?
+-   The top 10 states which has the most number of Asian artists, and the related population percentage.
 
 ```{r}
+# Calculate the racial composition for Asian artists
+artist_asian_composition <- artist %>%
+  filter(race == "Asian") %>%
+  group_by(state, race) %>%
+  summarise(artist_count = sum(artists_n, na.rm = TRUE), .groups = 'drop') %>%
+  mutate(artist_percentage = artist_count / sum(artist_count, na.rm = TRUE))
+
+# Calculate the overall racial composition of the Asian population in each state
+population_asian_composition <- artist %>%
+  filter(race == "Asian") %>%
+  group_by(state, race) %>%
+  summarise(population_count = sum(all_workers_n, na.rm = TRUE), .groups = 'drop') %>%
+  mutate(population_percentage = population_count / sum(population_count, na.rm = TRUE))
+
+# Merge the two datasets
+merged_asian_data <- merge(artist_asian_composition, population_asian_composition, by = c("state", "race"), all = TRUE)
+str(merged_asian_data)
+
+# Sort merged_asian_data by artist_count in descending order
+top_asian_states <- merged_asian_data[order(-merged_asian_data$artist_count), ]
+
+# Select the top 10 states
+top_10_asian_states <- head(top_asian_states, 10)
+
+# Print the top 10 states with artist count and population percentage
+print(top_10_asian_states[, c("state", "artist_count", "population_percentage")])
+
+
 
 ```
+
+vdbf
