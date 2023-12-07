@@ -11,13 +11,11 @@ output:
     progress: true
 ---
 
-
-
 ##Introduction
 
 Quarto enables you to weave together content and executable code into a finished presentation. To learn more about Quarto presentations see <https://quarto.org/docs/presentations/>.
 
----
+------------------------------------------------------------------------
 
 ## Objective
 
@@ -30,12 +28,14 @@ Quarto enables you to weave together content and executable code into a finished
 
 ## Dataset Description
 
-| Number of Obseravtions | Number of Variables | Number of Rows having missing values | Number of rows after data cleaning |
-|----------------|----------------|------------------------|----------------|
-| 3381                   | 6                   | 1472                                 | 1909                               |
+| Number of Obseravations | Number of Variables | Number of Rows having missing values | Number of rows after data cleaning |
+|------------------|------------------|-------------------|------------------|
+| 3381                    | 6                   | 1472                                 | 1909                               |
+
+## Variables Description
 
 | variable          | class     | description                                                                                                                          |
-|-----------------|-----------------|--------------------------------------|
+|------------------|------------------|-----------------------------------|
 | state             | character | This variable represents the U.S. state where the data was collected                                                                 |
 | race              | character | This variable specifies the racial or ethnic category of the workforce being analyzed                                                |
 | type              | character | This variable indicates the type of profession or occupation for which the data is recorded                                          |
@@ -44,15 +44,59 @@ Quarto enables you to weave together content and executable code into a finished
 | artists_share     | double    | This numeric variable expresses the share or proportion of artists among all workers in the occupation within the particular state   |
 | location_quotient | double    | Location quotient is a numerical measure used to assess the concentration of a particular occupation in a specific geographical area |
 
-```{r}
-1 + 1
-```
+## Result for question 1
 
-## result 1
+Are there any states with a location quotient significantly below 1.0 for artists?\
 
-##2
+### The states having average location quotient less than one
 
-## 3
+
+| state          | location quotient |
+|----------------|-------------------|
+| Alabama        | 0.678499          |
+| Alaska         | 0.703285          |
+| Arizona        | 0.889886          |
+| Arkansas       | 0.624634          |
+| Delaware       | 0.718172          |
+| Idaho          | 0.756616          |
+| Illinois       | 0.937109          |
+| Indiana        | 0.718303          |
+| Iowa           | 0.670376          |
+| Kentucky       | 0.694958          |
+| Michigan       | 0.863056          |
+| Minnesota      | 0.925676          |
+| Mississippi    | 0.524682          |
+| Missouri       | 0.810909          |
+| Montana        | 0.789532          |
+| Nebraska       | 0.861959          |
+| New Hampshire  | 0.664936          |
+| New Mexico     | 0.984415          |
+| North Carolina | 0.671117          |
+| North Dakota   | 0.581610          |
+| Ohio           | 0.924914          |
+| Pennsylvania   | 0.905970          |
+| South Carolina | 0.716638          |
+| South Dakota   | 0.636614          |
+| Tennessee      | 0.994544          |
+| Texas          | 0.854910          |
+| Utah           | 0.875502          |
+| Virginia       | 0.918024          |
+| Washington     | 0.944148          |
+| West Virginia  | 0.512631          |
+| Wisconsin      | 0.707132          |
+| Wyoming        | 0.880094          |
+
+### The histogram of location quotient for all states
+
+## Result for question 2
+
+## Result for question 3
+
+## Result for question 4
+
+## Result for question 5
+
+## Result for question 6
 
 ## Conclusion
 

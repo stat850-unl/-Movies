@@ -124,46 +124,44 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="co">""" Question1: Are there any states with a location quotient significantly below 1.0 for artists?"""</span></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Filter the data to include only the relevant columns</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Group by state and calculate the average location quotient for each state</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>' Question1: Are there any states with a location quotient significantly below 1.0 for artists?'</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>subset <span class="op">=</span> artist[[<span class="st">'state'</span>, <span class="st">'location_quotient'</span>]]</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>average_location_quotient <span class="op">=</span> artist.groupby(<span class="st">'state'</span>)[<span class="st">'location_quotient'</span>].mean().reset_index()</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="co">#print(average_location_quotient)</span></span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Visual analysis using a histogram</span></span>
 <span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">6</span>))</span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>plt.hist(subset[<span class="st">'location_quotient'</span>], bins<span class="op">=</span><span class="dv">20</span>, edgecolor<span class="op">=</span><span class="st">'black'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>plt.hist(average_location_quotient[<span class="st">'location_quotient'</span>], bins<span class="op">=</span><span class="dv">20</span>, edgecolor<span class="op">=</span><span class="st">'black'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>(array([814., 823., 166.,  42.,  25.,  11.,  10.,   8.,   2.,   5.,   2.,
-         0.,   0.,   0.,   0.,   0.,   0.,   0.,   0.,   1.]), array([ 0.        ,  0.78173091,  1.56346182,  2.34519273,  3.12692364,
-        3.90865455,  4.69038547,  5.47211638,  6.25384729,  7.0355782 ,
-        7.81730911,  8.59904002,  9.38077093, 10.16250184, 10.94423275,
-       11.72596366, 12.50769457, 13.28942548, 14.0711564 , 14.85288731,
-       15.63461822]), &lt;BarContainer object of 20 artists&gt;)</code></pre>
+<pre><code>(array([ 5., 11.,  7.,  9.,  5.,  5.,  3.,  1.,  1.,  1.,  1.,  1.,  0.,
+        0.,  0.,  0.,  0.,  0.,  0.,  1.]), array([0.51263112, 0.6380898 , 0.76354848, 0.88900716, 1.01446583,
+       1.13992451, 1.26538319, 1.39084187, 1.51630055, 1.64175922,
+       1.7672179 , 1.89267658, 2.01813526, 2.14359394, 2.26905261,
+       2.39451129, 2.51996997, 2.64542865, 2.77088733, 2.896346  ,
+       3.02180468]), &lt;BarContainer object of 20 artists&gt;)</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Histogram of Location Quotients for Artists'</span>)</span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'Location Quotient'</span>)</span>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Histogram of Average Location Quotients for Artists'</span>)</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'Average Location Quotient'</span>)</span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'Frequency'</span>)</span>
 <span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>plt.show()</span>
 <span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Visual analysis using a box plot</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Visual analysis using a box plot</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="Project_files/figure-html/table-setup-py-1.png" class="img-fluid" width="960"></p>
 </div>
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">6</span>))</span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>plt.boxplot(subset[<span class="st">'location_quotient'</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>plt.boxplot(average_location_quotient[<span class="st">'location_quotient'</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>{'whiskers': [&lt;matplotlib.lines.Line2D object at 0x00000000653DC690&gt;, &lt;matplotlib.lines.Line2D object at 0x0000000064D567D0&gt;], 'caps': [&lt;matplotlib.lines.Line2D object at 0x00000000653FBF90&gt;, &lt;matplotlib.lines.Line2D object at 0x00000000653F8390&gt;], 'boxes': [&lt;matplotlib.lines.Line2D object at 0x00000000653CCD50&gt;], 'medians': [&lt;matplotlib.lines.Line2D object at 0x00000000653F9CD0&gt;], 'fliers': [&lt;matplotlib.lines.Line2D object at 0x00000000653DA390&gt;], 'means': []}</code></pre>
+<pre><code>{'whiskers': [&lt;matplotlib.lines.Line2D object at 0x0000000064D39F10&gt;, &lt;matplotlib.lines.Line2D object at 0x00000000655B2C50&gt;], 'caps': [&lt;matplotlib.lines.Line2D object at 0x00000000655B3650&gt;, &lt;matplotlib.lines.Line2D object at 0x00000000655C8150&gt;], 'boxes': [&lt;matplotlib.lines.Line2D object at 0x000000006559DD50&gt;], 'medians': [&lt;matplotlib.lines.Line2D object at 0x00000000655C8BD0&gt;], 'fliers': [&lt;matplotlib.lines.Line2D object at 0x00000000655C9690&gt;], 'means': []}</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Location Quotient Distribution for Artists'</span>)</span>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Average Location Quotient Distribution for Artists'</span>)</span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'Artists'</span>)</span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'Location Quotient'</span>)</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'Average Location Quotient'</span>)</span>
 <span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>plt.show()</span>
 <span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Statistical analysis using a one-sample t-test</span></span>
-<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Set the significance level for the hypothesis test</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Statistical analysis using a one-sample t-test</span></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Set the significance level for the hypothesis test</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="Project_files/figure-html/table-setup-py-2.png" class="img-fluid" width="960"></p>
 </div>
@@ -171,38 +169,32 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>population_mean <span class="op">=</span> <span class="fl">1.0</span>  <span class="co"># The hypothesized mean (1.0)</span></span>
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Perform a one-sample t-test</span></span>
-<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>t_stat, p_value <span class="op">=</span> stats.ttest_1samp(subset[<span class="st">'location_quotient'</span>], population_mean)</span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>t_stat, p_value <span class="op">=</span> stats.ttest_1samp(average_location_quotient[<span class="st">'location_quotient'</span>], population_mean)</span>
 <span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Filter states with location quotient less than 1.0</span></span>
-<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>states_below_1 <span class="op">=</span> subset[subset[<span class="st">'location_quotient'</span>] <span class="op">&lt;</span> <span class="fl">1.0</span>]</span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Filter states with an average location quotient less than 1.0</span></span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>states_below_1 <span class="op">=</span> average_location_quotient[average_location_quotient[<span class="st">'location_quotient'</span>] <span class="op">&lt;</span> <span class="fl">1.0</span>]</span>
 <span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Check if the p-value is less than the significance level</span></span>
 <span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> p_value <span class="op">&lt;</span> alpha:</span>
-<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"States with a location quotient significantly below 1.0 (p-value: </span><span class="sc">{</span>p_value<span class="sc">:.4f}</span><span class="ss">): </span><span class="sc">{</span><span class="bu">len</span>(states_below_1)<span class="sc">}</span><span class="ss"> states"</span>)</span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"States with an average location quotient significantly below 1.0 (p-value: </span><span class="sc">{</span>p_value<span class="sc">:.4f}</span><span class="ss">): </span><span class="sc">{</span><span class="bu">len</span>(states_below_1)<span class="sc">}</span><span class="ss"> states"</span>)</span>
 <span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Filter the original dataset based on the states with a significantly lower location quotient than 1.0</span></span>
-<span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a>    filtered_dataset <span class="op">=</span> artist[artist[<span class="st">'state'</span>].isin(states_below_1[<span class="st">'state'</span>])]</span>
-<span id="cb11-16"><a href="#cb11-16" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"Filtered Dataset:"</span>)</span>
-<span id="cb11-17"><a href="#cb11-17" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(filtered_dataset)</span>
-<span id="cb11-18"><a href="#cb11-18" aria-hidden="true" tabindex="-1"></a><span class="cf">else</span>:</span>
-<span id="cb11-19"><a href="#cb11-19" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"No significant evidence of location quotients below 1.0. Number of states below 1.0: </span><span class="sc">{</span><span class="bu">len</span>(states_below_1)<span class="sc">}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Display a table with states having an average location quotient less than 1.0</span></span>
+<span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a>    table_states_below_1 <span class="op">=</span> states_below_1[[<span class="st">'state'</span>, <span class="st">'location_quotient'</span>]]</span>
+<span id="cb11-16"><a href="#cb11-16" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">Table of States with Average Location Quotient Below 1.0:"</span>)</span>
+<span id="cb11-17"><a href="#cb11-17" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(table_states_below_1)</span>
+<span id="cb11-18"><a href="#cb11-18" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb11-19"><a href="#cb11-19" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Filter the original dataset based on the states with an average location quotient significantly lower than 1.0</span></span>
+<span id="cb11-20"><a href="#cb11-20" aria-hidden="true" tabindex="-1"></a>    filtered_dataset <span class="op">=</span> artist[artist[<span class="st">'state'</span>].isin(states_below_1[<span class="st">'state'</span>])]</span>
+<span id="cb11-21"><a href="#cb11-21" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">Filtered Dataset:"</span>)</span>
+<span id="cb11-22"><a href="#cb11-22" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(filtered_dataset)</span>
+<span id="cb11-23"><a href="#cb11-23" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb11-24"><a href="#cb11-24" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Alternatively, you can use display() to show the table</span></span>
+<span id="cb11-25"><a href="#cb11-25" aria-hidden="true" tabindex="-1"></a>    <span class="co"># display(table_states_below_1)</span></span>
+<span id="cb11-26"><a href="#cb11-26" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb11-27"><a href="#cb11-27" aria-hidden="true" tabindex="-1"></a><span class="cf">else</span>:</span>
+<span id="cb11-28"><a href="#cb11-28" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"No significant evidence of average location quotients below 1.0. Number of states below 1.0: </span><span class="sc">{</span><span class="bu">len</span>(states_below_1)<span class="sc">}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>States with a location quotient significantly below 1.0 (p-value: 0.0007): 1186 states
-Filtered Dataset:
-           state      race  ... artists_share  location_quotient
-0        Alabama  Hispanic  ...      0.000510           0.875352
-1         Alaska  Hispanic  ...      0.000558           0.957214
-2        Arizona  Hispanic  ...      0.000261           0.448099
-4     California  Hispanic  ...      0.000518           0.888412
-5       Colorado  Hispanic  ...      0.000336           0.576934
-...          ...       ...  ...           ...                ...
-3372        Utah     Other  ...      0.000604           0.492364
-3373     Vermont     Other  ...      0.003390           2.765584
-3374    Virginia     Other  ...      0.001009           0.823161
-3375  Washington     Other  ...      0.001140           0.930011
-3377   Wisconsin     Other  ...      0.000897           0.731483
-
-[1909 rows x 7 columns]</code></pre>
+<pre><code>No significant evidence of average location quotients below 1.0. Number of states below 1.0: 32</code></pre>
 </div>
 </div>
 <ul>
