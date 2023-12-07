@@ -35,27 +35,80 @@ Delving into dataset intricacies, addressing anomalies, exploring trends, and pr
 
 # Dataset Description
 
-![](Table of Data.png)
+![](Table%20of%20Data.png)
 
 # Result for Question1
-***The states having average location quotient less than one*** 
+
+***The states having average location quotient less than one***
+
 ```{r}
 # Load the knitr library
 library(knitr)
 
-# Insert your favorite plot generated in R
+# Insert the plot
 knitr::include_graphics("States Having low quotient.png")
 ```
+
 # Result for Question1
 
-
 ```{r}
-# Load the knitr library
-library(knitr)
 
-# Insert your favorite plot generated in R
+# Insert the plot
 knitr::include_graphics("Histogram of average location qutient.png")
 ```
 
+# Result for Question2
+
+```{r}
+
+# Insert your favorite plot generated in R
+knitr::include_graphics("distribution_of_artists_in_the_US.PNG")
+```
 
 # Result for Question2
+```{r}
+
+# Insert your favorite plot generated in R
+knitr::include_graphics("artist_type_distribution.png")
+```
+
+
+# Result for Question3
+```{r}
+
+# Insert your favorite plot generated in R
+knitr::include_graphics("Top 10 states having high quotient.png")
+```
+
+
+# Result for Question4
+
+
+# Result for Question5
+
+```{r}
+
+# Insert your favorite plot generated in R
+knitr::include_graphics("Racial Diversity.jpg")
+```
+
+
+# Result for Question5
+
+
+
+## Conclusion
+1. The lower location quotients could be influenced by various economic, cultural, and demographic factors. States with diverse economic structures, a focus on industries other than arts and entertainment, or a different cultural emphasis may exhibit lower concentrations of artists.
+2. Lower Concentration of Artists: States with a location quotient below 1.0, as listed, have a lower concentration of artists compared to the national average. This implies that, on average, these states have a smaller proportion of their workforce engaged in artistic occupations compared to the overall distribution across the United States.
+3. Five state are in high in Artors (Arkansa, Florida,Kentucky, New Mexico and Tennessee) and two in low (Arizona, north carolina)
+ 1. The negative sign suggests that, on average, as the percentage of artists increases, the state's number of workers tends to decrease slightly. 2. Percentage of artists is not a strong predictor of the overall workforce size. 3. Economic, demographic, or industry-specific factors may contribute to the overall workforce size.
+ 
+## future work
+
+1. Economic and Cultural Factors for the artists distribution and location quotients
+
+## Thank you
+
+
+
+
