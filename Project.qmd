@@ -213,9 +213,6 @@ distribution <- subset %>% group_by(state, type) %>% summarise(count = n())
 # Display the overall distribution
 print(distribution)
 
-library(ggplot2)
-
-library(tidyr)
 
 # Pivot the data for heatmap
 heatmap_data <- distribution %>%
