@@ -1,17 +1,23 @@
 ---
 title: "Artists in the US"
-author: "Chathurika Narayana & Jing Wang"
+author: "Mahyar Madarshahain & Jing Wang"
 date: "2023-12-06"
 output:
-  slidy_presentation: default
-  beamer_presentation: default
+  revealjs::revealjs_presentation:
+    theme: "white" # You can choose a different theme
+    slideNumber: true
+    center: true
+    controls: true
+    progress: true
 ---
 
-## 
+
 
 ##Introduction
 
 Quarto enables you to weave together content and executable code into a finished presentation. To learn more about Quarto presentations see <https://quarto.org/docs/presentations/>.
+
+---
 
 ## Objective
 
@@ -24,8 +30,12 @@ Quarto enables you to weave together content and executable code into a finished
 
 ## Dataset Description
 
+| Number of Obseravtions | Number of Variables | Number of Rows having missing values | Number of rows after data cleaning |
+|----------------|----------------|------------------------|----------------|
+| 3381                   | 6                   | 1472                                 | 1909                               |
+
 | variable          | class     | description                                                                                                                          |
-|-------------------|-----------|--------------------------------------------------------------------------------------------------------------------------------------|
+|-----------------|-----------------|--------------------------------------|
 | state             | character | This variable represents the U.S. state where the data was collected                                                                 |
 | race              | character | This variable specifies the racial or ethnic category of the workforce being analyzed                                                |
 | type              | character | This variable indicates the type of profession or occupation for which the data is recorded                                          |
