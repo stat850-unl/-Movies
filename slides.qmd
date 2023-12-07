@@ -26,6 +26,11 @@ Quarto enables you to weave together content and executable code into a finished
 -   How does the racial diversity of artists vary across different states or territories? Are there states with a more diverse artist population than others?
 -   Are there any states where the racial composition of artists is significantly different from the overall racial composition of the state's population, and what might explain this difference?
 
+
+Delving into dataset intricacies, addressing anomalies, exploring trends, and presenting visualizations
+Seeking patterns, correlations, and distinctive features to enhance understanding of the artistic workforce in the U.S.
+An analytical journey unfolding across different states and territories
+
 ## Dataset Description
 
 | Number of Obseravations | Number of Variables | Number of Rows having missing values | Number of rows after data cleaning |
