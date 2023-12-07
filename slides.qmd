@@ -1,7 +1,7 @@
 ---
 title: "Artists in the US"
 author: "Mahyar Madarshahain & Jing Wang"
-date: "2023-12-06"
+date: "2023-12-07"
 output:
   revealjs::revealjs_presentation:
     theme: "white" # You can choose a different theme
@@ -29,13 +29,13 @@ Quarto enables you to weave together content and executable code into a finished
 ## Dataset Description
 
 | Number of Obseravations | Number of Variables | Number of Rows having missing values | Number of rows after data cleaning |
-|------------------|------------------|-------------------|------------------|
+|-----------------|-----------------|--------------------|-------------------|
 | 3381                    | 6                   | 1472                                 | 1909                               |
 
 ## Variables Description
 
 | variable          | class     | description                                                                                                                          |
-|------------------|------------------|-----------------------------------|
+|--------------|--------------|--------------------------------------------|
 | state             | character | This variable represents the U.S. state where the data was collected                                                                 |
 | race              | character | This variable specifies the racial or ethnic category of the workforce being analyzed                                                |
 | type              | character | This variable indicates the type of profession or occupation for which the data is recorded                                          |
@@ -49,7 +49,6 @@ Quarto enables you to weave together content and executable code into a finished
 Are there any states with a location quotient significantly below 1.0 for artists?\
 
 ### The states having average location quotient less than one
-
 
 | state          | location quotient |
 |----------------|-------------------|
@@ -87,6 +86,10 @@ Are there any states with a location quotient significantly below 1.0 for artist
 | Wyoming        | 0.880094          |
 
 ### The histogram of location quotient for all states
+
+![Histogram](https://github.com/stat850-unl/Artist_In_The_US/blob/main/Histogram%20of%20average%20location%20qutient.png)
+
+
 
 ## Result for question 2
 
