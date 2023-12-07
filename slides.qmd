@@ -1,15 +1,21 @@
 ---
 title: "Artists in the US"
-author: "Chathurika Narayana & Jing Wang"
+author: "Mahyar Madarshahain & Jing Wang"
 date: "2023-12-06"
 output:
-  slidy_presentation: default
-  beamer_presentation: default
+  revealjs::revealjs_presentation:
+    theme: "white" # You can choose a different theme
+    slideNumber: true
+    center: true
+    controls: true
+    progress: true
 ---
-##
+
 ##Introduction
 
 Quarto enables you to weave together content and executable code into a finished presentation. To learn more about Quarto presentations see <https://quarto.org/docs/presentations/>.
+
+------------------------------------------------------------------------
 
 ## Objective
 
@@ -20,25 +26,78 @@ Quarto enables you to weave together content and executable code into a finished
 -   How does the racial diversity of artists vary across different states or territories? Are there states with a more diverse artist population than others?
 -   Are there any states where the racial composition of artists is significantly different from the overall racial composition of the state's population, and what might explain this difference?
 
+## Dataset Description
 
-##  Dataset Description
+| Number of Obseravations | Number of Variables | Number of Rows having missing values | Number of rows after data cleaning |
+|------------------|------------------|-------------------|------------------|
+| 3381                    | 6                   | 1472                                 | 1909                               |
 
-When you click the **Render** button a presentation will be generated that includes both content and the output of embedded code. You can embed code like this:
+## Variables Description
 
-```{r}
-1 + 1
-```
+| variable          | class     | description                                                                                                                          |
+|------------------|------------------|-----------------------------------|
+| state             | character | This variable represents the U.S. state where the data was collected                                                                 |
+| race              | character | This variable specifies the racial or ethnic category of the workforce being analyzed                                                |
+| type              | character | This variable indicates the type of profession or occupation for which the data is recorded                                          |
+| all_workers_n     | double    | This numeric variable represents the total number of workers in the specified state and occupation                                   |
+| artists_n         | double    | This numeric variable signifies the number of artists within the same state and occupation                                           |
+| artists_share     | double    | This numeric variable expresses the share or proportion of artists among all workers in the occupation within the particular state   |
+| location_quotient | double    | Location quotient is a numerical measure used to assess the concentration of a particular occupation in a specific geographical area |
 
-## result 1
+## Result for question 1
+
+Are there any states with a location quotient significantly below 1.0 for artists?\
+
+### The states having average location quotient less than one
 
 
-##2
+| state          | location quotient |
+|----------------|-------------------|
+| Alabama        | 0.678499          |
+| Alaska         | 0.703285          |
+| Arizona        | 0.889886          |
+| Arkansas       | 0.624634          |
+| Delaware       | 0.718172          |
+| Idaho          | 0.756616          |
+| Illinois       | 0.937109          |
+| Indiana        | 0.718303          |
+| Iowa           | 0.670376          |
+| Kentucky       | 0.694958          |
+| Michigan       | 0.863056          |
+| Minnesota      | 0.925676          |
+| Mississippi    | 0.524682          |
+| Missouri       | 0.810909          |
+| Montana        | 0.789532          |
+| Nebraska       | 0.861959          |
+| New Hampshire  | 0.664936          |
+| New Mexico     | 0.984415          |
+| North Carolina | 0.671117          |
+| North Dakota   | 0.581610          |
+| Ohio           | 0.924914          |
+| Pennsylvania   | 0.905970          |
+| South Carolina | 0.716638          |
+| South Dakota   | 0.636614          |
+| Tennessee      | 0.994544          |
+| Texas          | 0.854910          |
+| Utah           | 0.875502          |
+| Virginia       | 0.918024          |
+| Washington     | 0.944148          |
+| West Virginia  | 0.512631          |
+| Wisconsin      | 0.707132          |
+| Wyoming        | 0.880094          |
 
+### The histogram of location quotient for all states
 
-## 3
+## Result for question 2
 
+## Result for question 3
+
+## Result for question 4
+
+## Result for question 5
+
+## Result for question 6
 
 ## Conclusion
 
 ## Thank you
-

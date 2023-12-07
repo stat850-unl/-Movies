@@ -7,7 +7,7 @@ Names: Mahyar Madarshahain, Jing Wang.
 
 ## Python Code
 
--   Are there any states with a location quotient significantly below 1.0 for artists?
+-   Are there any states with a location quotient below 1.0 for artists?
 
 ```{python table-setup-py}
 # Explicitly import pandas
@@ -17,55 +17,37 @@ import matplotlib.pyplot as plt
 
 # Import the dataset
 artist = pd.read_csv("artists.csv")
-artist.head()
+
 
 # Delete missing values
 artist = artist.dropna()
 """ Question1: Are there any states with a location quotient significantly below 1.0 for artists?"""
 
 
-# Filter the data to include only the relevant columns
-subset = artist[['state', 'location_quotient']]
-
+# Group by state and calculate the average location quotient for each state
+average_location_quotient = artist.groupby('state')['location_quotient'].mean().reset_index()
+#print(average_location_quotient)
 # Visual analysis using a histogram
 plt.figure(figsize=(10, 6))
-plt.hist(subset['location_quotient'], bins=20, edgecolor='black')
-plt.title('Histogram of Location Quotients for Artists')
-plt.xlabel('Location Quotient')
+plt.hist(average_location_quotient['location_quotient'], bins=20, edgecolor='black')
+plt.title('Histogram of Average Location Quotients for Artists')
+plt.xlabel('Average Location Quotient')
 plt.ylabel('Frequency')
 plt.show()
 
-
 # Visual analysis using a box plot
 plt.figure(figsize=(10, 6))
-plt.boxplot(subset['location_quotient'])
-plt.title('Location Quotient Distribution for Artists')
+plt.boxplot(average_location_quotient['location_quotient'])
+plt.title('Average Location Quotient Distribution for Artists')
 plt.xlabel('Artists')
-plt.ylabel('Location Quotient')
+plt.ylabel('Average Location Quotient')
 plt.show()
 
 
-# Statistical analysis using a one-sample t-test
-# Set the significance level for the hypothesis test
-alpha = 0.05
-population_mean = 1.0  # The hypothesized mean (1.0)
+# Filter states with an average location quotient less than 1.0
+states_below_1 = average_location_quotient[average_location_quotient['location_quotient'] < 1.0]
+states_below_1
 
-# Perform a one-sample t-test
-t_stat, p_value = stats.ttest_1samp(subset['location_quotient'], population_mean)
-
-# Filter states with location quotient less than 1.0
-states_below_1 = subset[subset['location_quotient'] < 1.0]
-
-# Check if the p-value is less than the significance level
-if p_value < alpha:
-    print(f"States with a location quotient significantly below 1.0 (p-value: {p_value:.4f}): {len(states_below_1)} states")
-    
-    # Filter the original dataset based on the states with a significantly lower location quotient than 1.0
-    filtered_dataset = artist[artist['state'].isin(states_below_1['state'])]
-    print("Filtered Dataset:")
-    print(filtered_dataset)
-else:
-    print(f"No significant evidence of location quotients below 1.0. Number of states below 1.0: {len(states_below_1)}")
 ```
 
 -   The top 10 state /territory has the highest number of artists, as indicated by the location quotient.
