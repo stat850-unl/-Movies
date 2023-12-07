@@ -35,4 +35,7 @@ Delving into dataset intricacies, addressing anomalies, exploring trends, and pr
 
 ![Table](Table of Data.png)
 
-# Introduction
+# Result for Question1
+
+***The states having average location quotient less than one***
+![Table](States Having low quotient.png)
