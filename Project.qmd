@@ -90,6 +90,7 @@ print(top_10_states)
 # Load required libraries
 library(shiny)
 library(dplyr)
+library(ggplot2)
 
 # Import the dataset
 artist <- read.csv("artists.csv")  # Replace with the actual file path
