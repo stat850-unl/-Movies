@@ -91,11 +91,27 @@ Are there any states with a location quotient significantly below 1.0 for artist
 
 
 
-## Result for question 2
+## Question 2:  What is the overall distribution of artist types across different states or territories?
+![The overall distribution of all artist types across different states or territories ](distribution_of_artists_in_the_US.PNG)
+ 
+## Visualization Considerations for Question 2
+- Heatmaps are powerful but come with limitations.
+ - Challenges include color misinterpretation and difficulty in distinguishing similar shades.
+ - Difficulty in interpreting shades.
+ - Lack of granularity for specific data points, especially in individual states.
+ - Concerns about color scale effectiveness based on data variations.
+ Shiny App Solution
+- Leveraging Shiny to address heatmap limitations.
+- Interactive visualization for detailed analysis.
+- Better navigation for exploring specific states and artist types.
+
+## Shiny App for Question 2
+![The overall distribution of all artist types across different states or territories ](artist_type_distribution.png)
 
 ## Result for question 3
 
 ## Result for question 4
+
 
 ## Result for question 5
 
