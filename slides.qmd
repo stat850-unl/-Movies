@@ -136,7 +136,10 @@ Y: the state's number of workers (all_workers_n)
 The correlation coefficient (r) ranges from -1 to 1:
 ![](explain.png)
 
+## question 4
+Correlation Coefficient: -0.0315 (Very Weak Negative Correlation)
 
+## 
 
 ## Result for question 5
 ![Racial Diversity](Racial Diversity.jpg)
@@ -157,13 +160,15 @@ The correlation coefficient (r) ranges from -1 to 1:
 | Florida        | 3615         | 0.031865987            |
 | Virginia       | 3445         | 0.027151296            |
 | Hawaii         | 3305         | 0.031579239            |
-=======
-![Racial Diversity](Racial Diversity.jpg)
-## Result for question 6
->>>>>>> d999a3f1f5c86bdff5616c66617bdd03c6c60d4a
+
 
 ## Shiny app fpr question 6
 ![](race.png)
 ## Conclusion
-
+1. The lower location quotients could be influenced by various economic, cultural, and demographic factors. States with diverse economic structures, a focus on industries other than arts and entertainment, or a different cultural emphasis may exhibit lower concentrations of artists.
+2. Lower Concentration of Artists: States with a location quotient below 1.0, as listed, have a lower concentration of artists compared to the national average. This implies that, on average, these states have a smaller proportion of their workforce engaged in artistic occupations compared to the overall distribution across the United States.
+3. Five state are in high in Artors (Arkansa, Florida, ...) and two in low (arizona, north carolina)
+nterpretations: 1. The negative sign suggests that, on average, as the percentage of artists increases, the state's number of workers tends to decrease slightly. 2. Percentage of artists is not a strong predictor of the overall workforce size. 3. Economic, demographic, or industry-specific factors may contribute to the overall workforce size.
+## future work
+1. Economic and Cultural Factors for the artists distribution and location quotients
 ## Thank you
