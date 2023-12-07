@@ -168,7 +168,10 @@ Correlation Coefficient: -0.0315 (Very Weak Negative Correlation)
 1. The lower location quotients could be influenced by various economic, cultural, and demographic factors. States with diverse economic structures, a focus on industries other than arts and entertainment, or a different cultural emphasis may exhibit lower concentrations of artists.
 2. Lower Concentration of Artists: States with a location quotient below 1.0, as listed, have a lower concentration of artists compared to the national average. This implies that, on average, these states have a smaller proportion of their workforce engaged in artistic occupations compared to the overall distribution across the United States.
 3. Five state are in high in Artors (Arkansa, Florida,Kentucky, New Mexico and Tennessee) and two in low (Arizona, north carolina)
-nterpretations: 1. The negative sign suggests that, on average, as the percentage of artists increases, the state's number of workers tends to decrease slightly. 2. Percentage of artists is not a strong predictor of the overall workforce size. 3. Economic, demographic, or industry-specific factors may contribute to the overall workforce size.
+ 1. The negative sign suggests that, on average, as the percentage of artists increases, the state's number of workers tends to decrease slightly. 2. Percentage of artists is not a strong predictor of the overall workforce size. 3. Economic, demographic, or industry-specific factors may contribute to the overall workforce size.
+ 
 ## future work
+
 1. Economic and Cultural Factors for the artists distribution and location quotients
+
 ## Thank you

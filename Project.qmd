@@ -271,7 +271,8 @@ ggplot(heatmap_data, aes(x = state, y = `Actors`, fill = `Actors`)) +
        x = "State",
        y = "Artist Type") +
   theme_minimal() +
-  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+  theme(axis.text.x = element_text(angle = 90, hjust = 1))
+
 ```
 
 As shown in the above figure, while the heatmap is a very useful visualization, it also has its own disadvantages which are reflected from the above figure.
@@ -335,6 +336,7 @@ server <- function(input, output) {
 }
 
 shinyApp(ui, server)
+
 ```
 
 -   Is there a correlation between the percentage of artists in a state (artists_share) and the state's number of workers?
