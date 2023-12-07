@@ -97,7 +97,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="python-code" class="level2">
 <h2 class="anchored" data-anchor-id="python-code">Python Code</h2>
 <ul>
-<li>Are there any states with a location quotient significantly below 1.0 for artists?</li>
+<li>Are there any states with a location quotient below 1.0 for artists?</li>
 </ul>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Explicitly import pandas</span></span>
@@ -107,32 +107,22 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Import the dataset</span></span>
 <span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>artist <span class="op">=</span> pd.read_csv(<span class="st">"artists.csv"</span>)</span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>artist.head()</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Delete missing values</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>        state      race  ... artists_share  location_quotient
-0     Alabama  Hispanic  ...      0.000510           0.875352
-1      Alaska  Hispanic  ...      0.000558           0.957214
-2     Arizona  Hispanic  ...      0.000261           0.448099
-3    Arkansas  Hispanic  ...           NaN                NaN
-4  California  Hispanic  ...      0.000518           0.888412
-
-[5 rows x 7 columns]</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>artist <span class="op">=</span> artist.dropna()</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="co">""" Question1: Are there any states with a location quotient significantly below 1.0 for artists?"""</span></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Group by state and calculate the average location quotient for each state</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Delete missing values</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>artist <span class="op">=</span> artist.dropna()</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="co">""" Question1: Are there any states with a location quotient significantly below 1.0 for artists?"""</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Group by state and calculate the average location quotient for each state</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>' Question1: Are there any states with a location quotient significantly below 1.0 for artists?'</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>average_location_quotient <span class="op">=</span> artist.groupby(<span class="st">'state'</span>)[<span class="st">'location_quotient'</span>].mean().reset_index()</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="co">#print(average_location_quotient)</span></span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Visual analysis using a histogram</span></span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">6</span>))</span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>plt.hist(average_location_quotient[<span class="st">'location_quotient'</span>], bins<span class="op">=</span><span class="dv">20</span>, edgecolor<span class="op">=</span><span class="st">'black'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>average_location_quotient <span class="op">=</span> artist.groupby(<span class="st">'state'</span>)[<span class="st">'location_quotient'</span>].mean().reset_index()</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="co">#print(average_location_quotient)</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Visual analysis using a histogram</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">6</span>))</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>plt.hist(average_location_quotient[<span class="st">'location_quotient'</span>], bins<span class="op">=</span><span class="dv">20</span>, edgecolor<span class="op">=</span><span class="st">'black'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>(array([ 5., 11.,  7.,  9.,  5.,  5.,  3.,  1.,  1.,  1.,  1.,  1.,  0.,
         0.,  0.,  0.,  0.,  0.,  0.,  1.]), array([0.51263112, 0.6380898 , 0.76354848, 0.88900716, 1.01446583,
@@ -141,78 +131,84 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
        2.39451129, 2.51996997, 2.64542865, 2.77088733, 2.896346  ,
        3.02180468]), &lt;BarContainer object of 20 artists&gt;)</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Histogram of Average Location Quotients for Artists'</span>)</span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'Average Location Quotient'</span>)</span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'Frequency'</span>)</span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>plt.show()</span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Visual analysis using a box plot</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Histogram of Average Location Quotients for Artists'</span>)</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'Average Location Quotient'</span>)</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'Frequency'</span>)</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>plt.show()</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Visual analysis using a box plot</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="Project_files/figure-html/table-setup-py-1.png" class="img-fluid" width="960"></p>
 </div>
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">6</span>))</span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>plt.boxplot(average_location_quotient[<span class="st">'location_quotient'</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">6</span>))</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>plt.boxplot(average_location_quotient[<span class="st">'location_quotient'</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>{'whiskers': [&lt;matplotlib.lines.Line2D object at 0x0000000064D39F10&gt;, &lt;matplotlib.lines.Line2D object at 0x00000000655B2C50&gt;], 'caps': [&lt;matplotlib.lines.Line2D object at 0x00000000655B3650&gt;, &lt;matplotlib.lines.Line2D object at 0x00000000655C8150&gt;], 'boxes': [&lt;matplotlib.lines.Line2D object at 0x000000006559DD50&gt;], 'medians': [&lt;matplotlib.lines.Line2D object at 0x00000000655C8BD0&gt;], 'fliers': [&lt;matplotlib.lines.Line2D object at 0x00000000655C9690&gt;], 'means': []}</code></pre>
+<pre><code>{'whiskers': [&lt;matplotlib.lines.Line2D object at 0x0000000064AFE950&gt;, &lt;matplotlib.lines.Line2D object at 0x0000000064AEAB50&gt;], 'caps': [&lt;matplotlib.lines.Line2D object at 0x0000000064B08150&gt;, &lt;matplotlib.lines.Line2D object at 0x0000000064B08BD0&gt;], 'boxes': [&lt;matplotlib.lines.Line2D object at 0x0000000064AFDDD0&gt;], 'medians': [&lt;matplotlib.lines.Line2D object at 0x0000000064B09690&gt;], 'fliers': [&lt;matplotlib.lines.Line2D object at 0x0000000064B0A150&gt;], 'means': []}</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Average Location Quotient Distribution for Artists'</span>)</span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'Artists'</span>)</span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'Average Location Quotient'</span>)</span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>plt.show()</span>
-<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Statistical analysis using a one-sample t-test</span></span>
-<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Set the significance level for the hypothesis test</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Average Location Quotient Distribution for Artists'</span>)</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'Artists'</span>)</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'Average Location Quotient'</span>)</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>plt.show()</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Filter states with an average location quotient less than 1.0</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="Project_files/figure-html/table-setup-py-2.png" class="img-fluid" width="960"></p>
 </div>
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>alpha <span class="op">=</span> <span class="fl">0.05</span></span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>population_mean <span class="op">=</span> <span class="fl">1.0</span>  <span class="co"># The hypothesized mean (1.0)</span></span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Perform a one-sample t-test</span></span>
-<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>t_stat, p_value <span class="op">=</span> stats.ttest_1samp(average_location_quotient[<span class="st">'location_quotient'</span>], population_mean)</span>
-<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Filter states with an average location quotient less than 1.0</span></span>
-<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>states_below_1 <span class="op">=</span> average_location_quotient[average_location_quotient[<span class="st">'location_quotient'</span>] <span class="op">&lt;</span> <span class="fl">1.0</span>]</span>
-<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Check if the p-value is less than the significance level</span></span>
-<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> p_value <span class="op">&lt;</span> alpha:</span>
-<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"States with an average location quotient significantly below 1.0 (p-value: </span><span class="sc">{</span>p_value<span class="sc">:.4f}</span><span class="ss">): </span><span class="sc">{</span><span class="bu">len</span>(states_below_1)<span class="sc">}</span><span class="ss"> states"</span>)</span>
-<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Display a table with states having an average location quotient less than 1.0</span></span>
-<span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a>    table_states_below_1 <span class="op">=</span> states_below_1[[<span class="st">'state'</span>, <span class="st">'location_quotient'</span>]]</span>
-<span id="cb11-16"><a href="#cb11-16" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">Table of States with Average Location Quotient Below 1.0:"</span>)</span>
-<span id="cb11-17"><a href="#cb11-17" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(table_states_below_1)</span>
-<span id="cb11-18"><a href="#cb11-18" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb11-19"><a href="#cb11-19" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Filter the original dataset based on the states with an average location quotient significantly lower than 1.0</span></span>
-<span id="cb11-20"><a href="#cb11-20" aria-hidden="true" tabindex="-1"></a>    filtered_dataset <span class="op">=</span> artist[artist[<span class="st">'state'</span>].isin(states_below_1[<span class="st">'state'</span>])]</span>
-<span id="cb11-21"><a href="#cb11-21" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">Filtered Dataset:"</span>)</span>
-<span id="cb11-22"><a href="#cb11-22" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(filtered_dataset)</span>
-<span id="cb11-23"><a href="#cb11-23" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb11-24"><a href="#cb11-24" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Alternatively, you can use display() to show the table</span></span>
-<span id="cb11-25"><a href="#cb11-25" aria-hidden="true" tabindex="-1"></a>    <span class="co"># display(table_states_below_1)</span></span>
-<span id="cb11-26"><a href="#cb11-26" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb11-27"><a href="#cb11-27" aria-hidden="true" tabindex="-1"></a><span class="cf">else</span>:</span>
-<span id="cb11-28"><a href="#cb11-28" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"No significant evidence of average location quotients below 1.0. Number of states below 1.0: </span><span class="sc">{</span><span class="bu">len</span>(states_below_1)<span class="sc">}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>states_below_1 <span class="op">=</span> average_location_quotient[average_location_quotient[<span class="st">'location_quotient'</span>] <span class="op">&lt;</span> <span class="fl">1.0</span>]</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>states_below_1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>No significant evidence of average location quotients below 1.0. Number of states below 1.0: 32</code></pre>
+<pre><code>             state  location_quotient
+0          Alabama           0.678499
+1           Alaska           0.703285
+2          Arizona           0.889886
+3         Arkansas           0.624634
+7         Delaware           0.718172
+12           Idaho           0.756616
+13        Illinois           0.937109
+14         Indiana           0.718303
+15            Iowa           0.670376
+17        Kentucky           0.694958
+22        Michigan           0.863056
+23       Minnesota           0.925676
+24     Mississippi           0.524682
+25        Missouri           0.810909
+26         Montana           0.789532
+27        Nebraska           0.861959
+29   New Hampshire           0.664936
+31      New Mexico           0.984415
+33  North Carolina           0.671117
+34    North Dakota           0.581610
+35            Ohio           0.924914
+38    Pennsylvania           0.905970
+40  South Carolina           0.716638
+41    South Dakota           0.636614
+42       Tennessee           0.994544
+43           Texas           0.854910
+44            Utah           0.875502
+46        Virginia           0.918024
+47      Washington           0.944148
+48   West Virginia           0.512631
+49       Wisconsin           0.707132
+50         Wyoming           0.880094</code></pre>
 </div>
 </div>
 <ul>
 <li>The top 10 state /territory has the highest number of artists, as indicated by the location quotient.</li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate the average location_quotient for each state</span></span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>average_location_quotient <span class="op">=</span> artist.groupby(<span class="st">'state'</span>)[<span class="st">'location_quotient'</span>].mean()</span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Sort states based on average location_quotient and get the top 10</span></span>
-<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>top_10_states <span class="op">=</span> average_location_quotient.sort_values(ascending<span class="op">=</span><span class="va">False</span>).head(<span class="dv">10</span>)</span>
-<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Display the top 10 states</span></span>
-<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Top 10 States with Highest Location Quotient:"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate the average location_quotient for each state</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>average_location_quotient <span class="op">=</span> artist.groupby(<span class="st">'state'</span>)[<span class="st">'location_quotient'</span>].mean()</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Sort states based on average location_quotient and get the top 10</span></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>top_10_states <span class="op">=</span> average_location_quotient.sort_values(ascending<span class="op">=</span><span class="va">False</span>).head(<span class="dv">10</span>)</span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Display the top 10 states</span></span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Top 10 States with Highest Location Quotient:"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Top 10 States with Highest Location Quotient:</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(top_10_states)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(top_10_states)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>state
 District of Columbia    3.021805
@@ -229,13 +225,13 @@ Name: location_quotient, dtype: float64</code></pre>
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Assuming you have loaded your dataset into a data frame named 'artist'</span></span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Replace 'your_data.csv' with the actual file path if you are reading from a CSV file</span></span>
-<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Load required libraries</span></span>
-<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(shiny)</span>
-<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Assuming you have loaded your dataset into a data frame named 'artist'</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Replace 'your_data.csv' with the actual file path if you are reading from a CSV file</span></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Load required libraries</span></span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(shiny)</span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Warning: package 'dplyr' was built under R version 4.1.3</code></pre>
 </div>
@@ -253,55 +249,55 @@ Attaching package: 'dplyr'</code></pre>
 
     intersect, setdiff, setequal, union</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Import the dataset</span></span>
-<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>artist <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"artists.csv"</span>)  <span class="co"># Replace with the actual file path</span></span>
-<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>artist <span class="ot">&lt;-</span> <span class="fu">na.omit</span>(artist)</span>
-<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a><span class="co"># UI definition</span></span>
-<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>ui <span class="ot">&lt;-</span> <span class="fu">fluidPage</span>(</span>
-<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">titlePanel</span>(<span class="st">"Average Location Quotient for Each State and Top 10 States"</span>),</span>
-<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sidebarLayout</span>(</span>
-<span id="cb22-10"><a href="#cb22-10" aria-hidden="true" tabindex="-1"></a>    <span class="fu">sidebarPanel</span>(),</span>
-<span id="cb22-11"><a href="#cb22-11" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mainPanel</span>(</span>
-<span id="cb22-12"><a href="#cb22-12" aria-hidden="true" tabindex="-1"></a>      <span class="fu">tableOutput</span>(<span class="st">"averageTable"</span>),</span>
-<span id="cb22-13"><a href="#cb22-13" aria-hidden="true" tabindex="-1"></a>      <span class="fu">plotOutput</span>(<span class="st">"barPlot"</span>)</span>
-<span id="cb22-14"><a href="#cb22-14" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb22-15"><a href="#cb22-15" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb22-16"><a href="#cb22-16" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb22-17"><a href="#cb22-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-18"><a href="#cb22-18" aria-hidden="true" tabindex="-1"></a><span class="co"># Server definition</span></span>
-<span id="cb22-19"><a href="#cb22-19" aria-hidden="true" tabindex="-1"></a>server <span class="ot">&lt;-</span> <span class="cf">function</span>(input, output) {</span>
-<span id="cb22-20"><a href="#cb22-20" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb22-21"><a href="#cb22-21" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Calculate average location quotient for each state</span></span>
-<span id="cb22-22"><a href="#cb22-22" aria-hidden="true" tabindex="-1"></a>  average_location_quotient <span class="ot">&lt;-</span> artist <span class="sc">%&gt;%</span></span>
-<span id="cb22-23"><a href="#cb22-23" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by</span>(state) <span class="sc">%&gt;%</span></span>
-<span id="cb22-24"><a href="#cb22-24" aria-hidden="true" tabindex="-1"></a>    <span class="fu">summarize</span>(<span class="at">average_location_quotient =</span> <span class="fu">mean</span>(location_quotient))</span>
-<span id="cb22-25"><a href="#cb22-25" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb22-26"><a href="#cb22-26" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Sort states based on average location quotient and get the top 10</span></span>
-<span id="cb22-27"><a href="#cb22-27" aria-hidden="true" tabindex="-1"></a>  top_10_states <span class="ot">&lt;-</span> average_location_quotient <span class="sc">%&gt;%</span></span>
-<span id="cb22-28"><a href="#cb22-28" aria-hidden="true" tabindex="-1"></a>    <span class="fu">arrange</span>(<span class="fu">desc</span>(average_location_quotient)) <span class="sc">%&gt;%</span></span>
-<span id="cb22-29"><a href="#cb22-29" aria-hidden="true" tabindex="-1"></a>    <span class="fu">head</span>(<span class="dv">10</span>)</span>
-<span id="cb22-30"><a href="#cb22-30" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb22-31"><a href="#cb22-31" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Display the top 10 states</span></span>
-<span id="cb22-32"><a href="#cb22-32" aria-hidden="true" tabindex="-1"></a>  output<span class="sc">$</span>averageTable <span class="ot">&lt;-</span> <span class="fu">renderTable</span>({</span>
-<span id="cb22-33"><a href="#cb22-33" aria-hidden="true" tabindex="-1"></a>    top_10_states</span>
-<span id="cb22-34"><a href="#cb22-34" aria-hidden="true" tabindex="-1"></a>  })</span>
-<span id="cb22-35"><a href="#cb22-35" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb22-36"><a href="#cb22-36" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Bar plot of average location quotient for each state</span></span>
-<span id="cb22-37"><a href="#cb22-37" aria-hidden="true" tabindex="-1"></a>  output<span class="sc">$</span>barPlot <span class="ot">&lt;-</span> <span class="fu">renderPlot</span>({</span>
-<span id="cb22-38"><a href="#cb22-38" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggplot</span>(average_location_quotient, <span class="fu">aes</span>(<span class="at">x =</span> state, <span class="at">y =</span> average_location_quotient)) <span class="sc">+</span></span>
-<span id="cb22-39"><a href="#cb22-39" aria-hidden="true" tabindex="-1"></a>      <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">"identity"</span>, <span class="at">fill =</span> <span class="st">"skyblue"</span>) <span class="sc">+</span></span>
-<span id="cb22-40"><a href="#cb22-40" aria-hidden="true" tabindex="-1"></a>      <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Average Location Quotient for Each State"</span>,</span>
-<span id="cb22-41"><a href="#cb22-41" aria-hidden="true" tabindex="-1"></a>           <span class="at">x =</span> <span class="st">"State"</span>,</span>
-<span id="cb22-42"><a href="#cb22-42" aria-hidden="true" tabindex="-1"></a>           <span class="at">y =</span> <span class="st">"Average Location Quotient"</span>) <span class="sc">+</span></span>
-<span id="cb22-43"><a href="#cb22-43" aria-hidden="true" tabindex="-1"></a>      <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
-<span id="cb22-44"><a href="#cb22-44" aria-hidden="true" tabindex="-1"></a>      <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">90</span>, <span class="at">hjust =</span> <span class="dv">1</span>))</span>
-<span id="cb22-45"><a href="#cb22-45" aria-hidden="true" tabindex="-1"></a>  })</span>
-<span id="cb22-46"><a href="#cb22-46" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb22-47"><a href="#cb22-47" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-48"><a href="#cb22-48" aria-hidden="true" tabindex="-1"></a><span class="co"># Run the Shiny app</span></span>
-<span id="cb22-49"><a href="#cb22-49" aria-hidden="true" tabindex="-1"></a><span class="fu">shinyApp</span>(ui, server)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Import the dataset</span></span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>artist <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"artists.csv"</span>)  <span class="co"># Replace with the actual file path</span></span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>artist <span class="ot">&lt;-</span> <span class="fu">na.omit</span>(artist)</span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a><span class="co"># UI definition</span></span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>ui <span class="ot">&lt;-</span> <span class="fu">fluidPage</span>(</span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">titlePanel</span>(<span class="st">"Average Location Quotient for Each State and Top 10 States"</span>),</span>
+<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sidebarLayout</span>(</span>
+<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a>    <span class="fu">sidebarPanel</span>(),</span>
+<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mainPanel</span>(</span>
+<span id="cb20-12"><a href="#cb20-12" aria-hidden="true" tabindex="-1"></a>      <span class="fu">tableOutput</span>(<span class="st">"averageTable"</span>),</span>
+<span id="cb20-13"><a href="#cb20-13" aria-hidden="true" tabindex="-1"></a>      <span class="fu">plotOutput</span>(<span class="st">"barPlot"</span>)</span>
+<span id="cb20-14"><a href="#cb20-14" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb20-15"><a href="#cb20-15" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb20-16"><a href="#cb20-16" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb20-17"><a href="#cb20-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-18"><a href="#cb20-18" aria-hidden="true" tabindex="-1"></a><span class="co"># Server definition</span></span>
+<span id="cb20-19"><a href="#cb20-19" aria-hidden="true" tabindex="-1"></a>server <span class="ot">&lt;-</span> <span class="cf">function</span>(input, output) {</span>
+<span id="cb20-20"><a href="#cb20-20" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb20-21"><a href="#cb20-21" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Calculate average location quotient for each state</span></span>
+<span id="cb20-22"><a href="#cb20-22" aria-hidden="true" tabindex="-1"></a>  average_location_quotient <span class="ot">&lt;-</span> artist <span class="sc">%&gt;%</span></span>
+<span id="cb20-23"><a href="#cb20-23" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by</span>(state) <span class="sc">%&gt;%</span></span>
+<span id="cb20-24"><a href="#cb20-24" aria-hidden="true" tabindex="-1"></a>    <span class="fu">summarize</span>(<span class="at">average_location_quotient =</span> <span class="fu">mean</span>(location_quotient))</span>
+<span id="cb20-25"><a href="#cb20-25" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb20-26"><a href="#cb20-26" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Sort states based on average location quotient and get the top 10</span></span>
+<span id="cb20-27"><a href="#cb20-27" aria-hidden="true" tabindex="-1"></a>  top_10_states <span class="ot">&lt;-</span> average_location_quotient <span class="sc">%&gt;%</span></span>
+<span id="cb20-28"><a href="#cb20-28" aria-hidden="true" tabindex="-1"></a>    <span class="fu">arrange</span>(<span class="fu">desc</span>(average_location_quotient)) <span class="sc">%&gt;%</span></span>
+<span id="cb20-29"><a href="#cb20-29" aria-hidden="true" tabindex="-1"></a>    <span class="fu">head</span>(<span class="dv">10</span>)</span>
+<span id="cb20-30"><a href="#cb20-30" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb20-31"><a href="#cb20-31" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Display the top 10 states</span></span>
+<span id="cb20-32"><a href="#cb20-32" aria-hidden="true" tabindex="-1"></a>  output<span class="sc">$</span>averageTable <span class="ot">&lt;-</span> <span class="fu">renderTable</span>({</span>
+<span id="cb20-33"><a href="#cb20-33" aria-hidden="true" tabindex="-1"></a>    top_10_states</span>
+<span id="cb20-34"><a href="#cb20-34" aria-hidden="true" tabindex="-1"></a>  })</span>
+<span id="cb20-35"><a href="#cb20-35" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb20-36"><a href="#cb20-36" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Bar plot of average location quotient for each state</span></span>
+<span id="cb20-37"><a href="#cb20-37" aria-hidden="true" tabindex="-1"></a>  output<span class="sc">$</span>barPlot <span class="ot">&lt;-</span> <span class="fu">renderPlot</span>({</span>
+<span id="cb20-38"><a href="#cb20-38" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggplot</span>(average_location_quotient, <span class="fu">aes</span>(<span class="at">x =</span> state, <span class="at">y =</span> average_location_quotient)) <span class="sc">+</span></span>
+<span id="cb20-39"><a href="#cb20-39" aria-hidden="true" tabindex="-1"></a>      <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">"identity"</span>, <span class="at">fill =</span> <span class="st">"skyblue"</span>) <span class="sc">+</span></span>
+<span id="cb20-40"><a href="#cb20-40" aria-hidden="true" tabindex="-1"></a>      <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Average Location Quotient for Each State"</span>,</span>
+<span id="cb20-41"><a href="#cb20-41" aria-hidden="true" tabindex="-1"></a>           <span class="at">x =</span> <span class="st">"State"</span>,</span>
+<span id="cb20-42"><a href="#cb20-42" aria-hidden="true" tabindex="-1"></a>           <span class="at">y =</span> <span class="st">"Average Location Quotient"</span>) <span class="sc">+</span></span>
+<span id="cb20-43"><a href="#cb20-43" aria-hidden="true" tabindex="-1"></a>      <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb20-44"><a href="#cb20-44" aria-hidden="true" tabindex="-1"></a>      <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">90</span>, <span class="at">hjust =</span> <span class="dv">1</span>))</span>
+<span id="cb20-45"><a href="#cb20-45" aria-hidden="true" tabindex="-1"></a>  })</span>
+<span id="cb20-46"><a href="#cb20-46" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb20-47"><a href="#cb20-47" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-48"><a href="#cb20-48" aria-hidden="true" tabindex="-1"></a><span class="co"># Run the Shiny app</span></span>
+<span id="cb20-49"><a href="#cb20-49" aria-hidden="true" tabindex="-1"></a><span class="fu">shinyApp</span>(ui, server)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>PhantomJS not found. You can install it with webshot::install_phantomjs(). If it is installed, please make sure the phantomjs executable can be found via the PATH variable.</code></pre>
 </div>
@@ -313,8 +309,8 @@ Attaching package: 'dplyr'</code></pre>
 <li>How does the racial diversity of artists vary across different states or territories? Are there states with a more diverse artist population than others?</li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(shiny)</span>
-<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(shiny)</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Warning: package 'tidyverse' was built under R version 4.1.3</code></pre>
 </div>
@@ -350,60 +346,60 @@ x dplyr::filter() masks stats::filter()
 x dplyr::lag()    masks stats::lag()
 i Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(viridis)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(viridis)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Loading required package: viridisLite</code></pre>
 </div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Warning: package 'viridisLite' was built under R version 4.1.3</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Define UI</span></span>
-<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>ui <span class="ot">&lt;-</span> <span class="fu">fluidPage</span>(</span>
-<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">titlePanel</span>(<span class="st">"Racial Diversity of Artists Across States"</span>),</span>
-<span id="cb37-4"><a href="#cb37-4" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb37-5"><a href="#cb37-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sidebarLayout</span>(</span>
-<span id="cb37-6"><a href="#cb37-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">sidebarPanel</span>(</span>
-<span id="cb37-7"><a href="#cb37-7" aria-hidden="true" tabindex="-1"></a>      <span class="fu">selectInput</span>(<span class="st">"selected_state"</span>, <span class="st">"Select State"</span>, <span class="at">choices =</span> <span class="fu">unique</span>(artist<span class="sc">$</span>state), <span class="at">selected =</span> <span class="st">"Alabama"</span>),</span>
-<span id="cb37-8"><a href="#cb37-8" aria-hidden="true" tabindex="-1"></a>      <span class="co"># You can add more inputs here if needed</span></span>
-<span id="cb37-9"><a href="#cb37-9" aria-hidden="true" tabindex="-1"></a>    ),</span>
-<span id="cb37-10"><a href="#cb37-10" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb37-11"><a href="#cb37-11" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mainPanel</span>(</span>
-<span id="cb37-12"><a href="#cb37-12" aria-hidden="true" tabindex="-1"></a>      <span class="fu">plotOutput</span>(<span class="st">"barPlot"</span>)</span>
-<span id="cb37-13"><a href="#cb37-13" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb37-14"><a href="#cb37-14" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb37-15"><a href="#cb37-15" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb37-16"><a href="#cb37-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-17"><a href="#cb37-17" aria-hidden="true" tabindex="-1"></a><span class="co"># Define server</span></span>
-<span id="cb37-18"><a href="#cb37-18" aria-hidden="true" tabindex="-1"></a>server <span class="ot">&lt;-</span> <span class="cf">function</span>(input, output) {</span>
-<span id="cb37-19"><a href="#cb37-19" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb37-20"><a href="#cb37-20" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Filter data based on selected state</span></span>
-<span id="cb37-21"><a href="#cb37-21" aria-hidden="true" tabindex="-1"></a>  data_selected_state <span class="ot">&lt;-</span> <span class="fu">reactive</span>({</span>
-<span id="cb37-22"><a href="#cb37-22" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(artist, state <span class="sc">==</span> input<span class="sc">$</span>selected_state)</span>
-<span id="cb37-23"><a href="#cb37-23" aria-hidden="true" tabindex="-1"></a>  })</span>
-<span id="cb37-24"><a href="#cb37-24" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb37-25"><a href="#cb37-25" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Process data and create plot</span></span>
-<span id="cb37-26"><a href="#cb37-26" aria-hidden="true" tabindex="-1"></a>  output<span class="sc">$</span>barPlot <span class="ot">&lt;-</span> <span class="fu">renderPlot</span>({</span>
-<span id="cb37-27"><a href="#cb37-27" aria-hidden="true" tabindex="-1"></a>    data_processed <span class="ot">&lt;-</span> <span class="fu">data_selected_state</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb37-28"><a href="#cb37-28" aria-hidden="true" tabindex="-1"></a>      <span class="fu">group_by</span>(state, race) <span class="sc">%&gt;%</span></span>
-<span id="cb37-29"><a href="#cb37-29" aria-hidden="true" tabindex="-1"></a>      <span class="fu">summarise</span>(<span class="at">artists_n =</span> <span class="fu">sum</span>(artists_n)) <span class="sc">%&gt;%</span></span>
-<span id="cb37-30"><a href="#cb37-30" aria-hidden="true" tabindex="-1"></a>      <span class="fu">group_by</span>(state) <span class="sc">%&gt;%</span></span>
-<span id="cb37-31"><a href="#cb37-31" aria-hidden="true" tabindex="-1"></a>      <span class="fu">mutate</span>(<span class="at">percentage_of_artists =</span> (artists_n <span class="sc">/</span> <span class="fu">sum</span>(artists_n)) <span class="sc">*</span> <span class="dv">100</span>)</span>
-<span id="cb37-32"><a href="#cb37-32" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb37-33"><a href="#cb37-33" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Create a bar plot using ggplot2</span></span>
-<span id="cb37-34"><a href="#cb37-34" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggplot</span>(data_processed, <span class="fu">aes</span>(<span class="at">x =</span> state, <span class="at">y =</span> percentage_of_artists, <span class="at">fill =</span> race)) <span class="sc">+</span></span>
-<span id="cb37-35"><a href="#cb37-35" aria-hidden="true" tabindex="-1"></a>      <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">"identity"</span>, <span class="at">position =</span> <span class="st">"dodge"</span>) <span class="sc">+</span></span>
-<span id="cb37-36"><a href="#cb37-36" aria-hidden="true" tabindex="-1"></a>      <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Racial Diversity of Artists Across States"</span>,</span>
-<span id="cb37-37"><a href="#cb37-37" aria-hidden="true" tabindex="-1"></a>           <span class="at">x =</span> <span class="st">"State"</span>,</span>
-<span id="cb37-38"><a href="#cb37-38" aria-hidden="true" tabindex="-1"></a>           <span class="at">y =</span> <span class="st">"Percentage of Artists"</span>,</span>
-<span id="cb37-39"><a href="#cb37-39" aria-hidden="true" tabindex="-1"></a>           <span class="at">fill =</span> <span class="st">"Race"</span>) <span class="sc">+</span></span>
-<span id="cb37-40"><a href="#cb37-40" aria-hidden="true" tabindex="-1"></a>      <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
-<span id="cb37-41"><a href="#cb37-41" aria-hidden="true" tabindex="-1"></a>      <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">0</span>, <span class="at">hjust =</span> <span class="dv">1</span>)) <span class="sc">+</span></span>
-<span id="cb37-42"><a href="#cb37-42" aria-hidden="true" tabindex="-1"></a>      <span class="fu">scale_fill_viridis</span>(<span class="at">discrete =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb37-43"><a href="#cb37-43" aria-hidden="true" tabindex="-1"></a>  })</span>
-<span id="cb37-44"><a href="#cb37-44" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb37-45"><a href="#cb37-45" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-46"><a href="#cb37-46" aria-hidden="true" tabindex="-1"></a><span class="co"># Run the Shiny app</span></span>
-<span id="cb37-47"><a href="#cb37-47" aria-hidden="true" tabindex="-1"></a><span class="fu">shinyApp</span>(ui, server)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Define UI</span></span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>ui <span class="ot">&lt;-</span> <span class="fu">fluidPage</span>(</span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">titlePanel</span>(<span class="st">"Racial Diversity of Artists Across States"</span>),</span>
+<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sidebarLayout</span>(</span>
+<span id="cb35-6"><a href="#cb35-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">sidebarPanel</span>(</span>
+<span id="cb35-7"><a href="#cb35-7" aria-hidden="true" tabindex="-1"></a>      <span class="fu">selectInput</span>(<span class="st">"selected_state"</span>, <span class="st">"Select State"</span>, <span class="at">choices =</span> <span class="fu">unique</span>(artist<span class="sc">$</span>state), <span class="at">selected =</span> <span class="st">"Alabama"</span>),</span>
+<span id="cb35-8"><a href="#cb35-8" aria-hidden="true" tabindex="-1"></a>      <span class="co"># You can add more inputs here if needed</span></span>
+<span id="cb35-9"><a href="#cb35-9" aria-hidden="true" tabindex="-1"></a>    ),</span>
+<span id="cb35-10"><a href="#cb35-10" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb35-11"><a href="#cb35-11" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mainPanel</span>(</span>
+<span id="cb35-12"><a href="#cb35-12" aria-hidden="true" tabindex="-1"></a>      <span class="fu">plotOutput</span>(<span class="st">"barPlot"</span>)</span>
+<span id="cb35-13"><a href="#cb35-13" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb35-14"><a href="#cb35-14" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb35-15"><a href="#cb35-15" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb35-16"><a href="#cb35-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-17"><a href="#cb35-17" aria-hidden="true" tabindex="-1"></a><span class="co"># Define server</span></span>
+<span id="cb35-18"><a href="#cb35-18" aria-hidden="true" tabindex="-1"></a>server <span class="ot">&lt;-</span> <span class="cf">function</span>(input, output) {</span>
+<span id="cb35-19"><a href="#cb35-19" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb35-20"><a href="#cb35-20" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Filter data based on selected state</span></span>
+<span id="cb35-21"><a href="#cb35-21" aria-hidden="true" tabindex="-1"></a>  data_selected_state <span class="ot">&lt;-</span> <span class="fu">reactive</span>({</span>
+<span id="cb35-22"><a href="#cb35-22" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(artist, state <span class="sc">==</span> input<span class="sc">$</span>selected_state)</span>
+<span id="cb35-23"><a href="#cb35-23" aria-hidden="true" tabindex="-1"></a>  })</span>
+<span id="cb35-24"><a href="#cb35-24" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb35-25"><a href="#cb35-25" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Process data and create plot</span></span>
+<span id="cb35-26"><a href="#cb35-26" aria-hidden="true" tabindex="-1"></a>  output<span class="sc">$</span>barPlot <span class="ot">&lt;-</span> <span class="fu">renderPlot</span>({</span>
+<span id="cb35-27"><a href="#cb35-27" aria-hidden="true" tabindex="-1"></a>    data_processed <span class="ot">&lt;-</span> <span class="fu">data_selected_state</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb35-28"><a href="#cb35-28" aria-hidden="true" tabindex="-1"></a>      <span class="fu">group_by</span>(state, race) <span class="sc">%&gt;%</span></span>
+<span id="cb35-29"><a href="#cb35-29" aria-hidden="true" tabindex="-1"></a>      <span class="fu">summarise</span>(<span class="at">artists_n =</span> <span class="fu">sum</span>(artists_n)) <span class="sc">%&gt;%</span></span>
+<span id="cb35-30"><a href="#cb35-30" aria-hidden="true" tabindex="-1"></a>      <span class="fu">group_by</span>(state) <span class="sc">%&gt;%</span></span>
+<span id="cb35-31"><a href="#cb35-31" aria-hidden="true" tabindex="-1"></a>      <span class="fu">mutate</span>(<span class="at">percentage_of_artists =</span> (artists_n <span class="sc">/</span> <span class="fu">sum</span>(artists_n)) <span class="sc">*</span> <span class="dv">100</span>)</span>
+<span id="cb35-32"><a href="#cb35-32" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb35-33"><a href="#cb35-33" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Create a bar plot using ggplot2</span></span>
+<span id="cb35-34"><a href="#cb35-34" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggplot</span>(data_processed, <span class="fu">aes</span>(<span class="at">x =</span> state, <span class="at">y =</span> percentage_of_artists, <span class="at">fill =</span> race)) <span class="sc">+</span></span>
+<span id="cb35-35"><a href="#cb35-35" aria-hidden="true" tabindex="-1"></a>      <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">"identity"</span>, <span class="at">position =</span> <span class="st">"dodge"</span>) <span class="sc">+</span></span>
+<span id="cb35-36"><a href="#cb35-36" aria-hidden="true" tabindex="-1"></a>      <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Racial Diversity of Artists Across States"</span>,</span>
+<span id="cb35-37"><a href="#cb35-37" aria-hidden="true" tabindex="-1"></a>           <span class="at">x =</span> <span class="st">"State"</span>,</span>
+<span id="cb35-38"><a href="#cb35-38" aria-hidden="true" tabindex="-1"></a>           <span class="at">y =</span> <span class="st">"Percentage of Artists"</span>,</span>
+<span id="cb35-39"><a href="#cb35-39" aria-hidden="true" tabindex="-1"></a>           <span class="at">fill =</span> <span class="st">"Race"</span>) <span class="sc">+</span></span>
+<span id="cb35-40"><a href="#cb35-40" aria-hidden="true" tabindex="-1"></a>      <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb35-41"><a href="#cb35-41" aria-hidden="true" tabindex="-1"></a>      <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">0</span>, <span class="at">hjust =</span> <span class="dv">1</span>)) <span class="sc">+</span></span>
+<span id="cb35-42"><a href="#cb35-42" aria-hidden="true" tabindex="-1"></a>      <span class="fu">scale_fill_viridis</span>(<span class="at">discrete =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb35-43"><a href="#cb35-43" aria-hidden="true" tabindex="-1"></a>  })</span>
+<span id="cb35-44"><a href="#cb35-44" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb35-45"><a href="#cb35-45" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-46"><a href="#cb35-46" aria-hidden="true" tabindex="-1"></a><span class="co"># Run the Shiny app</span></span>
+<span id="cb35-47"><a href="#cb35-47" aria-hidden="true" tabindex="-1"></a><span class="fu">shinyApp</span>(ui, server)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p></p><div style="width: 100% ; height: 400px ; text-align: center; box-sizing: border-box; -moz-box-sizing: border-box; -webkit-box-sizing: border-box;" class="muted well">Shiny applications not supported in static R Markdown documents</div><p></p>
 </div>
@@ -415,15 +411,15 @@ i Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all
 <li>What is the overall distribution of artist types across different states or territories?</li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load required libraries</span></span>
-<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(shiny)</span>
-<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readr)</span>
-<span id="cb38-5"><a href="#cb38-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(stats)</span>
-<span id="cb38-6"><a href="#cb38-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
-<span id="cb38-7"><a href="#cb38-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb38-8"><a href="#cb38-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Import the dataset</span></span>
-<span id="cb38-9"><a href="#cb38-9" aria-hidden="true" tabindex="-1"></a>artist <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"artists.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load required libraries</span></span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(shiny)</span>
+<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readr)</span>
+<span id="cb36-5"><a href="#cb36-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(stats)</span>
+<span id="cb36-6"><a href="#cb36-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb36-7"><a href="#cb36-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-8"><a href="#cb36-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Import the dataset</span></span>
+<span id="cb36-9"><a href="#cb36-9" aria-hidden="true" tabindex="-1"></a>artist <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"artists.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Rows: 3380 Columns: 7
 -- Column specification --------------------------------------------------------
@@ -434,8 +430,8 @@ dbl (4): all_workers_n, artists_n, artists_share, location_quotient
 i Use `spec()` to retrieve the full column specification for this data.
 i Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Display the first few rows of the dataset</span></span>
-<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(artist)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Display the first few rows of the dataset</span></span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(artist)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 6 x 7
   state      race  type  all_workers_n artists_n artists_share location_quotient
@@ -447,21 +443,21 @@ i Specify the column types or set `show_col_types = FALSE` to quiet this message
 5 California Hisp~ Arch~       7470730      3870      0.000518             0.888
 6 Colorado   Hisp~ Arch~        594525       200      0.000336             0.577</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Delete missing values</span></span>
-<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a>artist <span class="ot">&lt;-</span> <span class="fu">na.omit</span>(artist)</span>
-<span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb42-4"><a href="#cb42-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Question 2 : What is the overall distribution of artist types across different states or territories?</span></span>
-<span id="cb42-5"><a href="#cb42-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb42-6"><a href="#cb42-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Filter the data to include only the relevant columns</span></span>
-<span id="cb42-7"><a href="#cb42-7" aria-hidden="true" tabindex="-1"></a>subset <span class="ot">&lt;-</span> artist <span class="sc">%&gt;%</span> <span class="fu">select</span>(state, type)</span>
-<span id="cb42-8"><a href="#cb42-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate the overall distribution</span></span>
-<span id="cb42-9"><a href="#cb42-9" aria-hidden="true" tabindex="-1"></a>distribution <span class="ot">&lt;-</span> subset <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(state, type) <span class="sc">%&gt;%</span> <span class="fu">summarise</span>(<span class="at">count =</span> <span class="fu">n</span>())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Delete missing values</span></span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a>artist <span class="ot">&lt;-</span> <span class="fu">na.omit</span>(artist)</span>
+<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-4"><a href="#cb40-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Question 2 : What is the overall distribution of artist types across different states or territories?</span></span>
+<span id="cb40-5"><a href="#cb40-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-6"><a href="#cb40-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Filter the data to include only the relevant columns</span></span>
+<span id="cb40-7"><a href="#cb40-7" aria-hidden="true" tabindex="-1"></a>subset <span class="ot">&lt;-</span> artist <span class="sc">%&gt;%</span> <span class="fu">select</span>(state, type)</span>
+<span id="cb40-8"><a href="#cb40-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate the overall distribution</span></span>
+<span id="cb40-9"><a href="#cb40-9" aria-hidden="true" tabindex="-1"></a>distribution <span class="ot">&lt;-</span> subset <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(state, type) <span class="sc">%&gt;%</span> <span class="fu">summarise</span>(<span class="at">count =</span> <span class="fu">n</span>())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>`summarise()` has grouped output by 'state'. You can override using the
 `.groups` argument.</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Display the overall distribution</span></span>
-<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(distribution)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Display the overall distribution</span></span>
+<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(distribution)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 647 x 3
 # Groups:   state [51]
@@ -479,23 +475,23 @@ i Specify the column types or set `show_col_types = FALSE` to quiet this message
 10 Alabama Musicians                                      2
 # i 637 more rows</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb46-3"><a href="#cb46-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyr)</span>
-<span id="cb46-4"><a href="#cb46-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb46-5"><a href="#cb46-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Pivot the data for heatmap</span></span>
-<span id="cb46-6"><a href="#cb46-6" aria-hidden="true" tabindex="-1"></a>heatmap_data <span class="ot">&lt;-</span> distribution <span class="sc">%&gt;%</span></span>
-<span id="cb46-7"><a href="#cb46-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> <span class="st">"type"</span>, <span class="at">values_from =</span> <span class="st">"count"</span>, <span class="at">values_fill =</span> <span class="dv">0</span>)</span>
-<span id="cb46-8"><a href="#cb46-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb46-9"><a href="#cb46-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a heatmap</span></span>
-<span id="cb46-10"><a href="#cb46-10" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(heatmap_data, <span class="fu">aes</span>(<span class="at">x =</span> state, <span class="at">y =</span> <span class="st">`</span><span class="at">Actors</span><span class="st">`</span>, <span class="at">fill =</span> <span class="st">`</span><span class="at">Actors</span><span class="st">`</span>)) <span class="sc">+</span></span>
-<span id="cb46-11"><a href="#cb46-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_tile</span>() <span class="sc">+</span></span>
-<span id="cb46-12"><a href="#cb46-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_gradient</span>(<span class="at">low =</span> <span class="st">"red"</span>, <span class="at">high =</span> <span class="st">"blue"</span>) <span class="sc">+</span></span>
-<span id="cb46-13"><a href="#cb46-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Distribution of Artist Types Across States"</span>,</span>
-<span id="cb46-14"><a href="#cb46-14" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"State"</span>,</span>
-<span id="cb46-15"><a href="#cb46-15" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Artist Type"</span>) <span class="sc">+</span></span>
-<span id="cb46-16"><a href="#cb46-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
-<span id="cb46-17"><a href="#cb46-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">45</span>, <span class="at">hjust =</span> <span class="dv">1</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyr)</span>
+<span id="cb44-4"><a href="#cb44-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-5"><a href="#cb44-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Pivot the data for heatmap</span></span>
+<span id="cb44-6"><a href="#cb44-6" aria-hidden="true" tabindex="-1"></a>heatmap_data <span class="ot">&lt;-</span> distribution <span class="sc">%&gt;%</span></span>
+<span id="cb44-7"><a href="#cb44-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> <span class="st">"type"</span>, <span class="at">values_from =</span> <span class="st">"count"</span>, <span class="at">values_fill =</span> <span class="dv">0</span>)</span>
+<span id="cb44-8"><a href="#cb44-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-9"><a href="#cb44-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a heatmap</span></span>
+<span id="cb44-10"><a href="#cb44-10" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(heatmap_data, <span class="fu">aes</span>(<span class="at">x =</span> state, <span class="at">y =</span> <span class="st">`</span><span class="at">Actors</span><span class="st">`</span>, <span class="at">fill =</span> <span class="st">`</span><span class="at">Actors</span><span class="st">`</span>)) <span class="sc">+</span></span>
+<span id="cb44-11"><a href="#cb44-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_tile</span>() <span class="sc">+</span></span>
+<span id="cb44-12"><a href="#cb44-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_gradient</span>(<span class="at">low =</span> <span class="st">"red"</span>, <span class="at">high =</span> <span class="st">"blue"</span>) <span class="sc">+</span></span>
+<span id="cb44-13"><a href="#cb44-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Distribution of Artist Types Across States"</span>,</span>
+<span id="cb44-14"><a href="#cb44-14" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"State"</span>,</span>
+<span id="cb44-15"><a href="#cb44-15" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Artist Type"</span>) <span class="sc">+</span></span>
+<span id="cb44-16"><a href="#cb44-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb44-17"><a href="#cb44-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">45</span>, <span class="at">hjust =</span> <span class="dv">1</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="Project_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid" width="672"></p>
 </div>
@@ -509,56 +505,56 @@ i Specify the column types or set `show_col_types = FALSE` to quiet this message
 </ol>
 <p>Consider the specific goals of our analysis and the characteristics of our dataset when choosing a visualization method. Based on waht we learnt in the class, we want to create one shiny graph to answer this question. The R code is shown below:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a>ui <span class="ot">&lt;-</span> <span class="fu">fluidPage</span>(</span>
-<span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">titlePanel</span>(<span class="st">"Artist Type Distribution"</span>),</span>
-<span id="cb47-3"><a href="#cb47-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sidebarLayout</span>(</span>
-<span id="cb47-4"><a href="#cb47-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">sidebarPanel</span>(</span>
-<span id="cb47-5"><a href="#cb47-5" aria-hidden="true" tabindex="-1"></a>      <span class="fu">selectInput</span>(<span class="st">"stateInput"</span>, <span class="st">"Select a state:"</span>, <span class="fu">unique</span>(distribution<span class="sc">$</span>state)),</span>
-<span id="cb47-6"><a href="#cb47-6" aria-hidden="true" tabindex="-1"></a>      <span class="fu">actionButton</span>(<span class="st">"plotButton"</span>, <span class="st">"Plot"</span>)</span>
-<span id="cb47-7"><a href="#cb47-7" aria-hidden="true" tabindex="-1"></a>    ),</span>
-<span id="cb47-8"><a href="#cb47-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mainPanel</span>(</span>
-<span id="cb47-9"><a href="#cb47-9" aria-hidden="true" tabindex="-1"></a>      <span class="fu">tableOutput</span>(<span class="st">"resultTable"</span>),</span>
-<span id="cb47-10"><a href="#cb47-10" aria-hidden="true" tabindex="-1"></a>      <span class="fu">plotOutput</span>(<span class="st">"barPlot"</span>),</span>
-<span id="cb47-11"><a href="#cb47-11" aria-hidden="true" tabindex="-1"></a>      <span class="fu">plotOutput</span>(<span class="st">"pieChart"</span>)</span>
-<span id="cb47-12"><a href="#cb47-12" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb47-13"><a href="#cb47-13" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb47-14"><a href="#cb47-14" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb47-15"><a href="#cb47-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb47-16"><a href="#cb47-16" aria-hidden="true" tabindex="-1"></a>server <span class="ot">&lt;-</span> <span class="cf">function</span>(input, output) {</span>
-<span id="cb47-17"><a href="#cb47-17" aria-hidden="true" tabindex="-1"></a>  state_data <span class="ot">&lt;-</span> <span class="fu">reactive</span>({</span>
-<span id="cb47-18"><a href="#cb47-18" aria-hidden="true" tabindex="-1"></a>    selected_state <span class="ot">&lt;-</span> input<span class="sc">$</span>stateInput</span>
-<span id="cb47-19"><a href="#cb47-19" aria-hidden="true" tabindex="-1"></a>    subset_for_state <span class="ot">&lt;-</span> distribution[distribution<span class="sc">$</span>state <span class="sc">==</span> selected_state, ]</span>
-<span id="cb47-20"><a href="#cb47-20" aria-hidden="true" tabindex="-1"></a>    subset_for_state</span>
-<span id="cb47-21"><a href="#cb47-21" aria-hidden="true" tabindex="-1"></a>  })</span>
-<span id="cb47-22"><a href="#cb47-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb47-23"><a href="#cb47-23" aria-hidden="true" tabindex="-1"></a>  output<span class="sc">$</span>resultTable <span class="ot">&lt;-</span> <span class="fu">renderTable</span>({</span>
-<span id="cb47-24"><a href="#cb47-24" aria-hidden="true" tabindex="-1"></a>    <span class="fu">state_data</span>()</span>
-<span id="cb47-25"><a href="#cb47-25" aria-hidden="true" tabindex="-1"></a>  })</span>
-<span id="cb47-26"><a href="#cb47-26" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb47-27"><a href="#cb47-27" aria-hidden="true" tabindex="-1"></a>  <span class="fu">observeEvent</span>(input<span class="sc">$</span>plotButton, {</span>
-<span id="cb47-28"><a href="#cb47-28" aria-hidden="true" tabindex="-1"></a>    output<span class="sc">$</span>barPlot <span class="ot">&lt;-</span> <span class="fu">renderPlot</span>({</span>
-<span id="cb47-29"><a href="#cb47-29" aria-hidden="true" tabindex="-1"></a>      <span class="fu">ggplot</span>(<span class="fu">state_data</span>(), <span class="fu">aes</span>(<span class="at">x =</span> type, <span class="at">y =</span> count, <span class="at">fill =</span> type)) <span class="sc">+</span></span>
-<span id="cb47-30"><a href="#cb47-30" aria-hidden="true" tabindex="-1"></a>        <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">"identity"</span>) <span class="sc">+</span></span>
-<span id="cb47-31"><a href="#cb47-31" aria-hidden="true" tabindex="-1"></a>        <span class="fu">labs</span>(<span class="at">title =</span> <span class="fu">paste</span>(<span class="st">"Distribution of Artist Types in"</span>, input<span class="sc">$</span>stateInput),</span>
-<span id="cb47-32"><a href="#cb47-32" aria-hidden="true" tabindex="-1"></a>             <span class="at">x =</span> <span class="st">"Artist Type"</span>,</span>
-<span id="cb47-33"><a href="#cb47-33" aria-hidden="true" tabindex="-1"></a>             <span class="at">y =</span> <span class="st">"Count"</span>) <span class="sc">+</span></span>
-<span id="cb47-34"><a href="#cb47-34" aria-hidden="true" tabindex="-1"></a>        <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
-<span id="cb47-35"><a href="#cb47-35" aria-hidden="true" tabindex="-1"></a>        <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">45</span>, <span class="at">hjust =</span> <span class="dv">1</span>))</span>
-<span id="cb47-36"><a href="#cb47-36" aria-hidden="true" tabindex="-1"></a>    })</span>
-<span id="cb47-37"><a href="#cb47-37" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb47-38"><a href="#cb47-38" aria-hidden="true" tabindex="-1"></a>    output<span class="sc">$</span>pieChart <span class="ot">&lt;-</span> <span class="fu">renderPlot</span>({</span>
-<span id="cb47-39"><a href="#cb47-39" aria-hidden="true" tabindex="-1"></a>      <span class="fu">ggplot</span>(<span class="fu">state_data</span>(), <span class="fu">aes</span>(<span class="at">x =</span> <span class="st">""</span>, <span class="at">y =</span> count, <span class="at">fill =</span> type)) <span class="sc">+</span></span>
-<span id="cb47-40"><a href="#cb47-40" aria-hidden="true" tabindex="-1"></a>        <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">"pie"</span>) <span class="sc">+</span></span>
-<span id="cb47-41"><a href="#cb47-41" aria-hidden="true" tabindex="-1"></a>        <span class="fu">labs</span>(<span class="at">title =</span> <span class="fu">paste</span>(<span class="st">"Pie Chart of Artist Types in"</span>, input<span class="sc">$</span>stateInput),</span>
-<span id="cb47-42"><a href="#cb47-42" aria-hidden="true" tabindex="-1"></a>             <span class="at">x =</span> <span class="cn">NULL</span>,</span>
-<span id="cb47-43"><a href="#cb47-43" aria-hidden="true" tabindex="-1"></a>             <span class="at">y =</span> <span class="cn">NULL</span>) <span class="sc">+</span></span>
-<span id="cb47-44"><a href="#cb47-44" aria-hidden="true" tabindex="-1"></a>        <span class="fu">theme_void</span>() <span class="sc">+</span></span>
-<span id="cb47-45"><a href="#cb47-45" aria-hidden="true" tabindex="-1"></a>        <span class="fu">coord_polar</span>(<span class="at">theta =</span> <span class="st">"y"</span>)</span>
-<span id="cb47-46"><a href="#cb47-46" aria-hidden="true" tabindex="-1"></a>    })</span>
-<span id="cb47-47"><a href="#cb47-47" aria-hidden="true" tabindex="-1"></a>  })</span>
-<span id="cb47-48"><a href="#cb47-48" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb47-49"><a href="#cb47-49" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb47-50"><a href="#cb47-50" aria-hidden="true" tabindex="-1"></a><span class="fu">shinyApp</span>(ui, server)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a>ui <span class="ot">&lt;-</span> <span class="fu">fluidPage</span>(</span>
+<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">titlePanel</span>(<span class="st">"Artist Type Distribution"</span>),</span>
+<span id="cb45-3"><a href="#cb45-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sidebarLayout</span>(</span>
+<span id="cb45-4"><a href="#cb45-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">sidebarPanel</span>(</span>
+<span id="cb45-5"><a href="#cb45-5" aria-hidden="true" tabindex="-1"></a>      <span class="fu">selectInput</span>(<span class="st">"stateInput"</span>, <span class="st">"Select a state:"</span>, <span class="fu">unique</span>(distribution<span class="sc">$</span>state)),</span>
+<span id="cb45-6"><a href="#cb45-6" aria-hidden="true" tabindex="-1"></a>      <span class="fu">actionButton</span>(<span class="st">"plotButton"</span>, <span class="st">"Plot"</span>)</span>
+<span id="cb45-7"><a href="#cb45-7" aria-hidden="true" tabindex="-1"></a>    ),</span>
+<span id="cb45-8"><a href="#cb45-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mainPanel</span>(</span>
+<span id="cb45-9"><a href="#cb45-9" aria-hidden="true" tabindex="-1"></a>      <span class="fu">tableOutput</span>(<span class="st">"resultTable"</span>),</span>
+<span id="cb45-10"><a href="#cb45-10" aria-hidden="true" tabindex="-1"></a>      <span class="fu">plotOutput</span>(<span class="st">"barPlot"</span>),</span>
+<span id="cb45-11"><a href="#cb45-11" aria-hidden="true" tabindex="-1"></a>      <span class="fu">plotOutput</span>(<span class="st">"pieChart"</span>)</span>
+<span id="cb45-12"><a href="#cb45-12" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb45-13"><a href="#cb45-13" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb45-14"><a href="#cb45-14" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb45-15"><a href="#cb45-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-16"><a href="#cb45-16" aria-hidden="true" tabindex="-1"></a>server <span class="ot">&lt;-</span> <span class="cf">function</span>(input, output) {</span>
+<span id="cb45-17"><a href="#cb45-17" aria-hidden="true" tabindex="-1"></a>  state_data <span class="ot">&lt;-</span> <span class="fu">reactive</span>({</span>
+<span id="cb45-18"><a href="#cb45-18" aria-hidden="true" tabindex="-1"></a>    selected_state <span class="ot">&lt;-</span> input<span class="sc">$</span>stateInput</span>
+<span id="cb45-19"><a href="#cb45-19" aria-hidden="true" tabindex="-1"></a>    subset_for_state <span class="ot">&lt;-</span> distribution[distribution<span class="sc">$</span>state <span class="sc">==</span> selected_state, ]</span>
+<span id="cb45-20"><a href="#cb45-20" aria-hidden="true" tabindex="-1"></a>    subset_for_state</span>
+<span id="cb45-21"><a href="#cb45-21" aria-hidden="true" tabindex="-1"></a>  })</span>
+<span id="cb45-22"><a href="#cb45-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-23"><a href="#cb45-23" aria-hidden="true" tabindex="-1"></a>  output<span class="sc">$</span>resultTable <span class="ot">&lt;-</span> <span class="fu">renderTable</span>({</span>
+<span id="cb45-24"><a href="#cb45-24" aria-hidden="true" tabindex="-1"></a>    <span class="fu">state_data</span>()</span>
+<span id="cb45-25"><a href="#cb45-25" aria-hidden="true" tabindex="-1"></a>  })</span>
+<span id="cb45-26"><a href="#cb45-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-27"><a href="#cb45-27" aria-hidden="true" tabindex="-1"></a>  <span class="fu">observeEvent</span>(input<span class="sc">$</span>plotButton, {</span>
+<span id="cb45-28"><a href="#cb45-28" aria-hidden="true" tabindex="-1"></a>    output<span class="sc">$</span>barPlot <span class="ot">&lt;-</span> <span class="fu">renderPlot</span>({</span>
+<span id="cb45-29"><a href="#cb45-29" aria-hidden="true" tabindex="-1"></a>      <span class="fu">ggplot</span>(<span class="fu">state_data</span>(), <span class="fu">aes</span>(<span class="at">x =</span> type, <span class="at">y =</span> count, <span class="at">fill =</span> type)) <span class="sc">+</span></span>
+<span id="cb45-30"><a href="#cb45-30" aria-hidden="true" tabindex="-1"></a>        <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">"identity"</span>) <span class="sc">+</span></span>
+<span id="cb45-31"><a href="#cb45-31" aria-hidden="true" tabindex="-1"></a>        <span class="fu">labs</span>(<span class="at">title =</span> <span class="fu">paste</span>(<span class="st">"Distribution of Artist Types in"</span>, input<span class="sc">$</span>stateInput),</span>
+<span id="cb45-32"><a href="#cb45-32" aria-hidden="true" tabindex="-1"></a>             <span class="at">x =</span> <span class="st">"Artist Type"</span>,</span>
+<span id="cb45-33"><a href="#cb45-33" aria-hidden="true" tabindex="-1"></a>             <span class="at">y =</span> <span class="st">"Count"</span>) <span class="sc">+</span></span>
+<span id="cb45-34"><a href="#cb45-34" aria-hidden="true" tabindex="-1"></a>        <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb45-35"><a href="#cb45-35" aria-hidden="true" tabindex="-1"></a>        <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">45</span>, <span class="at">hjust =</span> <span class="dv">1</span>))</span>
+<span id="cb45-36"><a href="#cb45-36" aria-hidden="true" tabindex="-1"></a>    })</span>
+<span id="cb45-37"><a href="#cb45-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-38"><a href="#cb45-38" aria-hidden="true" tabindex="-1"></a>    output<span class="sc">$</span>pieChart <span class="ot">&lt;-</span> <span class="fu">renderPlot</span>({</span>
+<span id="cb45-39"><a href="#cb45-39" aria-hidden="true" tabindex="-1"></a>      <span class="fu">ggplot</span>(<span class="fu">state_data</span>(), <span class="fu">aes</span>(<span class="at">x =</span> <span class="st">""</span>, <span class="at">y =</span> count, <span class="at">fill =</span> type)) <span class="sc">+</span></span>
+<span id="cb45-40"><a href="#cb45-40" aria-hidden="true" tabindex="-1"></a>        <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">"pie"</span>) <span class="sc">+</span></span>
+<span id="cb45-41"><a href="#cb45-41" aria-hidden="true" tabindex="-1"></a>        <span class="fu">labs</span>(<span class="at">title =</span> <span class="fu">paste</span>(<span class="st">"Pie Chart of Artist Types in"</span>, input<span class="sc">$</span>stateInput),</span>
+<span id="cb45-42"><a href="#cb45-42" aria-hidden="true" tabindex="-1"></a>             <span class="at">x =</span> <span class="cn">NULL</span>,</span>
+<span id="cb45-43"><a href="#cb45-43" aria-hidden="true" tabindex="-1"></a>             <span class="at">y =</span> <span class="cn">NULL</span>) <span class="sc">+</span></span>
+<span id="cb45-44"><a href="#cb45-44" aria-hidden="true" tabindex="-1"></a>        <span class="fu">theme_void</span>() <span class="sc">+</span></span>
+<span id="cb45-45"><a href="#cb45-45" aria-hidden="true" tabindex="-1"></a>        <span class="fu">coord_polar</span>(<span class="at">theta =</span> <span class="st">"y"</span>)</span>
+<span id="cb45-46"><a href="#cb45-46" aria-hidden="true" tabindex="-1"></a>    })</span>
+<span id="cb45-47"><a href="#cb45-47" aria-hidden="true" tabindex="-1"></a>  })</span>
+<span id="cb45-48"><a href="#cb45-48" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb45-49"><a href="#cb45-49" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-50"><a href="#cb45-50" aria-hidden="true" tabindex="-1"></a><span class="fu">shinyApp</span>(ui, server)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p></p><div style="width: 100% ; height: 400px ; text-align: center; box-sizing: border-box; -moz-box-sizing: border-box; -webkit-box-sizing: border-box;" class="muted well">Shiny applications not supported in static R Markdown documents</div><p></p>
 </div>
@@ -567,11 +563,11 @@ i Specify the column types or set `show_col_types = FALSE` to quiet this message
 <li>Is there a correlation between the percentage of artists in a state (artists_share) and the state’s number of workers?</li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Assuming your dataframe is named "artist"</span></span>
-<span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Replace "your_data.csv" with the actual file path if you are reading from a CSV file</span></span>
-<span id="cb48-3"><a href="#cb48-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb48-4"><a href="#cb48-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Check the structure of your dataframe</span></span>
-<span id="cb48-5"><a href="#cb48-5" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(artist)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Assuming your dataframe is named "artist"</span></span>
+<span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Replace "your_data.csv" with the actual file path if you are reading from a CSV file</span></span>
+<span id="cb46-3"><a href="#cb46-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb46-4"><a href="#cb46-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Check the structure of your dataframe</span></span>
+<span id="cb46-5"><a href="#cb46-5" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(artist)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>tibble [1,909 x 7] (S3: tbl_df/tbl/data.frame)
  $ state            : chr [1:1909] "Alabama" "Alaska" "Arizona" "California" ...
@@ -584,11 +580,11 @@ i Specify the column types or set `show_col_types = FALSE` to quiet this message
  - attr(*, "na.action")= 'omit' Named int [1:1471] 4 8 13 16 18 20 25 27 28 29 ...
   ..- attr(*, "names")= chr [1:1471] "4" "8" "13" "16" ...</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate the correlation</span></span>
-<span id="cb50-2"><a href="#cb50-2" aria-hidden="true" tabindex="-1"></a>correlation <span class="ot">&lt;-</span> <span class="fu">cor</span>(artist<span class="sc">$</span>artists_share, artist<span class="sc">$</span>all_workers_n)</span>
-<span id="cb50-3"><a href="#cb50-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb50-4"><a href="#cb50-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Print the correlation</span></span>
-<span id="cb50-5"><a href="#cb50-5" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"Correlation between artists_share and all_workers_n:"</span>, correlation, <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate the correlation</span></span>
+<span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a>correlation <span class="ot">&lt;-</span> <span class="fu">cor</span>(artist<span class="sc">$</span>artists_share, artist<span class="sc">$</span>all_workers_n)</span>
+<span id="cb48-3"><a href="#cb48-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-4"><a href="#cb48-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Print the correlation</span></span>
+<span id="cb48-5"><a href="#cb48-5" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"Correlation between artists_share and all_workers_n:"</span>, correlation, <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Correlation between artists_share and all_workers_n: -0.0315063 </code></pre>
 </div>
@@ -602,12 +598,12 @@ i Specify the column types or set `show_col_types = FALSE` to quiet this message
 </ol>
 <p>In summary, while there is a statistical correlation, the practical significance of this correlation is very limited. It’s essential to interpret correlation in the context of the specific data and consider other relevant factors when drawing conclusions about the relationship between variables.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb52"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Fisher's Exact Test:</span></span>
-<span id="cb52-2"><a href="#cb52-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb52-3"><a href="#cb52-3" aria-hidden="true" tabindex="-1"></a><span class="co">#If the expected frequencies are too small, you might want to consider using Fisher's Exact Test, which is more appropriate for small sample sizes. In R, you can use fisher.test() for this purpose.</span></span>
-<span id="cb52-4"><a href="#cb52-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb52-5"><a href="#cb52-5" aria-hidden="true" tabindex="-1"></a>fisher_test <span class="ot">&lt;-</span> <span class="fu">fisher.test</span>(<span class="fu">table</span>(artist<span class="sc">$</span>race, artist<span class="sc">$</span>state), <span class="at">simulate.p.value =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb52-6"><a href="#cb52-6" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(fisher_test)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Fisher's Exact Test:</span></span>
+<span id="cb50-2"><a href="#cb50-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb50-3"><a href="#cb50-3" aria-hidden="true" tabindex="-1"></a><span class="co">#If the expected frequencies are too small, you might want to consider using Fisher's Exact Test, which is more appropriate for small sample sizes. In R, you can use fisher.test() for this purpose.</span></span>
+<span id="cb50-4"><a href="#cb50-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb50-5"><a href="#cb50-5" aria-hidden="true" tabindex="-1"></a>fisher_test <span class="ot">&lt;-</span> <span class="fu">fisher.test</span>(<span class="fu">table</span>(artist<span class="sc">$</span>race, artist<span class="sc">$</span>state), <span class="at">simulate.p.value =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb50-6"><a href="#cb50-6" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(fisher_test)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
     Fisher's Exact Test for Count Data with simulated p-value (based on
@@ -617,12 +613,12 @@ data:  table(artist$race, artist$state)
 p-value = 0.0004998
 alternative hypothesis: two.sided</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb54"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a>chisq_test <span class="ot">&lt;-</span> <span class="fu">chisq.test</span>(<span class="fu">table</span>(artist<span class="sc">$</span>race, artist<span class="sc">$</span>state), <span class="at">correct =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb52"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a>chisq_test <span class="ot">&lt;-</span> <span class="fu">chisq.test</span>(<span class="fu">table</span>(artist<span class="sc">$</span>race, artist<span class="sc">$</span>state), <span class="at">correct =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Warning in chisq.test(table(artist$race, artist$state), correct = FALSE):
 Chi-squared approximation may be incorrect</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb56"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(chisq_test)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb54"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(chisq_test)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
     Pearson's Chi-squared test
@@ -630,8 +626,8 @@ Chi-squared approximation may be incorrect</code></pre>
 data:  table(artist$race, artist$state)
 X-squared = 339.68, df = 200, p-value = 2.6e-09</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb58"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Print the test results</span></span>
-<span id="cb58-2"><a href="#cb58-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(chisq_test)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb56"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Print the test results</span></span>
+<span id="cb56-2"><a href="#cb56-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(chisq_test)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
     Pearson's Chi-squared test
@@ -661,10 +657,10 @@ X-squared = 339.68, df = 200, p-value = 2.6e-09</code></pre>
 </ul>
 <p>Remember that statistical significance does not imply causation, and further investigation and domain knowledge are often necessary to understand the underlying reasons for the observed associations.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb60"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb60-1"><a href="#cb60-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a contingency table</span></span>
-<span id="cb60-2"><a href="#cb60-2" aria-hidden="true" tabindex="-1"></a>contingency_table <span class="ot">&lt;-</span> <span class="fu">table</span>(artist<span class="sc">$</span>race, artist<span class="sc">$</span>state)</span>
-<span id="cb60-3"><a href="#cb60-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb60-4"><a href="#cb60-4" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(contingency_table)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb58"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a contingency table</span></span>
+<span id="cb58-2"><a href="#cb58-2" aria-hidden="true" tabindex="-1"></a>contingency_table <span class="ot">&lt;-</span> <span class="fu">table</span>(artist<span class="sc">$</span>race, artist<span class="sc">$</span>state)</span>
+<span id="cb58-3"><a href="#cb58-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb58-4"><a href="#cb58-4" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(contingency_table)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>                  
                    Alabama Alaska Arizona Arkansas California Colorado
@@ -730,10 +726,10 @@ X-squared = 339.68, df = 200, p-value = 2.6e-09</code></pre>
   Other                     9             1         5       1
   White                    13            13        13      10</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb62"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb62-1"><a href="#cb62-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert the contingency table to a data frame</span></span>
-<span id="cb62-2"><a href="#cb62-2" aria-hidden="true" tabindex="-1"></a>contingency_df <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(<span class="fu">as.table</span>(contingency_table))</span>
-<span id="cb62-3"><a href="#cb62-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb62-4"><a href="#cb62-4" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(contingency_df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb60"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb60-1"><a href="#cb60-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert the contingency table to a data frame</span></span>
+<span id="cb60-2"><a href="#cb60-2" aria-hidden="true" tabindex="-1"></a>contingency_df <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(<span class="fu">as.table</span>(contingency_table))</span>
+<span id="cb60-3"><a href="#cb60-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-4"><a href="#cb60-4" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(contingency_df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>                Var1                 Var2 Freq
 1   African-American              Alabama   10
@@ -992,36 +988,36 @@ X-squared = 339.68, df = 200, p-value = 2.6e-09</code></pre>
 254            Other              Wyoming    1
 255            White              Wyoming   10</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb64"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb64-1"><a href="#cb64-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create an empty dataframe to store results</span></span>
-<span id="cb64-2"><a href="#cb64-2" aria-hidden="true" tabindex="-1"></a>result_df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>()</span>
-<span id="cb64-3"><a href="#cb64-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb64-4"><a href="#cb64-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Loop through each combination of race and state</span></span>
-<span id="cb64-5"><a href="#cb64-5" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="fu">unique</span>(contingency_df<span class="sc">$</span>Var1)) {</span>
-<span id="cb64-6"><a href="#cb64-6" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> (j <span class="cf">in</span> <span class="fu">unique</span>(contingency_df<span class="sc">$</span>Var2)) {</span>
-<span id="cb64-7"><a href="#cb64-7" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb64-8"><a href="#cb64-8" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Subset the data for the specific combination of race and state</span></span>
-<span id="cb64-9"><a href="#cb64-9" aria-hidden="true" tabindex="-1"></a>    subset_data <span class="ot">&lt;-</span> contingency_df[contingency_df<span class="sc">$</span>Var1 <span class="sc">==</span> i <span class="sc">&amp;</span> contingency_df<span class="sc">$</span>Var2 <span class="sc">==</span> j, ]</span>
-<span id="cb64-10"><a href="#cb64-10" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb64-11"><a href="#cb64-11" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Check if the subset_data has at least 2 rows</span></span>
-<span id="cb64-12"><a href="#cb64-12" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (<span class="fu">nrow</span>(subset_data) <span class="sc">&gt;=</span> <span class="dv">2</span>) {</span>
-<span id="cb64-13"><a href="#cb64-13" aria-hidden="true" tabindex="-1"></a>      <span class="co"># Perform Fisher's Exact Test</span></span>
-<span id="cb64-14"><a href="#cb64-14" aria-hidden="true" tabindex="-1"></a>      fisher_test <span class="ot">&lt;-</span> <span class="fu">fisher.test</span>(subset_data<span class="sc">$</span>Freq)</span>
-<span id="cb64-15"><a href="#cb64-15" aria-hidden="true" tabindex="-1"></a>      </span>
-<span id="cb64-16"><a href="#cb64-16" aria-hidden="true" tabindex="-1"></a>      <span class="co"># Extract relevant information and store in result_df</span></span>
-<span id="cb64-17"><a href="#cb64-17" aria-hidden="true" tabindex="-1"></a>      result_df <span class="ot">&lt;-</span> <span class="fu">rbind</span>(result_df, <span class="fu">data.frame</span>(</span>
-<span id="cb64-18"><a href="#cb64-18" aria-hidden="true" tabindex="-1"></a>        <span class="at">Var1 =</span> i,</span>
-<span id="cb64-19"><a href="#cb64-19" aria-hidden="true" tabindex="-1"></a>        <span class="at">Var2 =</span> j,</span>
-<span id="cb64-20"><a href="#cb64-20" aria-hidden="true" tabindex="-1"></a>        <span class="at">p.value =</span> fisher_test<span class="sc">$</span>p.value</span>
-<span id="cb64-21"><a href="#cb64-21" aria-hidden="true" tabindex="-1"></a>      ))</span>
-<span id="cb64-22"><a href="#cb64-22" aria-hidden="true" tabindex="-1"></a>    }</span>
-<span id="cb64-23"><a href="#cb64-23" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb64-24"><a href="#cb64-24" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb64-25"><a href="#cb64-25" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb64-26"><a href="#cb64-26" aria-hidden="true" tabindex="-1"></a><span class="co"># Adjust p-values for multiple comparisons</span></span>
-<span id="cb64-27"><a href="#cb64-27" aria-hidden="true" tabindex="-1"></a>result_df<span class="sc">$</span>p.adjusted <span class="ot">&lt;-</span> <span class="fu">p.adjust</span>(result_df<span class="sc">$</span>p.value, <span class="at">method =</span> <span class="st">"holm"</span>)</span>
-<span id="cb64-28"><a href="#cb64-28" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb64-29"><a href="#cb64-29" aria-hidden="true" tabindex="-1"></a><span class="co"># Print the results</span></span>
-<span id="cb64-30"><a href="#cb64-30" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(result_df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb62"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb62-1"><a href="#cb62-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create an empty dataframe to store results</span></span>
+<span id="cb62-2"><a href="#cb62-2" aria-hidden="true" tabindex="-1"></a>result_df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>()</span>
+<span id="cb62-3"><a href="#cb62-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-4"><a href="#cb62-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Loop through each combination of race and state</span></span>
+<span id="cb62-5"><a href="#cb62-5" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="fu">unique</span>(contingency_df<span class="sc">$</span>Var1)) {</span>
+<span id="cb62-6"><a href="#cb62-6" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> (j <span class="cf">in</span> <span class="fu">unique</span>(contingency_df<span class="sc">$</span>Var2)) {</span>
+<span id="cb62-7"><a href="#cb62-7" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb62-8"><a href="#cb62-8" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Subset the data for the specific combination of race and state</span></span>
+<span id="cb62-9"><a href="#cb62-9" aria-hidden="true" tabindex="-1"></a>    subset_data <span class="ot">&lt;-</span> contingency_df[contingency_df<span class="sc">$</span>Var1 <span class="sc">==</span> i <span class="sc">&amp;</span> contingency_df<span class="sc">$</span>Var2 <span class="sc">==</span> j, ]</span>
+<span id="cb62-10"><a href="#cb62-10" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb62-11"><a href="#cb62-11" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Check if the subset_data has at least 2 rows</span></span>
+<span id="cb62-12"><a href="#cb62-12" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (<span class="fu">nrow</span>(subset_data) <span class="sc">&gt;=</span> <span class="dv">2</span>) {</span>
+<span id="cb62-13"><a href="#cb62-13" aria-hidden="true" tabindex="-1"></a>      <span class="co"># Perform Fisher's Exact Test</span></span>
+<span id="cb62-14"><a href="#cb62-14" aria-hidden="true" tabindex="-1"></a>      fisher_test <span class="ot">&lt;-</span> <span class="fu">fisher.test</span>(subset_data<span class="sc">$</span>Freq)</span>
+<span id="cb62-15"><a href="#cb62-15" aria-hidden="true" tabindex="-1"></a>      </span>
+<span id="cb62-16"><a href="#cb62-16" aria-hidden="true" tabindex="-1"></a>      <span class="co"># Extract relevant information and store in result_df</span></span>
+<span id="cb62-17"><a href="#cb62-17" aria-hidden="true" tabindex="-1"></a>      result_df <span class="ot">&lt;-</span> <span class="fu">rbind</span>(result_df, <span class="fu">data.frame</span>(</span>
+<span id="cb62-18"><a href="#cb62-18" aria-hidden="true" tabindex="-1"></a>        <span class="at">Var1 =</span> i,</span>
+<span id="cb62-19"><a href="#cb62-19" aria-hidden="true" tabindex="-1"></a>        <span class="at">Var2 =</span> j,</span>
+<span id="cb62-20"><a href="#cb62-20" aria-hidden="true" tabindex="-1"></a>        <span class="at">p.value =</span> fisher_test<span class="sc">$</span>p.value</span>
+<span id="cb62-21"><a href="#cb62-21" aria-hidden="true" tabindex="-1"></a>      ))</span>
+<span id="cb62-22"><a href="#cb62-22" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb62-23"><a href="#cb62-23" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb62-24"><a href="#cb62-24" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb62-25"><a href="#cb62-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-26"><a href="#cb62-26" aria-hidden="true" tabindex="-1"></a><span class="co"># Adjust p-values for multiple comparisons</span></span>
+<span id="cb62-27"><a href="#cb62-27" aria-hidden="true" tabindex="-1"></a>result_df<span class="sc">$</span>p.adjusted <span class="ot">&lt;-</span> <span class="fu">p.adjust</span>(result_df<span class="sc">$</span>p.value, <span class="at">method =</span> <span class="st">"holm"</span>)</span>
+<span id="cb62-28"><a href="#cb62-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-29"><a href="#cb62-29" aria-hidden="true" tabindex="-1"></a><span class="co"># Print the results</span></span>
+<span id="cb62-30"><a href="#cb62-30" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(result_df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] p.adjusted
 &lt;0 rows&gt; (or 0-length row.names)</code></pre>

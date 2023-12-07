@@ -7,7 +7,7 @@ Names: Mahyar Madarshahain, Jing Wang.
 
 ## Python Code
 
--   Are there any states with a location quotient significantly below 1.0 for artists?
+-   Are there any states with a location quotient below 1.0 for artists?
 
 ```{python table-setup-py}
 # Explicitly import pandas
@@ -17,7 +17,7 @@ import matplotlib.pyplot as plt
 
 # Import the dataset
 artist = pd.read_csv("artists.csv")
-artist.head()
+
 
 # Delete missing values
 artist = artist.dropna()
@@ -43,36 +43,11 @@ plt.xlabel('Artists')
 plt.ylabel('Average Location Quotient')
 plt.show()
 
-# Statistical analysis using a one-sample t-test
-# Set the significance level for the hypothesis test
-alpha = 0.05
-population_mean = 1.0  # The hypothesized mean (1.0)
-
-# Perform a one-sample t-test
-t_stat, p_value = stats.ttest_1samp(average_location_quotient['location_quotient'], population_mean)
 
 # Filter states with an average location quotient less than 1.0
 states_below_1 = average_location_quotient[average_location_quotient['location_quotient'] < 1.0]
+states_below_1
 
-# Check if the p-value is less than the significance level
-if p_value < alpha:
-    print(f"States with an average location quotient significantly below 1.0 (p-value: {p_value:.4f}): {len(states_below_1)} states")
-    
-    # Display a table with states having an average location quotient less than 1.0
-    table_states_below_1 = states_below_1[['state', 'location_quotient']]
-    print("\nTable of States with Average Location Quotient Below 1.0:")
-    print(table_states_below_1)
-    
-    # Filter the original dataset based on the states with an average location quotient significantly lower than 1.0
-    filtered_dataset = artist[artist['state'].isin(states_below_1['state'])]
-    print("\nFiltered Dataset:")
-    print(filtered_dataset)
-    
-    # Alternatively, you can use display() to show the table
-    # display(table_states_below_1)
-    
-else:
-    print(f"No significant evidence of average location quotients below 1.0. Number of states below 1.0: {len(states_below_1)}")
 ```
 
 -   The top 10 state /territory has the highest number of artists, as indicated by the location quotient.
