@@ -29,13 +29,13 @@ Quarto enables you to weave together content and executable code into a finished
 ## Dataset Description
 
 | Number of Obseravations | Number of Variables | Number of Rows having missing values | Number of rows after data cleaning |
-|-----------------|-----------------|--------------------|-------------------|
+|------------------|------------------|-------------------|------------------|
 | 3381                    | 6                   | 1472                                 | 1909                               |
 
 ## Variables Description
 
 | variable          | class     | description                                                                                                                          |
-|--------------|--------------|--------------------------------------------|
+|----------------|----------------|-----------------------------------------|
 | state             | character | This variable represents the U.S. state where the data was collected                                                                 |
 | race              | character | This variable specifies the racial or ethnic category of the workforce being analyzed                                                |
 | type              | character | This variable indicates the type of profession or occupation for which the data is recorded                                          |
@@ -89,6 +89,7 @@ Are there any states with a location quotient significantly below 1.0 for artist
 
 ![Histogram](https://github.com/stat850-unl/Artist_In_The_US/blob/main/Histogram%20of%20average%20location%20qutient.png)
 
+<<<<<<< HEAD
 
 
 ## Question 2:  What is the overall distribution of artist types across different states or territories?
@@ -107,14 +108,18 @@ Are there any states with a location quotient significantly below 1.0 for artist
 
 ## Shiny App for Question 2
 ![The overall distribution of all artist types across different states or territories ](artist_type_distribution.png)
+=======
 
 ## Result for question 3
+The top 10 state /territory has the highest number of artists, as indicated by the location quotient.
+
+![Top 10 states](https://github.com/stat850-unl/Artist_In_The_US/blob/main/Top%2010%20states%20having%20high%20quotient.png)
 
 ## Result for question 4
 
 
 ## Result for question 5
-
+![Racial Diversity](https://github.com/stat850-unl/Artist_In_The_US/blob/main/Racial%20Diversity.jpg)
 ## Result for question 6
 
 ## Conclusion
