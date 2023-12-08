@@ -23,8 +23,17 @@ if (!"shiny" %in% installed.packages()) {
 if (!"ggplot2" %in% installed.packages()) {
   install.packages("ggplot2")
 }
-if (!"ggplot2" %in% installed.packages()) {
-  install.packages("ggplot2")
+if (!"tidyverse" %in% installed.packages()) {
+  install.packages("tidyverse")
+}
+if (!"viridis" %in% installed.packages()) {
+  install.packages("viridis")
+}
+if (!"readr" %in% installed.packages()) {
+  install.packages("readr")
+}
+if (!"stats" %in% installed.packages()) {
+  install.packages("stats")
 }
 # This is how to do it for a package that's only on github
 if (!"emo" %in% installed.packages()) {
@@ -47,6 +56,10 @@ As we embark on this investigative journey, our project's unique approach lies i
 In the forthcoming sections, we will delve into the intricacies of the dataset, addressing anomalies, exploring trends, and presenting visualizations that encapsulate the diverse dimensions of the artistic workforce in the United States. Through our analytical lens, we seek to uncover patterns, correlations, and distinctive features that contribute to a richer understanding of the artistic landscape across different states and territories.
 
 ## Dataset Description
+
+The dataset provides insights into the presence and concentration of Hispanic architects in different states, highlighting variations in workforce demographics and professional diversity across the United States.
+
+This Arts Data Profile presents comprehensive insights into the presence of artists in the workforce at both national and state levels. The data is drawn from the American Community Survey (ACS) conducted by the U.S. Census Bureau, covering the years 2015 to 2019. The ACS provides estimates for the total number of artists and their distribution across 13 specific artist occupations. The interactive map below visualizes counts and location quotients for the overall number of artists and workers in specific artist occupations in each U.S. state. These occupations include architects, arts directors, fine artists, animators, designers, dancers, choreographers, musicians, actors, entertainers, writers, authors, and photographers.\[1\]
 
 ```{python}
 import pandas as pd
@@ -325,3 +338,8 @@ pandoc --lua-filter wordcount.lua report.qmd
 Notice that I have not pushed `_output/report.html` or the `_output/report_files/` folder to github - this is intentional. I have actually set `_output` to not show up in git, to encourage you all to NOT push the rendered files to github and to instead work from the markdown files directly.
 
 You may find it cleaner to create a figure subdirectory and store any figures that aren't created by R/Python in that folder. I encourage you to organize this repository in a sensible way.
+
+## Tips
+
+1.  \![\]([Artists in the Workforce: National and State Estimates for 2015-2019 \| National Endowment for the Arts](https://www.arts.gov/impact/research/arts-data-profile-series/adp-31)
+2.  )
