@@ -80,7 +80,7 @@ artist.head()
 ## Variables Description
 
 | variable          | class     | description                                                                                                                          |
-|----------------|----------------|-----------------------------------------|
+|------------------|------------------|-----------------------------------|
 | state             | character | This variable represents the U.S. state where the data was collected                                                                 |
 | race              | character | This variable specifies the racial or ethnic category of the workforce being analyzed                                                |
 | type              | character | This variable indicates the type of profession or occupation for which the data is recorded                                          |
@@ -93,7 +93,61 @@ The above table encompasses essential variable descriptions for the dataset. The
 
 ## Methods
 
-**Data Cleaning and Preparation**
+Imputation techniques, facilitated by the **`dplyr`** package in R, were applied to handle missing values. Additionally, anomalies within categorical variables were identified and addressed through the use of the **`filter`** and **`mutate`** functions. Variables were transformed as necessary to harmonize units or scales. The **`mutate`** function in the **`dplyr`** package played a crucial role in ensuring a standardized and coherent data-set for subsequent analyses. There are lots of other packages have been used in this project as the following:
+
+**R package**
+
+-   emotes
+
+-   Shiny
+
+-   ggplot2
+
+-   tidyverse
+
+-   viridis
+
+-   readr
+
+-   stats
+
+**Python package**
+
+-   pandas
+
+-   scipy
+
+-   matplotlib
+
+### **Exploratory Data Analysis (EDA):**
+
+The project employed a diverse set of exploratory data analysis techniques to uncover insights into the dataset.
+
+#### Distribution of Artist Types:
+
+Visualization techniques, including heatmaps, bar plots, and pie charts, were used to illustrate the distribution of artist types across different states. Both Python and R programming languages were employed to create diverse visualizations.
+
+#### Location Quotient Analysis:
+
+Average location quotients were calculated for each state, and the distribution was analyzed using histograms and box plots. Anomalies, such as the outlier in the District of Columbia, were identified and flagged for further investigation.
+
+#### Correlation Analysis:
+
+Pearson correlation coefficients were computed to analyze the relationship between the percentage of artists in a state (**`artists_share`**) and the state's number of workers (**`all_workers_n`**).
+
+#### Racial Diversity:
+
+Racial diversity among artists across states was visualized using bar plots and facet wraps in ggplot2. The distribution of Asian artists was explored in-depth, identifying top states based on artist count and population percentage.
+
+### **Shiny Apps for Interactive Exploration:**
+
+Interactive Shiny apps were developed to facilitate dynamic exploration of artist distributions. Users could interactively choose specific races, set the number of top states for analysis, and observe the distribution in real-time.
+
+### **Statistical Analyses:**
+
+Statistical analyses were conducted using a combination of R and Python libraries, including **`scipy`** and **`stats`**. Calculations included average location quotient, correlation coefficients, and racial compositions
+
+### **Data Cleaning and Preparation**
 
 | Number of Obseravations | Number of Variables | Number of Rows having missing values | Number of rows after data cleaning |
 |------------------|------------------|-------------------|------------------|
