@@ -35,9 +35,11 @@ if (!"readr" %in% installed.packages()) {
 if (!"stats" %in% installed.packages()) {
   install.packages("stats")
 }
-# This is how to do it for a package that's only on github
+
+# This is how to do it for a package that's only on GitHub
 if (!"emo" %in% installed.packages()) {
   remotes::install_github("hadley/emo")
+}
 
 ```
 
@@ -78,7 +80,7 @@ artist.head()
 ## Variables Description
 
 | variable          | class     | description                                                                                                                          |
-|--------------|--------------|--------------------------------------------|
+|----------------|----------------|-----------------------------------------|
 | state             | character | This variable represents the U.S. state where the data was collected                                                                 |
 | race              | character | This variable specifies the racial or ethnic category of the workforce being analyzed                                                |
 | type              | character | This variable indicates the type of profession or occupation for which the data is recorded                                          |
@@ -94,7 +96,7 @@ The above table encompasses essential variable descriptions for the dataset. The
 **Data Cleaning and Preparation**
 
 | Number of Obseravations | Number of Variables | Number of Rows having missing values | Number of rows after data cleaning |
-|-----------------|-----------------|--------------------|-------------------|
+|------------------|------------------|-------------------|------------------|
 | 3381                    | 6                   | 1472                                 | 1909                               |
 
 During data cleaning, 1472 rows with missing values were addressed, resulting in a refined dataset with 1909 rows. The cleaning process likely involved handling or imputing missing values to ensure the dataset's integrity and reliability for subsequent analyses.
@@ -502,31 +504,6 @@ for (i in seq_along(all_races)) {
 
 The Shiny app provides an insightful and interactive platform to examine the distribution of artists across various racial categories within U.S. states. Users can dynamically explore artist counts and population percentages for different races, gaining valuable insights into the artistic landscape's diversity. The app accommodates not only the analysis of Asian artists, where California emerges as a leader with the highest count, but also extends this functionality to other racial categories. Users have the flexibility to select a specific race, determine the number of top states to analyze, and promptly observe the corresponding distribution. This comprehensive tool facilitates a nuanced exploration of racial diversity within the artist community, fostering a deeper understanding of the geographic concentrations and proportions of artists from various racial backgrounds across the United States.
 
-The `echo: false` option disables the printing of code (only output is displayed).
-
-If you generate a figure, it should have a caption. Here's a demonstration of how to do that:
-
-```{r iris-plot}
-#| label: fig-iris
-#| fig-width: 8
-#| fig-height: 4 # Change the figure dimensions using fig-width/height
-#| out-width: 80% # This changes the size of the figure as rendered in the text. 
-#| fig-cap: "This figure shows the relationship between sepal width and petal width in irises. I've used geom_jitter to combat overplotting, as the data are measured in relatively consistent increments. The figure is drawn with `ggplot2` [@ggplot2-package]."
-#| echo: false
-
-
-data(iris)
-library(ggplot2)
-ggplot(iris, aes(x = Sepal.Width, y = Petal.Width, color = Species)) + 
-  geom_jitter() + 
-  xlab("Sepal Width (cm)") + ylab("Petal Width (cm)") + 
-  ggtitle("Sepal and Petal Dimensions")
-```
-
-Then, you can reference @fig-iris in the text and the appropriate cross-reference will be generated.
-
-You can find additional information about formatting figures generated from code in the [quarto documentation](https://quarto.org/docs/authoring/figures.html#computations).
-
 ## Additional Exploration topic
 
 Add another topic here... as many as you desire, really. Make sure to include a transition between the two sections that connects the two with some sort of logical train of thought.
@@ -565,21 +542,11 @@ In scrutinizing the distribution of Asian artists across U.S. states, California
 
 ## Tips
 
-(delete this section from your report!)
-
-Almost anything you might want to know about how to format output in quarto can be found [here](https://quarto.org/docs/authoring/markdown-basics.html). Feel free to email/come to office hours to figure out how to do XYZ - part of the goal of making you write this report is that I want you to know how to write e.g. a journal paper in Quarto as well, so now's the time to experiment.
-
-If you want to know what the wordcount of your report is, you can run the following command in your terminal:
-
 ```         
 pandoc --lua-filter wordcount.lua report.qmd
 ```
 
-Notice that I have not pushed `_output/report.html` or the `_output/report_files/` folder to github - this is intentional. I have actually set `_output` to not show up in git, to encourage you all to NOT push the rendered files to github and to instead work from the markdown files directly.
-
-You may find it cleaner to create a figure subdirectory and store any figures that aren't created by R/Python in that folder. I encourage you to organize this repository in a sensible way.
-
-## Tips
+## References
 
 1.  \![\]([Artists in the Workforce: National and State Estimates for 2015-2019 \| National Endowment for the Arts](https://www.arts.gov/impact/research/arts-data-profile-series/adp-31)
 2.  )
