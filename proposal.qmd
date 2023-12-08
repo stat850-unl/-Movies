@@ -36,7 +36,7 @@ Here is a data dictionary showing each variable, the type of variable, units, an
 Note: this is an example table, please modify to actually match your data. Ensure that all of the same information is represented.
 
 | variable          | class     | description                                                                                                                          |
-|-----------|-----------|--------------------------------------------------|
+|--------------|--------------|--------------------------------------------|
 | state             | character | This variable represents the U.S. state where the data was collected                                                                 |
 | race              | character | This variable specifies the racial or ethnic category of the workforce being analyzed                                                |
 | type              | character | This variable indicates the type of profession or occupation for which the data is recorded                                          |
