@@ -570,6 +570,11 @@ Outliers and Regional Disparities:
 
 The identification of an outlier, the District of Columbia, with a significantly high location quotient of 3.02, raises questions about its unique artistic landscape. Further investigation in question 3 will provide a deeper understanding of this outlier and its impact on the overall dataset. The box plot highlights regional disparities, with District of Columbia having the highest location quotient among the states, emphasizing variations in artist concentrations across different regions.
 
+Interactive Visualization of Artist Types Across U.S. States:
+
+The Shiny app enables exploration and visualization of artist type distributions across U.S. states or territories. Initially showcasing patterns through a heatmap, the app acknowledges heatmap limitations and offers an alternative format for enhanced interpretation. Users can select a state, triggering dynamic displays including a table, bar plot, and pie chart. These visualizations yield nuanced insights into artist type distributions within chosen states, presenting specific counts and proportions for various categories. The app's interactivity fosters user engagement, enabling deeper insights into the intricate dynamics shaping the artist workforce across diverse U.S. regions.
+
+
 Racial Diversity and Influencing Factors:
 
 The examination of racial diversity reveals Hawaii stands out, displaying a unique blend of African American, Asian, Hispanic, Other, and White artists. This distinctive pattern may be influenced by cultural demographics, immigration trends, and historical and social factors specific to Hawaii. Economic, cultural, and demographic factors play a significant role in shaping the concentration of artists, as observed in states with lower location quotients. States with diverse economic structures, different industry focuses, or distinct cultural emphases may exhibit lower concentrations of artists.
