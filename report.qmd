@@ -196,17 +196,16 @@ head(artist)
 # Delete missing values
 artist <- na.omit(artist)
 
-# Question 2 : What is the overall distribution of artist types across different states or territories?
+# Question 2: What is the overall distribution of artist types across different states or territories?
 
 # Calculate the overall distribution
-distribution <- subset %>% group_by(state, type) %>% summarise(count = n())
+distribution <- artist %>% group_by(state, type) %>% summarise(count = n())
 
 # Summarize the count for each state
 summary_data <- distribution %>% group_by(state) %>% summarise(total_types = n())
 
 # Display the overall distribution
 print(summary_data)
-
 
 # Create a heatmap
 ggplot(summary_data, aes(x = state, y = total_types, fill = total_types)) +
@@ -217,6 +216,7 @@ ggplot(summary_data, aes(x = state, y = total_types, fill = total_types)) +
        y = "Number of Types") +
   theme_minimal() +
   theme(axis.text.x = element_text(angle = 90, hjust = 1))
+
 ```
 
 As shown in the above figure, while the heatmap is a very useful visualization, it also has its own disadvantages which are reflected from the above figure.
