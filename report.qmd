@@ -78,7 +78,7 @@ artist.head()
 ## Variables Description
 
 | variable          | class     | description                                                                                                                          |
-|-----------|-----------|--------------------------------------------------|
+|--------------|--------------|--------------------------------------------|
 | state             | character | This variable represents the U.S. state where the data was collected                                                                 |
 | race              | character | This variable specifies the racial or ethnic category of the workforce being analyzed                                                |
 | type              | character | This variable indicates the type of profession or occupation for which the data is recorded                                          |
@@ -94,7 +94,7 @@ The above table encompasses essential variable descriptions for the dataset. The
 **Data Cleaning and Preparation**
 
 | Number of Obseravations | Number of Variables | Number of Rows having missing values | Number of rows after data cleaning |
-|----------------|----------------|---------------------|--------------------|
+|-----------------|-----------------|--------------------|-------------------|
 | 3381                    | 6                   | 1472                                 | 1909                               |
 
 During data cleaning, 1472 rows with missing values were addressed, resulting in a refined dataset with 1909 rows. The cleaning process likely involved handling or imputing missing values to ensure the dataset's integrity and reliability for subsequent analyses.
@@ -178,45 +178,7 @@ The second question we aim to address is as follows:
 
 -   What is the overall distribution of artist types across different states or territories?
 
-```{r}
-#| echo: false
-# Load required libraries
-library(shiny)
-library(ggplot2)
-library(readr)
-library(stats)
-library(dplyr)
-
-# Import the dataset
-artist <- read_csv("artists.csv")
-
-# Display the first few rows of the dataset
-head(artist)
-
-# Delete missing values
-artist <- na.omit(artist)
-
-# Question 2 : What is the overall distribution of artist types across different states or territories?
-
-# Calculate the overall distribution
-distribution <- subset %>% group_by(state, type) %>% summarise(count = n())
-
-# Summarize the count for each state
-summary_data <- distribution %>% group_by(state) %>% summarise(total_types = n())
-
-# Display the overall distribution
-print(summary_data)
-
-
-# Create a heatmap
-ggplot(summary_data, aes(x = state, y = total_types, fill = total_types)) +
-  geom_tile() +
-  scale_fill_gradient(low = "red", high = "blue") +
-  labs(title = "Distribution of Artist Types Across States",
-       x = "State",
-       y = "Number of Types") +
-  theme_minimal() +
-  theme(axis.text.x = element_text(angle = 90, hjust = 1))
+```{}
 ```
 
 As shown in the above figure, while the heatmap is a very useful visualization, it also has its own disadvantages which are reflected from the above figure.
@@ -229,56 +191,46 @@ As shown in the above figure, while the heatmap is a very useful visualization, 
 Consider the specific goals of our analysis and the characteristics of our dataset when choosing a visualization method. Based on waht we learnt in the class, we want to create one shiny graph to answer this question.
 
 ```{r}
-ui <- fluidPage(
-  titlePanel("Artist Type Distribution"),
-  sidebarLayout(
-    sidebarPanel(
-      selectInput("stateInput", "Select a state:", unique(distribution$state)),
-      actionButton("plotButton", "Plot")
-    ),
-    mainPanel(
-      tableOutput("resultTable"),
-      plotOutput("barPlot"),
-      plotOutput("pieChart")
-    )
-  )
-)
+# Load required libraries
+library(dplyr)
+library(ggplot2)
 
-server <- function(input, output) {
-  state_data <- reactive({
-    selected_state <- input$stateInput
-    subset_for_state <- distribution[distribution$state == selected_state, ]
-    subset_for_state
-  })
+# Get unique states in the dataset
+all_states <- unique(artist$state)
 
-  output$resultTable <- renderTable({
-    state_data()
-  })
+# Create a function to generate plots for a specific state
+generate_plots_for_state <- function(selected_state) {
+  state_data <- artist %>%
+    filter(state == selected_state) %>%
+    group_by(type) %>%
+    summarise(count = n())
 
-  observeEvent(input$plotButton, {
-    output$barPlot <- renderPlot({
-      ggplot(state_data(), aes(x = type, y = count, fill = type)) +
-        geom_bar(stat = "identity") +
-        labs(title = paste("Distribution of Artist Types in", input$stateInput),
-             x = "Artist Type",
-             y = "Count") +
-        theme_minimal() +
-        theme(axis.text.x = element_text(angle = 90, hjust = 1))
-    })
+  # Bar Plot
+  bar_plot <- ggplot(state_data, aes(x = type, y = count, fill = type)) +
+    geom_bar(stat = "identity") +
+    labs(title = paste("Distribution of Artist Types in", selected_state),
+         x = "Artist Type",
+         y = "Count") +
+    theme_minimal() +
+    theme(axis.text.x = element_text(angle = 90, hjust = 1))
 
-    output$pieChart <- renderPlot({
-      ggplot(state_data(), aes(x = "", y = count, fill = type)) +
-        geom_bar(stat = "pie") +
-        labs(title = paste("Pie Chart of Artist Types in", input$stateInput),
-             x = NULL,
-             y = NULL) +
-        theme_void() +
-        coord_polar(theta = "y")
-    })
-  })
+  # Pie Chart
+  pie_chart <- ggplot(state_data, aes(x = "", y = count, fill = type)) +
+    geom_bar(stat = "identity") +  # Use geom_bar instead of geom_bar(stat = "pie")
+    labs(title = paste("Pie Chart of Artist Types in", selected_state),
+         x = NULL,
+         y = NULL) +
+    theme_void() +
+    coord_polar(theta = "y")
+
+  # Print the plots
+  print(bar_plot)
 }
 
-shinyApp(ui, server)
+# Generate plots for each state
+for (state in all_states) {
+  generate_plots_for_state(state)
+}
 
 ```
 
@@ -339,6 +291,7 @@ Our focus shifts to the fourth question, which can be stated as follows:
 -   Is there a correlation between the percentage of artists in a state (artists_share) and the state's number of workers?
 
     ```{r}
+    #| echo: false
     # Check the structure of your dataframe
     str(artist)
 
@@ -359,8 +312,7 @@ Y: the state's number of workers (all_workers_n)
 
 The correlation coefficient (r) ranges from -1 to 1:
 
-![](explain.png)
-The correlation coefficient of approximately -0.0315 suggests a very weak negative correlation between the percentage of artists in a state (**`artists_share`**) and the state's number of workers (**`all_workers_n`**). Here are some interpretations:
+![](explain.png) The correlation coefficient of approximately -0.0315 suggests a very weak negative correlation between the percentage of artists in a state (**`artists_share`**) and the state's number of workers (**`all_workers_n`**). Here are some interpretations:
 
 1.  **Weak Negative Correlation:** The negative sign indicates that, on average, as the percentage of artists in a state increases, the state's number of workers tends to decrease slightly. However, the strength of this relationship is very weak.
 
@@ -377,6 +329,7 @@ now turning our attention to the fifth question, and it can be articulated as fo
 -   How does the racial diversity of artists vary across different states or territories? Are there states with a more diverse artist than others?
 
     ```{r}
+    #| echo: false
     # Assuming you have loaded your dataset into a data frame named 'artist'
     # Replace 'your_data.csv' with the actual file path if you are reading from a CSV file
 
@@ -416,6 +369,7 @@ now turning our attention to the fifth question, and it can be articulated as fo
 The last question, and it can be articulated as follows:
 
 -   The top 10 states which has the most number of Asian artists, and the related population percentage.
+
 ```{r}
 # Calculate the racial composition for Asian artists
 artist_asian_composition <- artist %>%
@@ -459,72 +413,53 @@ In examining the distribution of Asian artists across states, a comprehensive an
 Now we are curious about the distribution for the distribution of race across all states. The provided Shiny app below is designed to explore and visualize the distribution of a selected race across U.S. states, focusing on artist counts and population percentages. The user interface (UI) allows users to dynamically choose a specific race from the dataset and specify the number of top states they want to analyze. Upon making selections, an action button triggers the update, and the main panel displays a table showcasing the top states based on the selected race, arranged by artist count in descending order. The table includes pertinent information such as the state name, artist count, artist percentage, population count, and population percentage. The reactive server function efficiently processes the dataset, filtering and aggregating the relevant information, ensuring a responsive and interactive exploration of racial distribution within the artist community across diverse U.S. states.
 
 ```{r}
-# Load necessary libraries
-library(shiny)
-library(dplyr)
-
 # Assuming you have already loaded the 'artist' dataset and executed previous code
 
-# Define UI
-ui <- fluidPage(
-  titlePanel("Top States by Artist Count and Population Percentage"),
-  sidebarLayout(
-    sidebarPanel(
-      # Select race
-      selectInput("race", "Select Race:", choices = unique(artist$race)),
-      
-      # Select number of top states
-      numericInput("top_n", "Select Top N States:", value = 10, min = 1, max = 50),
-      
-      # Action button to trigger the update
-      actionButton("update_button", "Update")
-    ),
-    mainPanel(
-      # Table to display top states
-      tableOutput("top_states_table")
-    )
-  )
-)
+# Calculate the racial composition for all artists
+artist_composition <- artist %>%
+  group_by(state, race) %>%
+  summarise(artist_count = sum(artists_n, na.rm = TRUE), .groups = 'drop') %>%
+  mutate(artist_percentage = artist_count / sum(artist_count, na.rm = TRUE))
 
-# Define server
-server <- function(input, output, session) {
-  # Reactive function to update the top states based on user input
-  top_states <- reactive({
-    # Filter the dataset based on selected race
-    filtered_data <- artist %>% filter(race == input$race)
-    
-    # Calculate the racial composition for selected artists
-    artist_composition <- filtered_data %>%
-      group_by(state, race) %>%
-      summarise(artist_count = sum(artists_n, na.rm = TRUE), .groups = 'drop') %>%
-      mutate(artist_percentage = artist_count / sum(artist_count, na.rm = TRUE))
-    
-    # Calculate the overall racial composition of the selected population in each state
-    population_composition <- filtered_data %>%
-      group_by(state, race) %>%
-      summarise(population_count = sum(all_workers_n, na.rm = TRUE), .groups = 'drop') %>%
-      mutate(population_percentage = population_count / sum(population_count, na.rm = TRUE))
-    
-    # Merge the two datasets
-    merged_data <- merge(artist_composition, population_composition, by = c("state", "race"), all = TRUE)
-    
-    # Sort merged data by artist_count in descending order
-    sorted_data <- merged_data[order(-merged_data$artist_count), ]
-    
-    # Select the top N states
-    top_states <- head(sorted_data, input$top_n)
-    
-    return(top_states)
-  })
+# Calculate the overall racial composition of the population in each state
+population_composition <- artist %>%
+  group_by(state, race) %>%
+  summarise(population_count = sum(all_workers_n, na.rm = TRUE), .groups = 'drop') %>%
+  mutate(population_percentage = population_count / sum(population_count, na.rm = TRUE))
 
-  # Reactive function to update the table output
-  output$top_states_table <- renderTable({
-    top_states()
-  })
+# Merge the two datasets
+merged_data <- merge(artist_composition, population_composition, by = c("state", "race"), all = TRUE)
+
+# Sort merged data by artist_count in descending order
+sorted_data <- merged_data[order(-merged_data$artist_count), ]
+
+# Function to get top N states for each race
+get_top_states <- function(race, n = 10) {
+  subset_data <- sorted_data[sorted_data$race == race, ]
+  top_states <- head(subset_data, n)
+  return(top_states)
 }
 
-# Run the application
-shinyApp(ui, server)
+# Example: Get top 10 states for each race
+all_races <- unique(sorted_data$race)
+top_states_by_race <- lapply(all_races, get_top_states, n = 10)
+
+# Print the results
+for (i in seq_along(all_races)) {
+  cat("Top 10 states for", all_races[i], ":\n")
+  print(top_states_by_race[[i]])
+  cat("\n")
+}
+
+# Plot histograms and pie charts
+for (i in seq_along(all_races)) {
+  race_data <- top_states_by_race[[i]]
+
+  # Pie chart for population percentage
+  pie(race_data$population_percentage, labels = race_data$state,
+      main = paste("Pie Chart of Population Percentage for", all_races[i]))
+}
+
 ```
 
 The Shiny app provides an insightful and interactive platform to examine the distribution of artists across various racial categories within U.S. states. Users can dynamically explore artist counts and population percentages for different races, gaining valuable insights into the artistic landscape's diversity. The app accommodates not only the analysis of Asian artists, where California emerges as a leader with the highest count, but also extends this functionality to other racial categories. Users have the flexibility to select a specific race, determine the number of top states to analyze, and promptly observe the corresponding distribution. This comprehensive tool facilitates a nuanced exploration of racial diversity within the artist community, fostering a deeper understanding of the geographic concentrations and proportions of artists from various racial backgrounds across the United States.
@@ -574,7 +509,6 @@ Interactive Visualization of Artist Types Across U.S. States:
 
 The Shiny app enables exploration and visualization of artist type distributions across U.S. states or territories. Initially showcasing patterns through a heatmap, the app acknowledges heatmap limitations and offers an alternative format for enhanced interpretation. Users can select a state, triggering dynamic displays including a table, bar plot, and pie chart. These visualizations yield nuanced insights into artist type distributions within chosen states, presenting specific counts and proportions for various categories. The app's interactivity fosters user engagement, enabling deeper insights into the intricate dynamics shaping the artist workforce across diverse U.S. regions.
 
-
 Racial Diversity and Influencing Factors:
 
 The examination of racial diversity reveals Hawaii stands out, displaying a unique blend of African American, Asian, Hispanic, Other, and White artists. This distinctive pattern may be influenced by cultural demographics, immigration trends, and historical and social factors specific to Hawaii. Economic, cultural, and demographic factors play a significant role in shaping the concentration of artists, as observed in states with lower location quotients. States with diverse economic structures, different industry focuses, or distinct cultural emphases may exhibit lower concentrations of artists.
@@ -589,7 +523,7 @@ States with a location quotient below 1.0 generally have a smaller proportion of
 
 Exploring Number of Artists Across Different Satae For Different Race:
 
-In scrutinizing the distribution of Asian artists across U.S. states, California emerges as the preeminent leader, boasting the highest count of Asian artists—61,210 individuals, constituting approximately 0.39% of the state's population. New York, Texas, and New Jersey closely follow suit, showcasing substantial counts of Asian artists and corresponding population percentages. This top-10 ranking illuminates regional variations in the concentration of Asian artists, underscoring California's significance as a prominent center for this demographic within the artistic landscape. The subsequent introduction of a Shiny app designed for exploring racial distribution across all states provides an interactive and insightful tool. Users can dynamically select a specific race, set the number of top states for analysis, and observe detailed distributions, including artist counts, percentages, population counts, and population percentages. This comprehensive platform fosters a nuanced exploration of racial diversity within the artist community, offering deeper insights into the geographic concentrations and proportions of artists from various racial backgrounds across the United States.
+In scrutinizing the distribution of Asian artists across U.S. states, California emerges as the preeminent leader, boasting the highest count of Asian artists---61,210 individuals, constituting approximately 0.39% of the state's population. New York, Texas, and New Jersey closely follow suit, showcasing substantial counts of Asian artists and corresponding population percentages. This top-10 ranking illuminates regional variations in the concentration of Asian artists, underscoring California's significance as a prominent center for this demographic within the artistic landscape. The subsequent introduction of a Shiny app designed for exploring racial distribution across all states provides an interactive and insightful tool. Users can dynamically select a specific race, set the number of top states for analysis, and observe detailed distributions, including artist counts, percentages, population counts, and population percentages. This comprehensive platform fosters a nuanced exploration of racial diversity within the artist community, offering deeper insights into the geographic concentrations and proportions of artists from various racial backgrounds across the United States.
 
 ## Tips
 
