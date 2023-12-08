@@ -18,7 +18,7 @@ editor: visual
 ::: nonincremental
 -   States with a location quotient below 1.0 for artists?
 -   The overall distribution of actors across different states?
--   The top 10 states have the highest number of artists, as indicated by the location quotient.
+-   The top 10 states have the highest average location quotient.
 -   Is there a correlation between the percentage of artists in a state (artists_share) and the state's number of workers?
 -   How does the racial diversity of artists vary across different states?
 -   The top 10 states which has the most number of Asian artists, and the related population percentage.
@@ -54,7 +54,9 @@ knitr::include_graphics("Histogram of average location qutient.png")
 ```
 
 ## Result for Question 2
+
 ***The overall distribution of actors across different states***
+
 ```{r}
 
 # Insert your favorite plot generated in R
@@ -70,7 +72,9 @@ knitr::include_graphics("artist_type_distribution.png")
 ```
 
 ## Result for Question 3
-***The top 10 states have the highest number of artists, as indicated by the location quotient***
+
+***The top 10 states have the highest average location quotient***
+
 ```{r}
 
 # Insert your favorite plot generated in R
@@ -78,6 +82,7 @@ knitr::include_graphics("Top 10 states having high quotient.png")
 ```
 
 ## Result for Question 4
+
 ***Is there a correlation between the percentage of artists in a state (artists_share) and the state's number of workers?***
 
 ```{r}
@@ -85,11 +90,13 @@ knitr::include_graphics("correction.png")
 ```
 
 Correlation Coefficient:
- 
- ***-0.0315 (Very Weak Negative Correlation)***
+
+***-0.0315 (Very Weak Negative Correlation)***
 
 ## Result for Question 5
+
 ***How does the racial diversity of artists vary across different states***
+
 ```{r}
 
 # Insert your favorite plot generated in R
@@ -97,7 +104,9 @@ knitr::include_graphics("Racial Diversity.jpg")
 ```
 
 ## Result for Question 6
+
 ***The top 10 states which has the most number of Asian artists, and the related population percentage***
+
 ```{r}
 knitr::include_graphics("question6.png")
 ```
@@ -110,13 +119,30 @@ knitr::include_graphics("race.png")
 
 ## Conclusion
 
-1.  The lower location quotients could be influenced by various economic, cultural, and demographic factors. States with diverse economic structures, a focus on industries other than arts and entertainment, or a different cultural emphasis may exhibit lower concentrations of artists.
-2.  Lower Concentration of Artists: States with a location quotient below 1.0, as listed, have a lower concentration of artists compared to the national average. This implies that, on average, these states have a smaller proportion of their workforce engaged in artistic occupations compared to the overall distribution across the United States.
-3.  Five state are in high in Actors (Arkansa, Florida,Kentucky, New Mexico and Tennessee) and two in low (Arizona, North Carolina)
-4.  The negative sign suggests that, on average, as the percentage of artists increases, the state's number of workers tends to decrease slightly. 2. Percentage of artists is not a strong predictor of the overall workforce size. 3. Economic, demographic, or industry-specific factors may contribute to the overall workforce size.
+::: incremental
+1.  Location Quotient Analysis: States with a location quotient below 1.0 indicate a lower concentration of artists compared to the national average.
+2.  Actors Analysis: Five states are in high in Actors (Arkansa, Florida,Kentucky, New Mexico and Tennessee) and two in low (Arizona, North Carolina).
+3.  Artistic Diversity: District of Columbia stands out with a significantly high location quotient of 3.02, suggesting a unique concentration of artists.While West Virginia exhibits the lowest concentration of artists among the states.
+:::
 
-## future work
+## Conclusion (cont.)
 
-1.  Economic and Cultural Factors for the artists distribution and location quotients
+::: incremental
+4.  Correlation Analysis: No significant correlation is observed between the percentage of artists in a state (artists_share) and the state's number of workers.
+5.  Diversity Analysis: Hawaii has more diversity compared to other states.
+6.  Asian Artist Distribution: California emerges as a leader with the highest number of Asian artists.
+:::
 
-## Thank you
+## Future Work
+
+::: incremental
+1.  Economic and Cultural Factors: Investigate economic and cultural influences contributing to the distribution and location quotients of artists in different states.
+2.  Policy Implications: Consider policy implications for states with lower location quotients to promote and support the artistic community.
+3.  Long-Term Trends: Analyze long-term trends in the distribution of artists, considering factors such as migration patterns and evolving cultural landscapes.
+:::
+
+## 
+
+```{r}
+knitr::include_graphics("thankyou.jfif")
+```
