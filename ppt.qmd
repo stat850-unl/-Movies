@@ -17,7 +17,7 @@ editor: visual
 
 ::: nonincremental
 -   States with a location quotient below 1.0 for artists?
--   The overall distribution of actors across different states?
+-   The overall distribution of artists' types in different states?
 -   The top 10 states have the highest average location quotient.
 -   Is there a correlation between the percentage of artists in a state (artists_share) and the state's number of workers?
 -   How does the racial diversity of artists vary across different states?
@@ -55,7 +55,7 @@ knitr::include_graphics("Histogram of average location qutient.png")
 
 ## Result for Question 2
 
-***The overall distribution of actors across different states***
+***The overall distribution of types of artist across different states***
 
 ```{r}
 
@@ -121,7 +121,7 @@ knitr::include_graphics("race.png")
 
 ::: incremental
 1.  Location Quotient Analysis: States with a location quotient below 1.0 indicate a lower concentration of artists compared to the national average.
-2.  Actors Analysis: Five states are in high in Actors (Arkansa, Florida,Kentucky, New Mexico and Tennessee) and two in low (Arizona, North Carolina).
+2.  Type of Artists Analysis: Most states have all types of artists, expect for North Carolina, Wyoming and other 9 states.
 3.  Artistic Diversity: District of Columbia stands out with a significantly high location quotient of 3.02, suggesting a unique concentration of artists.While West Virginia exhibits the lowest concentration of artists among the states.
 :::
 
