@@ -489,63 +489,55 @@ print(top_10_asian_states[, c("state", "artist_count", "population_percentage")]
 
 In examining the distribution of Asian artists across states, a comprehensive analysis reveals California's preeminence as the leading state with the highest number of Asian artists, totaling 61,210 individuals, constituting approximately 0.39% of the state's population. Following closely are New York, Texas, and New Jersey, each showcasing substantial counts of Asian artists and corresponding population percentages. This top-10 ranking underscores the regional variations in the concentration of Asian artists, emphasizing the significance of California as a prominent center for this demographic within the artistic landscape.
 
-Now we are curious about the distribution for the distribution of race across all states. The provided Shiny app below is designed to explore and visualize the distribution of a selected race across U.S. states, focusing on artist counts and population percentages. The user interface (UI) allows users to dynamically choose a specific race from the dataset and specify the number of top states they want to analyze. Upon making selections, an action button triggers the update, and the main panel displays a table showcasing the top states based on the selected race, arranged by artist count in descending order. The table includes pertinent information such as the state name, artist count, artist percentage, population count, and population percentage. The reactive server function efficiently processes the dataset, filtering and aggregating the relevant information, ensuring a responsive and interactive exploration of racial distribution within the artist community across diverse U.S. states.
+Now we are curious about the distribution for the distribution of race across all states. The provided Shiny app in [Project](project.qmd) is designed to explore and visualize the distribution of a selected race across U.S. states, focusing on artist counts and population percentages. The user interface (UI) allows users to dynamically choose a specific race from the dataset and specify the number of top states they want to analyze. Upon making selections, an action button triggers the update, and the main panel displays a table showcasing the top states based on the selected race, arranged by artist count in descending order. The table includes pertinent information such as the state name, artist count, artist percentage, population count, and population percentage. The reactive server function efficiently processes the dataset, filtering and aggregating the relevant information, ensuring a responsive and interactive exploration of racial distribution within the artist community across diverse U.S. states.
 
 ```{r}
-# Assuming you have already loaded the 'artist' dataset and executed previous code
-
-# Calculate the racial composition for all artists
-artist_composition <- artist %>%
-  group_by(state, race) %>%
+# Calculate the racial composition for Hispanic artists
+artist_composition_hispanic <- artist %>%
+  filter(race == "Hispanic") %>%
+  group_by(state) %>%
   summarise(artist_count = sum(artists_n, na.rm = TRUE), .groups = 'drop') %>%
   mutate(artist_percentage = artist_count / sum(artist_count, na.rm = TRUE))
 
-# Calculate the overall racial composition of the population in each state
-population_composition <- artist %>%
-  group_by(state, race) %>%
+# Calculate the overall racial composition of the Hispanic population in each state
+population_composition_hispanic <- artist %>%
+  filter(race == "Hispanic") %>%
+  group_by(state) %>%
   summarise(population_count = sum(all_workers_n, na.rm = TRUE), .groups = 'drop') %>%
   mutate(population_percentage = population_count / sum(population_count, na.rm = TRUE))
 
 # Merge the two datasets
-merged_data <- merge(artist_composition, population_composition, by = c("state", "race"), all = TRUE)
+merged_data_hispanic <- merge(artist_composition_hispanic, population_composition_hispanic, by = "state", all = TRUE)
 
 # Sort merged data by artist_count in descending order
-sorted_data <- merged_data[order(-merged_data$artist_count), ]
+sorted_data_hispanic <- merged_data_hispanic[order(-merged_data_hispanic$artist_count), ]
 
-# Function to get top N states for each race
-get_top_states <- function(race, n = 10) {
-  subset_data <- sorted_data[sorted_data$race == race, ]
-  top_states <- head(subset_data, n)
-  return(top_states)
+# Function to get top N states for Hispanic race
+get_top_states_hispanic <- function(n = 10) {
+  top_states_hispanic <- head(sorted_data_hispanic, n)
+  return(top_states_hispanic)
 }
 
-# Example: Get top 10 states for each race
-all_races <- unique(sorted_data$race)
-top_states_by_race <- lapply(all_races, get_top_states, n = 10)
+# Example: Get top 10 states for the Hispanic race
+top_states_hispanic <- get_top_states_hispanic(n = 10)
 
 # Print the results
-for (i in seq_along(all_races)) {
-  cat("Top 10 states for", all_races[i], ":\n")
-  print(top_states_by_race[[i]])
-  cat("\n")
-}
+cat("Top 10 states for Hispanic race:\n")
+print(top_states_hispanic)
+cat("\n")
 
-# Plot histograms and pie charts
-for (i in seq_along(all_races)) {
-  race_data <- top_states_by_race[[i]]
-
-  # Pie chart for population percentage
-  pie(race_data$population_percentage, labels = race_data$state,
-      main = paste("Pie Chart of Population Percentage for", all_races[i]))
-}
+# Plot pie chart for population percentage
+race_data_hispanic <- top_states_hispanic
+pie(race_data_hispanic$population_percentage, labels = race_data_hispanic$state,
+    main = "Pie Chart of Population Percentage for Hispanic race")
 
 ```
 
-The Shiny app provides an insightful and interactive platform to examine the distribution of artists across various racial categories within U.S. states. Users can dynamically explore artist counts and population percentages for different races, gaining valuable insights into the artistic landscape's diversity. The app accommodates not only the analysis of Asian artists, where California emerges as a leader with the highest count, but also extends this functionality to other racial categories. Users have the flexibility to select a specific race, determine the number of top states to analyze, and promptly observe the corresponding distribution. This comprehensive tool facilitates a nuanced exploration of racial diversity within the artist community, fostering a deeper understanding of the geographic concentrations and proportions of artists from various racial backgrounds across the United States.
+The Shiny app in [Project](Project.qmd) provides an insightful and interactive platform to examine the distribution of artists across various racial categories within U.S. states. Users can dynamically explore artist counts and population percentages for different races, gaining valuable insights into the artistic landscape's diversity. The app accommodates not only the analysis of Asian artists, where California emerges as a leader with the highest count, but also extends this functionality to other racial categories. Users have the flexibility to select a specific race, determine the number of top states to analyze, and promptly observe the corresponding distribution. This comprehensive tool facilitates a nuanced exploration of racial diversity within the artist community, fostering a deeper understanding of the geographic concentrations and proportions of artists from various racial backgrounds across the United States.
 
-## Additional Exploration topic
+In this report, take "Hispanic artist" as one example. In exploring the racial distribution of Hispanic artists across the "Top 10 states for the Hispanic race," California emerges as a significant focal point, exhibiting the highest count and percentage of Hispanic artists at 29.42%. Notably, this closely mirrors the state's Hispanic population percentage of 29.17%. Following closely is Texas, where a substantial count of 37,725 Hispanic artists contributes to a percentage of 14.87%, slightly below the state's Hispanic population percentage of 20.38%. Florida reveals a concentrated presence, with a Hispanic artist percentage (13.29%) surpassing its population percentage (10.75%). New York, known for its diverse artistic scene, presents a noteworthy 10.74% Hispanic artist percentage, exceeding the state's Hispanic population percentage of 7.10%. This examination sheds light on nuanced regional dynamics and provides valuable insights into the representation of Hispanic artists in the United States, emphasizing the variations across these top-ranking states.
 
-Add another topic here... as many as you desire, really. Make sure to include a transition between the two sections that connects the two with some sort of logical train of thought.
+
 
 ## Conclusion
 
