@@ -17,7 +17,15 @@ if (!"dplyr" %in% installed.packages()) {
 if (!"remotes" %in% installed.packages()) {
   install.packages("remotes")
 }
-
+if (!"shiny" %in% installed.packages()) {
+  install.packages("shiny")
+}
+if (!"ggplot2" %in% installed.packages()) {
+  install.packages("ggplot2")
+}
+if (!"ggplot2" %in% installed.packages()) {
+  install.packages("ggplot2")
+}
 # This is how to do it for a package that's only on github
 if (!"emo" %in% installed.packages()) {
   remotes::install_github("hadley/emo")
@@ -25,10 +33,6 @@ if (!"emo" %in% installed.packages()) {
 ```
 
 ## Introduction
-
-Introduce your dataset and basic questions for exploration. Explain any unique approaches you will take or any interesting features of your dataset that you have to overcome. Cite the source of your dataset, and briefly discuss how it was collected.
-
-Discuss the variables in the dataset and if there are anomalies in the variables, provide some visual assessment of the anomalies and explain how they may have arisen. You should cover most of the information in your proposal data section, but should primarily use paragraphs and not lists/tables (the exception may be a list of e.g. items which were measured).
 
 In this project, we delve into an insightful dataset originating from the [Artists in the U.S.](https://www.arts.gov/impact/research/arts-data-profile-series/adp-31/data-tables) initiative, with supplementary access available through a repository link [here](https://github.com/rfordatascience/tidytuesday/blob/master/data/2022/2022-09-27/artists.csv). The dataset offers a comprehensive examination of the presence and distribution of Hispanic architects across various states in the United States, shedding light on the diverse landscape of workforce demographics within the realm of artistic professions.
 
@@ -58,11 +62,10 @@ artist = artist.dropna()
 artist.head()
 ```
 
-
 ## Variables Description
 
 | variable          | class     | description                                                                                                                          |
-|------------------|------------------|-------------------------------------|
+|------------------|------------------|------------------------------------|
 | state             | character | This variable represents the U.S. state where the data was collected                                                                 |
 | race              | character | This variable specifies the racial or ethnic category of the workforce being analyzed                                                |
 | type              | character | This variable indicates the type of profession or occupation for which the data is recorded                                          |
@@ -255,8 +258,8 @@ We are now turning our attention to the fourth question, and it can be articulat
             legend.position = "right") +  # Move the legend to the right
       scale_fill_viridis(discrete = TRUE)
     ```
-The figure above portrays the racial diversity across different territories in the United States. Notably, Hawaii distinguishes itself by displaying greater diversity in terms of African American, Asian, Hispanic, Other, and White populations. Unlike other states and territories where a significant portion of artists is predominantly White, Hawaii stands out with a noteworthy presence of Asian artists, almost on par with the number of White artists. This distinctive pattern could be influenced by factors such as cultural demographics, immigration trends, and the unique blend of ethnicities that characterize Hawaii's population. Additionally, historical and social factors may contribute to this distinct composition of artists in Hawaii compared to other regions.
 
+    The figure above portrays the racial diversity across different territories in the United States. Notably, Hawaii distinguishes itself by displaying greater diversity in terms of African American, Asian, Hispanic, Other, and White populations. Unlike other states and territories where a significant portion of artists is predominantly White, Hawaii stands out with a noteworthy presence of Asian artists, almost on par with the number of White artists. This distinctive pattern could be influenced by factors such as cultural demographics, immigration trends, and the unique blend of ethnicities that characterize Hawaii's population. Additionally, historical and social factors may contribute to this distinct composition of artists in Hawaii compared to other regions.
 
 The `echo: false` option disables the printing of code (only output is displayed).
 
@@ -293,24 +296,19 @@ The project provides a comprehensive exploration of the concentration and divers
 
 Location Quotients and Concentration of Artists:
 
-The majority of states exhibit a lower concentration of artists than the national average, as indicated by location quotients below 1.0.
-The right-skewed distribution in the histogram emphasizes that a substantial number of states have location quotients closer to 1, further confirming the trend of lower artist concentrations compared to the national average.
+The majority of states exhibit a lower concentration of artists than the national average, as indicated by location quotients below 1.0. The right-skewed distribution in the histogram emphasizes that a substantial number of states have location quotients closer to 1, further confirming the trend of lower artist concentrations compared to the national average.
 
 Outliers and Regional Disparities:
 
-The identification of an outlier, the District of Columbia, with a significantly high location quotient of 3.02, raises questions about its unique artistic landscape. Further investigation in question 3 will provide a deeper understanding of this outlier and its impact on the overall dataset.
-The box plot highlights regional disparities, with District of Columbia having the highest location quotient among the states, emphasizing variations in artist concentrations across different regions.
+The identification of an outlier, the District of Columbia, with a significantly high location quotient of 3.02, raises questions about its unique artistic landscape. Further investigation in question 3 will provide a deeper understanding of this outlier and its impact on the overall dataset. The box plot highlights regional disparities, with District of Columbia having the highest location quotient among the states, emphasizing variations in artist concentrations across different regions.
 
 Racial Diversity and Influencing Factors:
 
-The examination of racial diversity reveals Hawaii stands out, displaying a unique blend of African American, Asian, Hispanic, Other, and White artists. This distinctive pattern may be influenced by cultural demographics, immigration trends, and historical and social factors specific to Hawaii.
-Economic, cultural, and demographic factors play a significant role in shaping the concentration of artists, as observed in states with lower location quotients. States with diverse economic structures, different industry focuses, or distinct cultural emphases may exhibit lower concentrations of artists.
+The examination of racial diversity reveals Hawaii stands out, displaying a unique blend of African American, Asian, Hispanic, Other, and White artists. This distinctive pattern may be influenced by cultural demographics, immigration trends, and historical and social factors specific to Hawaii. Economic, cultural, and demographic factors play a significant role in shaping the concentration of artists, as observed in states with lower location quotients. States with diverse economic structures, different industry focuses, or distinct cultural emphases may exhibit lower concentrations of artists.
 
 Relationship Between Percentage of Artists and Overall Workforce Size:
 
-States with a location quotient below 1.0 generally have a smaller proportion of their workforce engaged in artistic occupations compared to the national average.
-The correlation analysis suggests a slight negative relationship, indicating that, on average, as the percentage of artists increases, the state's overall workforce size tends to decrease very slightly. However, the percentage of artists is not a strong predictor of the overall workforce size, and various economic, demographic, or industry-specific factors contribute to the observed variations.
-In summary, the project sheds light on the nuanced factors influencing the concentration and diversity of artists across states, providing valuable insights into the intricate interplay of economic, cultural, and demographic dynamics in shaping regional artistic landscapes.
+States with a location quotient below 1.0 generally have a smaller proportion of their workforce engaged in artistic occupations compared to the national average. The correlation analysis suggests a slight negative relationship, indicating that, on average, as the percentage of artists increases, the state's overall workforce size tends to decrease very slightly. However, the percentage of artists is not a strong predictor of the overall workforce size, and various economic, demographic, or industry-specific factors contribute to the observed variations. In summary, the project sheds light on the nuanced factors influencing the concentration and diversity of artists across states, providing valuable insights into the intricate interplay of economic, cultural, and demographic dynamics in shaping regional artistic landscapes.
 
 ## Tips
 
