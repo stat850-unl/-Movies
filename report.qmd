@@ -35,7 +35,9 @@ if (!"readr" %in% installed.packages()) {
 if (!"stats" %in% installed.packages()) {
   install.packages("stats")
 }
-
+if (!"gridExtra" %in% installed.packages()) {
+  install.packages("gridExtra")
+}
 # This is how to do it for a package that's only on GitHub
 if (!"emo" %in% installed.packages()) {
   remotes::install_github("hadley/emo")
@@ -59,7 +61,7 @@ In the forthcoming sections, we will delve into the intricacies of the dataset, 
 
 ## Dataset Description
 
-The provides [dataset](https://www.arts.gov/impact/research/arts-data-profile-series/adp-31/data-tables)insights into the presence and concentration of Hispanic architects in different states, highlighting variations in workforce demographics and professional diversity across the United States.
+The provides [dataset](https://www.arts.gov/impact/research/arts-data-profile-series/adp-31/data-tables) insights into the presence and concentration of Hispanic architects in different states, highlighting variations in workforce demographics and professional diversity across the United States.
 
 This Arts Data Profile presents comprehensive insights into the presence of artists in the workforce at both national and state levels. The data is drawn from the American Community Survey (ACS) conducted by the U.S. Census Bureau, covering the years 2015 to 2019. The ACS provides estimates for the total number of artists and their distribution across 13 specific artist occupations. The interactive map below visualizes counts and location quotients for the overall number of artists and workers in specific artist occupations in each U.S. state. These occupations include architects, arts directors, fine artists, animators, designers, dancers, choreographers, musicians, actors, entertainers, writers, authors, and photographers.\[1\]
 
@@ -80,7 +82,7 @@ artist.head()
 ## Variables Description
 
 | variable          | class     | description                                                                                                                          |
-|------------------|------------------|-----------------------------------|
+|-------------------|-------------------|----------------------------------|
 | state             | character | This variable represents the U.S. state where the data was collected                                                                 |
 | race              | character | This variable specifies the racial or ethnic category of the workforce being analyzed                                                |
 | type              | character | This variable indicates the type of profession or occupation for which the data is recorded                                          |
@@ -172,10 +174,6 @@ In addition to the aforementioned data cleaning endeavors in R, a parallel proce
 Following the individual cleaning processes in R and Python, the datasets were integrated, and a meticulous verification was undertaken to confirm their consistency and alignment. Discrepancies, if any, were resolved through a collaborative review process, ensuring a cohesive and accurate dataset for subsequent analyses.
 
 In summary, the data cleaning procedures encompassed imputation of missing values, identification and rectification of anomalies, and standardization of variables. The integration of Python and R facilitated a comprehensive and meticulous approach to ensure the dataset's readiness for advanced statistical analyses.
-
-Describe any data cleaning and rearranging you needed to do to get your dataset into a workable form. Make sure to cite any packages which were important in your data cleaning process in this section. For instance, if you used dplyr, then it would be appropriate to say something like
-
-> we used the group-apply-combine paradigm with the `dplyr` functions `group_by` and `summarize` [@dplyr-package] to generate a dataset for each day of the observation period from the 15-minute interval observations in the raw data set.
 
 ## Topic of Exploration
 
@@ -282,55 +280,42 @@ As shown in the above figure, while the heatmap is a very useful visualization, 
 3.  Depending on the range of counts in my data, the color scale might not effectively represent the variations.
 4.  we have many states or artist types as shown in the table, the labels on the axes (states and artist types) has become crowded and difficult to read. This is especially true whenI have a large dataset (51 states and lots of types of artists), and it is challenging to display all labels clearly.
 
-Consider the specific goals of our analysis and the characteristics of our dataset when choosing a visualization method. Based on waht we learnt in the class, we want to create one shiny graph to answer this question.
+Consider the specific goals of our analysis and the characteristics of our dataset when choosing a visualization method. Based on what we learnt in the class, we want to create one shiny graph (which will not reflect in this report. However, you can check it in the [Project](Project.qmd) to answer this question. Here we just show one state as the example
 
 ```{r}
 # Load required libraries
 library(dplyr)
 library(ggplot2)
 
-# Get unique states in the dataset
-all_states <- unique(artist$state)
+# Filter the data for Nebraska and group by type
+nebraska_data <- artist %>%
+  filter(state == "Nebraska") %>%
+  group_by(type) %>%
+  summarise(total_artists_n = sum(artists_n))  # Sum of artists_n for each type
 
-# Create a function to generate plots for a specific state
-generate_plots_for_state <- function(selected_state) {
-  state_data <- artist %>%
-    filter(state == selected_state) %>%
-    group_by(type) %>%
-    summarise(count = n())
+# Bar Plot for Nebraska without legend
+bar_plot_nebraska <- ggplot(nebraska_data, aes(x = type, y = total_artists_n, fill = type)) +
+  geom_bar(stat = "identity") +
+  labs(title = "Number of Artists for Each Artist Type in Nebraska",
+       x = "Artist Type",
+       y = "Number of Artists") +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 90, hjust = 1),
+        legend.position = "none")  # Remove the legend
 
-  # Bar Plot
-  bar_plot <- ggplot(state_data, aes(x = type, y = count, fill = type)) +
-    geom_bar(stat = "identity") +
-    labs(title = paste("Distribution of Artist Types in", selected_state),
-         x = "Artist Type",
-         y = "Count") +
-    theme_minimal() +
-    theme(axis.text.x = element_text(angle = 90, hjust = 1))
-
-  # Pie Chart
-  pie_chart <- ggplot(state_data, aes(x = "", y = count, fill = type)) +
-    geom_bar(stat = "identity") +  # Use geom_bar instead of geom_bar(stat = "pie")
-    labs(title = paste("Pie Chart of Artist Types in", selected_state),
-         x = NULL,
-         y = NULL) +
-    theme_void() +
-    coord_polar(theta = "y")
-
-  # Print the plots
-  print(bar_plot)
-}
-
-# Generate plots for each state
-for (state in all_states) {
-  generate_plots_for_state(state)
-}
+# Print the bar plot for Nebraska
+print(bar_plot_nebraska)
 
 ```
 
 In the analysis of artist types across states, it is observed that the majority of states encompass a diverse array of artist categories. However, exceptions to this trend are evident in North Carolina, Wyoming, and nine additional states, where a more limited variety of artist types is apparent.
 
+
 Despite this observation, discerning the specific types of artists that are underrepresented in these states proves challenging. To address this limitation, detailed distributions of artist types within each individual state are made available through interactive Shiny apps. These applications facilitate a more granular exploration of the artist workforce composition in a given state, shedding light on the specific artistic professions that may be less prevalent or entirely absent. This approach enhances the visibility of nuanced regional variations, allowing for a comprehensive understanding of the intricate dynamics shaping the distribution of artists across the United States.
+
+
+Taking Nebraska as an illustrative example, the bar plot unveils notable differences in the distribution of artists across various types. Particularly noteworthy is the "designers" category, showcasing a significant total surpassing 4000 artists. In contrast, the "actors" category exhibits a relatively lower total, amounting to fewer than 500 artists. This visual representation offers a lucid portrayal of the relative magnitudes of artist types in Nebraska, underscoring the diversity and prevalence of distinct artistic vocations.
+
 
 We intend to tackle the following as our third question:
 
@@ -351,8 +336,6 @@ print(top_10_states)
 
 ```{r}
 #| echo: false
-# Assuming you have loaded your dataset into a data frame named 'artist'
-# Replace 'your_data.csv' with the actual file path if you are reading from a CSV file
 
 # Load required libraries
 library(dplyr)
@@ -406,7 +389,9 @@ Y: the state's number of workers (all_workers_n)
 
 The correlation coefficient (r) ranges from -1 to 1:
 
-![](explain.png) The correlation coefficient of approximately -0.0315 suggests a very weak negative correlation between the percentage of artists in a state (**`artists_share`**) and the state's number of workers (**`all_workers_n`**). Here are some interpretations:
+![](explain.png)
+
+The correlation coefficient of approximately -0.0315 suggests a very weak negative correlation between the percentage of artists in a state (**`artists_share`**) and the state's number of workers (**`all_workers_n`**). Here are some interpretations:
 
 1.  **Weak Negative Correlation:** The negative sign indicates that, on average, as the percentage of artists in a state increases, the state's number of workers tends to decrease slightly. However, the strength of this relationship is very weak.
 
@@ -460,7 +445,7 @@ now turning our attention to the fifth question, and it can be articulated as fo
 
     The figure above portrays the racial diversity across different territories in the United States. Notably, Hawaii distinguishes itself by displaying greater diversity in terms of African American, Asian, Hispanic, Other, and White populations. Unlike other states and territories where a significant portion of artists is predominantly White, Hawaii stands out with a noteworthy presence of Asian artists, almost on par with the number of White artists. This distinctive pattern could be influenced by factors such as cultural demographics, immigration trends, and the unique blend of ethnicities that characterize Hawaii's population. Additionally, historical and social factors may contribute to this distinct composition of artists in Hawaii compared to other regions.
 
-The last question, and it can be articulated as follows:
+Baes on the question 5, we can get that the population and the The last question, and it can be articulated as follows:
 
 -   The top 10 states which has the most number of Asian artists, and the related population percentage.
 
