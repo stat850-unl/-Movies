@@ -5,51 +5,47 @@ format: revealjs
 editor: visual
 ---
 
-# Introduction
+## Introduction
 
+::: incremental
 -   The Arts Data Profile offers national and state-level estimates of artists in the workforce.
 -   Data is sourced from the 2015-2019 American Community Survey (ACS) conducted by the U.S. Census Bureau.
 -   State-level estimates include the total number of artists and counts for 13 specific artist occupations.
--   The goal is to provide a comprehensive overview of the artistic workforce across different U.S. states.
-
-# Definition
-
-**Artists**
-
--   Architects (except landscape and naval); landscape architects; art directors, fine artists, and animators; designers; actors; producers and directors; dancers and choreographers; music directors and composers; musicians; disk jockeys, except radio; entertainers; broadcast announcers and radio disk jockeys; other media and communication workers; writers and authors; and photographers.
-
-**Location Quotients**
-
-The location quotient (LQ) measures the concentration of a particular occupation within a state's labor force, relative to that occupation's concentration in the U.S. labor force. For example, an LQ of 1.2 indicates that the occupation clusters in a state at a level 20 percent greater than within the nation's workforce at large. An LQ of 0.8 indicates that the occupation clusters in a state at a level 20 percent below the occupation's concentration.
+:::
 
 ## Objective
 
--   Are there any states with a location quotient significantly below 1.0 for artists?
--   What is the overall distribution of artist types across different states or territories?
--   The top 10 state /territory has the highest number of artists, as indicated by the location quotient.
+::: nonincremental
+-   States with a location quotient below 1.0 for artists?
+-   The overall distribution of actors across different states?
+-   The top 10 states have the highest number of artists, as indicated by the location quotient.
 -   Is there a correlation between the percentage of artists in a state (artists_share) and the state's number of workers?
--   How does the racial diversity of artists vary across different states or territories? Are there states with a more diverse artist population than others?
+-   How does the racial diversity of artists vary across different states?
 -   The top 10 states which has the most number of Asian artists, and the related population percentage.
+:::
 
-Delving into dataset intricacies, addressing anomalies, exploring trends, and presenting visualizations Seeking patterns, correlations, and distinctive features to enhance understanding of the artistic workforce in the U.S. An analytical journey unfolding across different states and territories
-
-# Dataset Description
-
-![](Table%20of%20Data.png)
-
-# Result for Question1
-
-***The states having average location quotient less than one***
+## Dataset Description
 
 ```{r}
 # Load the knitr library
 library(knitr)
 
 # Insert the plot
+knitr::include_graphics("Table of Data.png")
+```
+
+## Result for Question 1
+
+***The states having average location quotient less than one***
+
+```{r}
+
+
+# Insert the plot
 knitr::include_graphics("States Having low quotient.png")
 ```
 
-# Result for Question 1
+## Result for Question 1 (cont.)
 
 ```{r}
 
@@ -57,15 +53,15 @@ knitr::include_graphics("States Having low quotient.png")
 knitr::include_graphics("Histogram of average location qutient.png")
 ```
 
-# Result for Question 2
-
+## Result for Question 2
+***The overall distribution of actors across different states***
 ```{r}
 
 # Insert your favorite plot generated in R
 knitr::include_graphics("distribution1.png")
 ```
 
-# Result for Question 2
+## Result for Question 2(cont.)
 
 ```{r}
 
@@ -73,50 +69,50 @@ knitr::include_graphics("distribution1.png")
 knitr::include_graphics("artist_type_distribution.png")
 ```
 
-# Result for Question 3
-
+## Result for Question 3
+***The top 10 states have the highest number of artists, as indicated by the location quotient***
 ```{r}
 
 # Insert your favorite plot generated in R
 knitr::include_graphics("Top 10 states having high quotient.png")
 ```
 
-# Result for Question 4
-**The correlation between two variables, x and Y, is calculated using the Pearson correlation coefficient (r), which is defined by the following formula:**
+## Result for Question 4
+***Is there a correlation between the percentage of artists in a state (artists_share) and the state's number of workers?***
+
 ```{r}
 knitr::include_graphics("correction.png")
 ```
--   X: the percentage of artists in a state (artists_share)
--   Y: the state's number of workers (all_workers_n)
-** The correlation coefficient (r) ranges from -1 to 1:**
-```{r}
-knitr::include_graphics("explain.png")
-```
 
+Correlation Coefficient:
+ 
+ ***-0.0315 (Very Weak Negative Correlation)***
 
-
-# Result for Question 5
-
+## Result for Question 5
+***How does the racial diversity of artists vary across different states***
 ```{r}
 
 # Insert your favorite plot generated in R
 knitr::include_graphics("Racial Diversity.jpg")
 ```
 
-# Result for Question 6
+## Result for Question 6
+***The top 10 states which has the most number of Asian artists, and the related population percentage***
 ```{r}
 knitr::include_graphics("question6.png")
 ```
 
-# Result for Question 6 (cont.)
+## Result for Question 6 (cont.)
+
 ```{r}
 knitr::include_graphics("race.png")
 ```
+
 ## Conclusion
 
 1.  The lower location quotients could be influenced by various economic, cultural, and demographic factors. States with diverse economic structures, a focus on industries other than arts and entertainment, or a different cultural emphasis may exhibit lower concentrations of artists.
 2.  Lower Concentration of Artists: States with a location quotient below 1.0, as listed, have a lower concentration of artists compared to the national average. This implies that, on average, these states have a smaller proportion of their workforce engaged in artistic occupations compared to the overall distribution across the United States.
-3.  Five state are in high in Artors (Arkansa, Florida,Kentucky, New Mexico and Tennessee) and two in low (Arizona, north carolina)
+3.  Five state are in high in Actors (Arkansa, Florida,Kentucky, New Mexico and Tennessee) and two in low (Arizona, North Carolina)
 4.  The negative sign suggests that, on average, as the percentage of artists increases, the state's number of workers tends to decrease slightly. 2. Percentage of artists is not a strong predictor of the overall workforce size. 3. Economic, demographic, or industry-specific factors may contribute to the overall workforce size.
 
 ## future work
