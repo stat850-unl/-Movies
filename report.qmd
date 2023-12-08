@@ -78,7 +78,7 @@ artist.head()
 ## Variables Description
 
 | variable          | class     | description                                                                                                                          |
-|-------------------|-----------|--------------------------------------------------------------------------------------------------------------------------------------|
+|-----------|-----------|--------------------------------------------------|
 | state             | character | This variable represents the U.S. state where the data was collected                                                                 |
 | race              | character | This variable specifies the racial or ethnic category of the workforce being analyzed                                                |
 | type              | character | This variable indicates the type of profession or occupation for which the data is recorded                                          |
@@ -94,7 +94,7 @@ The above table encompasses essential variable descriptions for the dataset. The
 **Data Cleaning and Preparation**
 
 | Number of Obseravations | Number of Variables | Number of Rows having missing values | Number of rows after data cleaning |
-|-------------------------|---------------------|--------------------------------------|------------------------------------|
+|----------------|----------------|---------------------|--------------------|
 | 3381                    | 6                   | 1472                                 | 1909                               |
 
 During data cleaning, 1472 rows with missing values were addressed, resulting in a refined dataset with 1909 rows. The cleaning process likely involved handling or imputing missing values to ensure the dataset's integrity and reliability for subsequent analyses.
@@ -349,9 +349,30 @@ Our focus shifts to the fourth question, which can be stated as follows:
     cat("Correlation between artists_share and all_workers_n:", correlation, "\n")
     ```
 
-In this part, we calculate the correlation using R.
+In this part, we calculate the correlation using R. The correlation between two variables, X and Y, is calculated using the Pearson correlation coefficient (r), which is defined by the following formula:
 
-now turning our attention to the fourth question, and it can be articulated as follows:
+![](correction.png)
+
+X: the percentage of artists in a state (artists_share)
+
+Y: the state's number of workers (all_workers_n)
+
+The correlation coefficient (r) ranges from -1 to 1:
+
+![](explain.png)
+The correlation coefficient of approximately -0.0315 suggests a very weak negative correlation between the percentage of artists in a state (**`artists_share`**) and the state's number of workers (**`all_workers_n`**). Here are some interpretations:
+
+1.  **Weak Negative Correlation:** The negative sign indicates that, on average, as the percentage of artists in a state increases, the state's number of workers tends to decrease slightly. However, the strength of this relationship is very weak.
+
+2.  **Limited Predictive Power:** The correlation is close to zero, indicating that there is little linear association between the two variables. This means that the percentage of artists in a state is not a strong predictor or indicator of the total number of workers in that state.
+
+3.  **Other Factors at Play:** The weak correlation suggests that factors other than the percentage of artists likely influence the total number of workers in a state. There may be various economic, demographic, or industry-specific factors that contribute to the overall workforce size.
+
+4.  **Cautious Interpretation:** Correlation does not imply causation. Even though there is a weak correlation, it does not necessarily mean that the presence of artists directly causes a decrease in the number of workers or vice versa. Other confounding factors may be influencing the observed relationship.
+
+In summary, while there is a statistical correlation, the practical significance of this correlation is very limited. It's essential to interpret correlation in the context of the specific data and consider other relevant factors when drawing conclusions about the relationship between variables.
+
+now turning our attention to the fifth question, and it can be articulated as follows:
 
 -   How does the racial diversity of artists vary across different states or territories? Are there states with a more diverse artist than others?
 
@@ -391,6 +412,122 @@ now turning our attention to the fourth question, and it can be articulated as f
     ```
 
     The figure above portrays the racial diversity across different territories in the United States. Notably, Hawaii distinguishes itself by displaying greater diversity in terms of African American, Asian, Hispanic, Other, and White populations. Unlike other states and territories where a significant portion of artists is predominantly White, Hawaii stands out with a noteworthy presence of Asian artists, almost on par with the number of White artists. This distinctive pattern could be influenced by factors such as cultural demographics, immigration trends, and the unique blend of ethnicities that characterize Hawaii's population. Additionally, historical and social factors may contribute to this distinct composition of artists in Hawaii compared to other regions.
+
+The last question, and it can be articulated as follows:
+
+-   The top 10 states which has the most number of Asian artists, and the related population percentage.
+```{r}
+# Calculate the racial composition for Asian artists
+artist_asian_composition <- artist %>%
+  filter(race == "Asian") %>%
+  group_by(state, race) %>%
+  summarise(artist_count = sum(artists_n, na.rm = TRUE), .groups = 'drop') %>%
+  mutate(artist_percentage = artist_count / sum(artist_count, na.rm = TRUE))
+
+# Calculate the overall racial composition of the Asian population in each state
+population_asian_composition <- artist %>%
+  filter(race == "Asian") %>%
+  group_by(state, race) %>%
+  summarise(population_count = sum(all_workers_n, na.rm = TRUE), .groups = 'drop') %>%
+  mutate(population_percentage = population_count / sum(population_count, na.rm = TRUE))
+
+# Merge the two datasets
+merged_asian_data <- merge(artist_asian_composition, population_asian_composition, by = c("state", "race"), all = TRUE)
+str(merged_asian_data)
+
+# Sort merged_asian_data by artist_count in descending order
+top_asian_states <- merged_asian_data[order(-merged_asian_data$artist_count), ]
+
+# Select the top 10 states
+top_10_asian_states <- head(top_asian_states, 10)
+
+# Print the top 10 states with artist count and population percentage
+print(top_10_asian_states[, c("state", "artist_count", "population_percentage")])
+
+# Save the top 10 Asian states table to a CSV file
+write.table(top_10_asian_states[, c("state", "artist_count", "population_percentage")],
+            file = "top_10_asian_states_table.csv",
+            sep = ",",
+            row.names = FALSE)
+
+# Print the table
+print(top_10_asian_states[, c("state", "artist_count", "population_percentage")])
+```
+
+In examining the distribution of Asian artists across states, a comprehensive analysis reveals California's preeminence as the leading state with the highest number of Asian artists, totaling 61,210 individuals, constituting approximately 0.39% of the state's population. Following closely are New York, Texas, and New Jersey, each showcasing substantial counts of Asian artists and corresponding population percentages. This top-10 ranking underscores the regional variations in the concentration of Asian artists, emphasizing the significance of California as a prominent center for this demographic within the artistic landscape.
+
+Now we are curious about the distribution for the distribution of race across all states. The provided Shiny app below is designed to explore and visualize the distribution of a selected race across U.S. states, focusing on artist counts and population percentages. The user interface (UI) allows users to dynamically choose a specific race from the dataset and specify the number of top states they want to analyze. Upon making selections, an action button triggers the update, and the main panel displays a table showcasing the top states based on the selected race, arranged by artist count in descending order. The table includes pertinent information such as the state name, artist count, artist percentage, population count, and population percentage. The reactive server function efficiently processes the dataset, filtering and aggregating the relevant information, ensuring a responsive and interactive exploration of racial distribution within the artist community across diverse U.S. states.
+
+```{r}
+# Load necessary libraries
+library(shiny)
+library(dplyr)
+
+# Assuming you have already loaded the 'artist' dataset and executed previous code
+
+# Define UI
+ui <- fluidPage(
+  titlePanel("Top States by Artist Count and Population Percentage"),
+  sidebarLayout(
+    sidebarPanel(
+      # Select race
+      selectInput("race", "Select Race:", choices = unique(artist$race)),
+      
+      # Select number of top states
+      numericInput("top_n", "Select Top N States:", value = 10, min = 1, max = 50),
+      
+      # Action button to trigger the update
+      actionButton("update_button", "Update")
+    ),
+    mainPanel(
+      # Table to display top states
+      tableOutput("top_states_table")
+    )
+  )
+)
+
+# Define server
+server <- function(input, output, session) {
+  # Reactive function to update the top states based on user input
+  top_states <- reactive({
+    # Filter the dataset based on selected race
+    filtered_data <- artist %>% filter(race == input$race)
+    
+    # Calculate the racial composition for selected artists
+    artist_composition <- filtered_data %>%
+      group_by(state, race) %>%
+      summarise(artist_count = sum(artists_n, na.rm = TRUE), .groups = 'drop') %>%
+      mutate(artist_percentage = artist_count / sum(artist_count, na.rm = TRUE))
+    
+    # Calculate the overall racial composition of the selected population in each state
+    population_composition <- filtered_data %>%
+      group_by(state, race) %>%
+      summarise(population_count = sum(all_workers_n, na.rm = TRUE), .groups = 'drop') %>%
+      mutate(population_percentage = population_count / sum(population_count, na.rm = TRUE))
+    
+    # Merge the two datasets
+    merged_data <- merge(artist_composition, population_composition, by = c("state", "race"), all = TRUE)
+    
+    # Sort merged data by artist_count in descending order
+    sorted_data <- merged_data[order(-merged_data$artist_count), ]
+    
+    # Select the top N states
+    top_states <- head(sorted_data, input$top_n)
+    
+    return(top_states)
+  })
+
+  # Reactive function to update the table output
+  output$top_states_table <- renderTable({
+    top_states()
+  })
+}
+
+# Run the application
+shinyApp(ui, server)
+```
+
+The Shiny app provides an insightful and interactive platform to examine the distribution of artists across various racial categories within U.S. states. Users can dynamically explore artist counts and population percentages for different races, gaining valuable insights into the artistic landscape's diversity. The app accommodates not only the analysis of Asian artists, where California emerges as a leader with the highest count, but also extends this functionality to other racial categories. Users have the flexibility to select a specific race, determine the number of top states to analyze, and promptly observe the corresponding distribution. This comprehensive tool facilitates a nuanced exploration of racial diversity within the artist community, fostering a deeper understanding of the geographic concentrations and proportions of artists from various racial backgrounds across the United States.
 
 The `echo: false` option disables the printing of code (only output is displayed).
 
