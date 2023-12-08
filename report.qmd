@@ -57,7 +57,7 @@ In the forthcoming sections, we will delve into the intricacies of the dataset, 
 
 ## Dataset Description
 
-The dataset provides insights into the presence and concentration of Hispanic architects in different states, highlighting variations in workforce demographics and professional diversity across the United States.
+The provides [dataset](https://www.arts.gov/impact/research/arts-data-profile-series/adp-31/data-tables)insights into the presence and concentration of Hispanic architects in different states, highlighting variations in workforce demographics and professional diversity across the United States.
 
 This Arts Data Profile presents comprehensive insights into the presence of artists in the workforce at both national and state levels. The data is drawn from the American Community Survey (ACS) conducted by the U.S. Census Bureau, covering the years 2015 to 2019. The ACS provides estimates for the total number of artists and their distribution across 13 specific artist occupations. The interactive map below visualizes counts and location quotients for the overall number of artists and workers in specific artist occupations in each U.S. state. These occupations include architects, arts directors, fine artists, animators, designers, dancers, choreographers, musicians, actors, entertainers, writers, authors, and photographers.\[1\]
 
@@ -78,7 +78,7 @@ artist.head()
 ## Variables Description
 
 | variable          | class     | description                                                                                                                          |
-|------------------|------------------|------------------------------------|
+|-------------------|-------------------|-----------------------------------|
 | state             | character | This variable represents the U.S. state where the data was collected                                                                 |
 | race              | character | This variable specifies the racial or ethnic category of the workforce being analyzed                                                |
 | type              | character | This variable indicates the type of profession or occupation for which the data is recorded                                          |
@@ -86,6 +86,8 @@ artist.head()
 | artists_n         | double    | This numeric variable signifies the number of artists within the same state and occupation                                           |
 | artists_share     | double    | This numeric variable expresses the share or proportion of artists among all workers in the occupation within the particular state   |
 | location_quotient | double    | Location quotient is a numerical measure used to assess the concentration of a particular occupation in a specific geographical area |
+
+The above table encompasses essential variable descriptions for the dataset. The "class" variable, of character type, denotes the U.S. state where the data was collected. The "race" variable, also character, specifies the racial or ethnic category under analysis, while the "type" variable, character as well, indicates the recorded profession or occupation type. Numeric variables include "all_workers_n," representing the total number of workers in the specified state and occupation; "artists_n," signifying the count of artists within the same state and occupation; and "artists_share," a numeric variable expressing the share or proportion of artists among all workers in the occupation within the particular state. Additionally, the "location_quotient," a double type, serves as a numerical measure assessing the concentration of a specific occupation in a given geographical area.
 
 ## Methods
 
@@ -178,8 +180,111 @@ The second question we aim to address is as follows:
 
 ```{r}
 #| echo: false
-2 * 2
+# Load required libraries
+library(shiny)
+library(ggplot2)
+library(readr)
+library(stats)
+library(dplyr)
+
+# Import the dataset
+artist <- read_csv("artists.csv")
+
+# Display the first few rows of the dataset
+head(artist)
+
+# Delete missing values
+artist <- na.omit(artist)
+
+# Question 2 : What is the overall distribution of artist types across different states or territories?
+
+# Calculate the overall distribution
+distribution <- subset %>% group_by(state, type) %>% summarise(count = n())
+
+# Summarize the count for each state
+summary_data <- distribution %>% group_by(state) %>% summarise(total_types = n())
+
+# Display the overall distribution
+print(summary_data)
+
+
+# Create a heatmap
+ggplot(summary_data, aes(x = state, y = total_types, fill = total_types)) +
+  geom_tile() +
+  scale_fill_gradient(low = "red", high = "blue") +
+  labs(title = "Distribution of Artist Types Across States",
+       x = "State",
+       y = "Number of Types") +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 90, hjust = 1))
 ```
+
+As shown in the above figure, while the heatmap is a very useful visualization, it also has its own disadvantages which are reflected from the above figure.
+
+1.  Heatmaps rely on color to convey information, and misinterpretation of colors is a common issue. As shown in above, it is hard for the reviewers (even Mahyar and Jing) to interpret differences in shades. We also have difficulty distinguishing between similar colors. This is one reason that I decided to use another format to answer this question.
+2.  Heatmaps are effective for showing overall patterns but may not provide detailed information on individual data points. if we want to analyze the specific values in one specific state, it is hard to read it directly from this heat table. This is the second reason that I need to use other format table to answer this question.
+3.  Depending on the range of counts in my data, the color scale might not effectively represent the variations.
+4.  we have many states or artist types as shown in the table, the labels on the axes (states and artist types) has become crowded and difficult to read. This is especially true whenI have a large dataset (51 states and lots of types of artists), and it is challenging to display all labels clearly.
+
+Consider the specific goals of our analysis and the characteristics of our dataset when choosing a visualization method. Based on waht we learnt in the class, we want to create one shiny graph to answer this question.
+
+```{r}
+ui <- fluidPage(
+  titlePanel("Artist Type Distribution"),
+  sidebarLayout(
+    sidebarPanel(
+      selectInput("stateInput", "Select a state:", unique(distribution$state)),
+      actionButton("plotButton", "Plot")
+    ),
+    mainPanel(
+      tableOutput("resultTable"),
+      plotOutput("barPlot"),
+      plotOutput("pieChart")
+    )
+  )
+)
+
+server <- function(input, output) {
+  state_data <- reactive({
+    selected_state <- input$stateInput
+    subset_for_state <- distribution[distribution$state == selected_state, ]
+    subset_for_state
+  })
+
+  output$resultTable <- renderTable({
+    state_data()
+  })
+
+  observeEvent(input$plotButton, {
+    output$barPlot <- renderPlot({
+      ggplot(state_data(), aes(x = type, y = count, fill = type)) +
+        geom_bar(stat = "identity") +
+        labs(title = paste("Distribution of Artist Types in", input$stateInput),
+             x = "Artist Type",
+             y = "Count") +
+        theme_minimal() +
+        theme(axis.text.x = element_text(angle = 90, hjust = 1))
+    })
+
+    output$pieChart <- renderPlot({
+      ggplot(state_data(), aes(x = "", y = count, fill = type)) +
+        geom_bar(stat = "pie") +
+        labs(title = paste("Pie Chart of Artist Types in", input$stateInput),
+             x = NULL,
+             y = NULL) +
+        theme_void() +
+        coord_polar(theta = "y")
+    })
+  })
+}
+
+shinyApp(ui, server)
+
+```
+
+In the analysis of artist types across states, it is observed that the majority of states encompass a diverse array of artist categories. However, exceptions to this trend are evident in North Carolina, Wyoming, and nine additional states, where a more limited variety of artist types is apparent.
+
+Despite this observation, discerning the specific types of artists that are underrepresented in these states proves challenging. To address this limitation, detailed distributions of artist types within each individual state are made available through interactive Shiny apps. These applications facilitate a more granular exploration of the artist workforce composition in a given state, shedding light on the specific artistic professions that may be less prevalent or entirely absent. This approach enhances the visibility of nuanced regional variations, allowing for a comprehensive understanding of the intricate dynamics shaping the distribution of artists across the United States.
 
 We intend to tackle the following as our third question:
 
