@@ -285,12 +285,16 @@ As shown in the above figure, while the heatmap is a very useful visualization, 
 Consider the specific goals of our analysis and the characteristics of our dataset when choosing a visualization method. Based on waht we learnt in the class, we want to create one shiny graph to answer this question. The R code is shown below:
 
 ```{r}
+# Calculate the overall distribution
+distribution <- artist %>% 
+  group_by(state, type) %>% 
+  summarise(artists_count = sum(artists_n, na.rm = TRUE))
 
 ui <- fluidPage(
   titlePanel("Artist Type Distribution"),
   sidebarLayout(
     sidebarPanel(
-      selectInput("stateInput", "Select a state:", unique(distribution$state)),
+      selectInput("stateInput", "Select a state:", unique(artist$state)),
       actionButton("plotButton", "Plot")
     ),
     mainPanel(
@@ -314,17 +318,17 @@ server <- function(input, output) {
 
   observeEvent(input$plotButton, {
     output$barPlot <- renderPlot({
-      ggplot(state_data(), aes(x = type, y = count, fill = type)) +
+      ggplot(state_data(), aes(x = type, y = artists_count, fill = type)) +
         geom_bar(stat = "identity") +
         labs(title = paste("Distribution of Artist Types in", input$stateInput),
              x = "Artist Type",
-             y = "Count") +
+             y = "Number of Artists") +
         theme_minimal() +
         theme(axis.text.x = element_text(angle = 90, hjust = 1))
     })
 
     output$pieChart <- renderPlot({
-      ggplot(state_data(), aes(x = "", y = count, fill = type)) +
+      ggplot(state_data(), aes(x = "", y = artists_count, fill = type)) +
         geom_bar(stat = "pie") +
         labs(title = paste("Pie Chart of Artist Types in", input$stateInput),
              x = NULL,
@@ -370,8 +374,6 @@ In summary, while there is a statistical correlation, the practical significance
 
 ```{r}
 # Fisher's Exact Test:
-
-#If the expected frequencies are too small, you might want to consider using Fisher's Exact Test, which is more appropriate for small sample sizes. In R, you can use fisher.test() for this purpose.
 
 fisher_test <- fisher.test(table(artist$race, artist$state), simulate.p.value = TRUE)
 print(fisher_test)
