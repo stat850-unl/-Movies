@@ -49,7 +49,7 @@ library(knitr)
 knitr::include_graphics("States Having low quotient.png")
 ```
 
-# Result for Question1
+# Result for Question 1
 
 ```{r}
 
@@ -57,34 +57,45 @@ knitr::include_graphics("States Having low quotient.png")
 knitr::include_graphics("Histogram of average location qutient.png")
 ```
 
-# Result for Question2
+# Result for Question 2
 
 ```{r}
 
 # Insert your favorite plot generated in R
-knitr::include_graphics("distribution_of_artists_in_the_US.PNG")
+knitr::include_graphics("distribution1.png")
 ```
 
-# Result for Question2
+# Result for Question 2
+
 ```{r}
 
 # Insert your favorite plot generated in R
 knitr::include_graphics("artist_type_distribution.png")
 ```
 
+# Result for Question 3
 
-# Result for Question3
 ```{r}
 
 # Insert your favorite plot generated in R
 knitr::include_graphics("Top 10 states having high quotient.png")
 ```
 
+# Result for Question 4
+**The correlation between two variables, x and Y, is calculated using the Pearson correlation coefficient (r), which is defined by the following formula:**
+```{r}
+knitr::include_graphics("correction.png")
+```
+-   X: the percentage of artists in a state (artists_share)
+-   Y: the state's number of workers (all_workers_n)
+** The correlation coefficient (r) ranges from -1 to 1:**
+```{r}
+knitr::include_graphics("explain.png")
+```
 
-# Result for Question4
 
 
-# Result for Question5
+# Result for Question 5
 
 ```{r}
 
@@ -92,23 +103,24 @@ knitr::include_graphics("Top 10 states having high quotient.png")
 knitr::include_graphics("Racial Diversity.jpg")
 ```
 
+# Result for Question 6
+```{r}
+knitr::include_graphics("question6.png")
+```
 
-# Result for Question5
-
-
-
+# Result for Question 6 (cont.)
+```{r}
+knitr::include_graphics("race.png")
+```
 ## Conclusion
-1. The lower location quotients could be influenced by various economic, cultural, and demographic factors. States with diverse economic structures, a focus on industries other than arts and entertainment, or a different cultural emphasis may exhibit lower concentrations of artists.
-2. Lower Concentration of Artists: States with a location quotient below 1.0, as listed, have a lower concentration of artists compared to the national average. This implies that, on average, these states have a smaller proportion of their workforce engaged in artistic occupations compared to the overall distribution across the United States.
-3. Five state are in high in Artors (Arkansa, Florida,Kentucky, New Mexico and Tennessee) and two in low (Arizona, north carolina)
- 1. The negative sign suggests that, on average, as the percentage of artists increases, the state's number of workers tends to decrease slightly. 2. Percentage of artists is not a strong predictor of the overall workforce size. 3. Economic, demographic, or industry-specific factors may contribute to the overall workforce size.
- 
+
+1.  The lower location quotients could be influenced by various economic, cultural, and demographic factors. States with diverse economic structures, a focus on industries other than arts and entertainment, or a different cultural emphasis may exhibit lower concentrations of artists.
+2.  Lower Concentration of Artists: States with a location quotient below 1.0, as listed, have a lower concentration of artists compared to the national average. This implies that, on average, these states have a smaller proportion of their workforce engaged in artistic occupations compared to the overall distribution across the United States.
+3.  Five state are in high in Artors (Arkansa, Florida,Kentucky, New Mexico and Tennessee) and two in low (Arizona, north carolina)
+4.  The negative sign suggests that, on average, as the percentage of artists increases, the state's number of workers tends to decrease slightly. 2. Percentage of artists is not a strong predictor of the overall workforce size. 3. Economic, demographic, or industry-specific factors may contribute to the overall workforce size.
+
 ## future work
 
-1. Economic and Cultural Factors for the artists distribution and location quotients
+1.  Economic and Cultural Factors for the artists distribution and location quotients
 
 ## Thank you
-
-
-
-
