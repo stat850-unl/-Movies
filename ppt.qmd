@@ -21,7 +21,7 @@ editor: visual
 -   The top 10 states have the highest average location quotient.
 -   Is there a correlation between the percentage of artists in a state (artists_share) and the state's number of workers?
 -   How does the racial diversity of artists vary across different states?
--   The top 10 states which has the most number of Asian artists, and the related population percentage.
+-   The top 10 states having the most number of Asian artists, and the related population percentage.
 :::
 
 ## Dataset Description
