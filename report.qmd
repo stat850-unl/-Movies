@@ -571,12 +571,6 @@ In scrutinizing the distribution of Asian artists across U.S. states, California
 
 Future research should undertake a comprehensive exploration of the economic and cultural factors that underlie the distribution and location quotients of artists across various states. This investigation aims to unravel the intricate influences shaping the concentration of artistic communities in different regions. Additionally, there is a need to delve into the policy implications for states exhibiting lower location quotients, focusing on strategies to promote and bolster the artistic community. Another crucial facet involves conducting an in-depth analysis of long-term trends in the distribution of artists. This examination should encompass factors like migration patterns and the evolving cultural landscapes, providing valuable insights into the dynamic forces that influence the geographical presence of artists over extended periods.
 
-## Word Checking
-
-```         
-pandoc --lua-filter wordcount.lua report.qmd
-```
-
 ## References
 
 1.  [Artists in the Workforce: National and State Estimates for 2015-2019 \| National Endowment for the Arts](https://www.arts.gov/impact/research/arts-data-profile-series/adp-31)
